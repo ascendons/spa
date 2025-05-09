@@ -11,6 +11,26 @@ Currently, two official plugins are available:
 
 If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
+
+
+Steps to run:
+
+npm install
+npm run dev
+
+
+Commit and Push process:
+
+**NEVER** commit to master
+
+Before commiting, run the following commands: 
+npm run format
+npm run lint
+
+If any issues come up, fix it first.
+
+then commit to your branch, raise PR to master
+
 ```js
 export default tseslint.config({
   extends: [
