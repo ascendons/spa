@@ -1,16 +1,16 @@
-import "./App.css";
-import ascendons from "./ascendons.jpeg";
+// import React from 'react';
+import Header from './components/Header';
 
-function App() {
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="" target="_blank">
-          <img src={ascendons} className="logo" alt="Vite logo" />
-        </a>
+    <div className="bg-gray-950 min-h-screen">
+      <Header />
+      {/* Your other page content  */}
+      <div className="pt-20">
+         {/* Add main content here, the pt-20 adds padding so content doesn't go under the header */}
       </div>
-    </>
+    </div>
   );
-}
+};
 
 export default App;
