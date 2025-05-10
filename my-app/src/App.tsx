@@ -1,16 +1,24 @@
-// import React from 'react';
-import Header from './components/Header';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header'; 
+import About from "./pages/About";
+import Services from "./pages/Services"; 
+import Contact from "./pages/Contact"; 
+import './App.css';
 
-const App = () => {
+function App() {
   return (
-    <div className="bg-gray-950 min-h-screen">
-      <Header />
-      {/* Your other page content  */}
-      <div className="pt-20">
-         {/* Add main content here, the pt-20 adds padding so content doesn't go under the header */}
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Header />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
-};
+}
 
 export default App;
