@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     z-index: 50;
-    background: transparent;
+    background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
 }
 
 .header-container {
@@ -64,14 +64,14 @@
     position: absolute;
     top: 100%;
     right: 0;
-    /* background-color: #1f2937; */
-    background: transparent;
+    background: linear-gradient(90deg, #1e3a8a 0%, #727780 100%);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     margin-top: 8px;
     width: 100%;
     z-index: 40;
-    transition: transform 0.3s ease-in-out;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .nav-list {
@@ -92,7 +92,7 @@
 }
 
 .nav-link.contact:hover {
-    background-color: #3b82f6;
+    background-color: #636464;
     border-radius: 6px;
 }
 
@@ -117,7 +117,6 @@
         transition: color 0.3s ease;
         font-size: 1rem;  
     }    
-
 
     .desktop-link:hover {
         color: #d1d5db;
