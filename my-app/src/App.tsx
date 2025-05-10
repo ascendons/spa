@@ -1,5 +1,6 @@
 import "./App.css";
 import ascendons from "./ascendons.jpeg";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
           <img src={ascendons} className="logo" alt="Vite logo" />
         </a>
       </div>
+      <Footer />
     </>
   );
 }
