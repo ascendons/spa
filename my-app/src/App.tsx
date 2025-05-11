@@ -6,7 +6,7 @@ import Contact from "./pages/Contact";
 import './App.css';
 import Home from './pages/Home';
 import "./App.css";
-import ascendons from "./ascendons.jpeg";
+// import ascendons from "./ascendons.jpeg";
 import Footer from "./components/Footer";
 
 function App() {
