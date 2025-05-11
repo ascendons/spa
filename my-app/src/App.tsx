@@ -5,9 +5,13 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact"; 
 import './App.css';
 import Home from './pages/Home';
+import "./App.css";
+import ascendons from "./ascendons.jpeg";
+import Footer from "./components/Footer";
 
 function App() {
   return (
+    <>
     <Router>
       <div className="App">
         <Header />
@@ -19,6 +23,8 @@ function App() {
         </Routes>
       </div>
     </Router>
+      <Footer />
+    </>
   );
 }
 
