@@ -1,20 +1,31 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../ascendons.jpeg";
+import logo from "../../public/ascendons.png";
 import "./Header.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [scrolled, setScrolled] = useState(false); // NEW
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50); // NEW
+    };
+
     handleResize();
+    handleScroll(); // Initialize scroll state
     window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("scroll", handleScroll); // NEW
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("scroll", handleScroll); // NEW
+    };
   }, []);
 
   const toggleMenu = () => {
@@ -22,7 +33,7 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
+    <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="header-container">
         <div className="logo-wrapper">
           <Link to="/" className="logo-link">

@@ -4,10 +4,37 @@
   left: 0;
   width: 100%;
   z-index: 50;
-  /* background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); */
   background: transparent;
+  transition:
+    background-color 0.5s ease-in-out,
+    border-bottom 0.5s ease-in-out,
+    box-shadow 0.5s ease-in-out;
+  border-bottom: none;
 }
 
+.header.scrolled {
+  position: fixed;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.logo-link,
+.logo-text,
+.menu-toggle,
+.desktop-link {
+  color: white;
+  transition:
+    color 0.4s ease-in-out,
+    font-size 0.4s ease-in-out;
+}
+
+.header.scrolled .logo-link,
+.header.scrolled .logo-text,
+.header.scrolled .menu-toggle,
+.header.scrolled .desktop-link {
+  color: #1f2937;
+}
 .header-container {
   display: flex;
   justify-content: space-between;
@@ -27,7 +54,7 @@
   display: flex;
   align-items: center;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: bold;
   color: white;
 }
@@ -118,7 +145,7 @@
     color: white;
     text-decoration: none;
     transition: color 0.3s ease;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .desktop-link:hover {
@@ -129,10 +156,14 @@
     border: 1px solid white;
     padding: 10px 20px;
     border-radius: 25px;
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 
   .desktop-link.contact:hover {
-    background-color: #3b82f6;
+    background-color: #060606;
+    color: #f0f0f0;
+  }
+  .header.scrolled .desktop-link.contact {
+    border-color: black;
   }
 }
