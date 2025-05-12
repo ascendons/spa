@@ -4,7 +4,8 @@
     left: 0;
     width: 100%;
     z-index: 50;
-    background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+    /* background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); */
+    background:  transparent;
 }
 
 .header-container {
