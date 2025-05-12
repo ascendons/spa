@@ -1,3 +1,6 @@
+import "./App.css";
+import ascendons from "./ascendons.jpeg";
+import Footer from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header'; 
 import About from "./pages/About";
@@ -22,6 +25,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
+      <Footer />
+    </>
     </Router>
       <Footer />
     </>
