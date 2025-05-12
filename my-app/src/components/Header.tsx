@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; 
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import logo from "../ascendons.jpeg";
 import "./Header.css";
 
@@ -13,8 +13,8 @@ const Header = () => {
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const toggleMenu = () => {
@@ -25,7 +25,7 @@ const Header = () => {
     <header className="header">
       <div className="header-container">
         <div className="logo-wrapper">
-          <Link to="/" className="logo-link"> 
+          <Link to="/" className="logo-link">
             <img src={logo} alt="Company Logo" className="logo-image" />
             <span className="logo-text">ASCENDONS</span>
           </Link>
@@ -57,10 +57,26 @@ const Header = () => {
               {isMenuOpen && (
                 <nav className="mobile-nav">
                   <ul className="nav-list">
-                    <li><Link to="/" className="nav-link">Home</Link></li> 
-                    <li><Link to="/about" className="nav-link">About</Link></li> 
-                    <li><Link to="/services" className="nav-link">Services</Link></li> 
-                    <li><Link to="/contact" className="nav-link contact">Get in touch</Link></li> 
+                    <li>
+                      <Link to="/" className="nav-link">
+                        Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about" className="nav-link">
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/services" className="nav-link">
+                        Services
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/contact" className="nav-link contact">
+                        Get in touch
+                      </Link>
+                    </li>
                   </ul>
                 </nav>
               )}
@@ -68,10 +84,26 @@ const Header = () => {
           ) : (
             <nav className="desktop-nav">
               <ul className="desktop-list">
-                <li><Link to="/" className="desktop-link">Home</Link></li> 
-                <li><Link to="/about" className="desktop-link">About</Link></li> 
-                <li><Link to="/services" className="desktop-link">Services</Link></li> 
-                <li><Link to="/contact" className="desktop-link contact">Get in touch</Link></li> 
+                <li>
+                  <Link to="/" className="desktop-link">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="desktop-link">
+                    About
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services" className="desktop-link">
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="desktop-link contact">
+                    Get in touch
+                  </Link>
+                </li>
               </ul>
             </nav>
           )}

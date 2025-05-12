@@ -9,7 +9,11 @@ interface ParticlesComponentProps {
   className?: string;
 }
 
-const ParticlesComponent = ({ id, children, className }: ParticlesComponentProps) => {
+const ParticlesComponent = ({
+  id,
+  children,
+  className,
+}: ParticlesComponentProps) => {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
@@ -18,58 +22,58 @@ const ParticlesComponent = ({ id, children, className }: ParticlesComponentProps
     }).then(() => setInit(true));
   }, []);
 
-  const particlesLoaded = async (container: Container) => {
-    console.log("Particles loaded", container);
+  const particlesLoaded = async (container?: Container) => {
+    if (!container) {
+      console.warn("Particles container is undefined");
+      return;
+    }
   };
 
   const options: ISourceOptions = {
     background: {
-      color: "#0d0d0d"  
+      color: "#0d0d0d",
     },
 
-    
     fpsLimit: 120,
     interactivity: {
       events: {
         onClick: { enable: false, mode: "push" },
-        onHover: { enable: false, mode: "repulse" }
-      }
+        onHover: { enable: false, mode: "repulse" },
+      },
     },
     particles: {
       color: { value: "#ffffff" },
-      links: { 
+      links: {
         color: "#ffffff",
         distance: 200,
         enable: true,
         opacity: 0.5,
-        width: 1
+        width: 1,
       },
       move: {
         enable: true,
-        speed: 4
+        speed: 4,
       },
       number: { density: { enable: true }, value: 100 },
       opacity: { value: 0.7 },
       shape: { type: "circle" },
-      size: { value: { min: 1, max: 3 } }
+      size: { value: { min: 1, max: 3 } },
     },
-    detectRetina: true
+    detectRetina: true,
   };
 
   if (!init) return null;
 
   return (
-   <div className={`relative ${className}`}> 
-      <div className="absolute inset-0 -z-10">  
+    <div className={`relative ${className}`}>
+      <div className="absolute inset-0 -z-10">
         <Particles
           id={id}
-          init = {particlesLoaded}
+          particlesLoaded={particlesLoaded}
           options={options}
         />
       </div>
-      <div className="relative z-0">  
-        {children}
-      </div>
+      <div className="relative z-0">{children}</div>
     </div>
   );
 };

@@ -1,136 +1,138 @@
 .header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 50;
-    /* background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); */
-    background:  transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  /* background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); */
+  background: transparent;
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    max-width: 1200px;  
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .logo-wrapper {
-    display: flex;
-    align-items: center;
-    z-index: 50;
+  display: flex;
+  align-items: center;
+  z-index: 50;
 }
 
 .logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    font-size: 1.5rem;      
-    font-weight: bold;
-    color: white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
 }
 
 .logo-image {
-    height: 40px;          
-    margin-right: 12px;      
+  height: 40px;
+  margin-right: 12px;
 }
 
 .logo-text {
-    margin-right: 12px;     
-    color: white;
+  margin-right: 12px;
+  color: white;
 }
 
 .menu-wrapper {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .menu-toggle {
-    background: none;
-    border: none;
-    color: white;
-    z-index: 50;
-    transition: all 0.3s ease;
-    padding: 8px; 
+  background: none;
+  border: none;
+  color: white;
+  z-index: 50;
+  transition: all 0.3s ease;
+  padding: 8px;
 }
 
 .menu-icon {
-    height: 30px;          
-    width: 30px;            
+  height: 30px;
+  width: 30px;
 }
 
 .mobile-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: linear-gradient(90deg, #1e3a8a 0%, #727780 100%);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    margin-top: 8px;
-    width: 100%;
-    z-index: 40;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: linear-gradient(90deg, #1e3a8a 0%, #727780 100%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-top: 8px;
+  width: 100%;
+  z-index: 40;
+  transform: translateY(-20px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
 .nav-list {
-    padding: 8px 0;
-    list-style: none;
+  padding: 8px 0;
+  list-style: none;
 }
 
 .nav-link {
-    display: block;
-    padding: 12px 16px;      
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
+  display: block;
+  padding: 12px 16px;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
 }
 
 .nav-link:hover {
-    background-color: #374151;
+  background-color: #374151;
 }
 
 .nav-link.contact:hover {
-    background-color: #636464;
-    border-radius: 6px;
+  background-color: #636464;
+  border-radius: 6px;
 }
 
 .desktop-nav {
-    display: none;
+  display: none;
 }
 
 @media (min-width: 769px) {
-    .desktop-nav {
-        display: block;
-    }
+  .desktop-nav {
+    display: block;
+  }
 
-    .desktop-list {
-        display: flex;
-        gap: 30px;          
-        list-style: none;
-    }
+  .desktop-list {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+  }
 
-    .desktop-link {
-        color: white;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        font-size: 1rem;  
-    }    
+  .desktop-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 1rem;
+  }
 
-    .desktop-link:hover {
-        color: #d1d5db;
-    }
+  .desktop-link:hover {
+    color: #d1d5db;
+  }
 
-    .desktop-link.contact {
-        border: 1px solid white;
-        padding: 10px 20px;    
-        border-radius: 25px;
-        font-size: 1rem;
-    }
+  .desktop-link.contact {
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 1rem;
+  }
 
-    .desktop-link.contact:hover {
-        background-color: #3b82f6;
-    }
+  .desktop-link.contact:hover {
+    background-color: #3b82f6;
+  }
 }
