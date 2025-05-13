@@ -8,7 +8,7 @@ import Home from "./pages/Home";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
-import ParticlesComponent from "./components/Particle";
+// import ParticlesComponent from "./components/Particle";
 
 const router = createBrowserRouter([
   {
@@ -28,8 +28,7 @@ function RootLayout() {
   return (
     <div className="App">
       <Header />
-      <ParticlesComponent id="tsparticles" className="absolute inset-0" />
-
+      {/*<ParticlesComponent id="tsparticles" className="absolute inset-0" />*/}
       <React.Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </React.Suspense>
