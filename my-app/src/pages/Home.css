@@ -134,6 +134,12 @@
    transform: translateY(0);
 }
 
+.span1 {
+  background-color: #fdf2ea;
+  color: #efac78;
+  border-radius: 3px;
+}
+
 @media (max-width: 768px) {
   .home-heading {
     font-size: 3rem;

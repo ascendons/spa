@@ -3,7 +3,9 @@
 #root {
   width: 100%;
   margin: 0 auto;
-  padding: 0rem;
+ padding: 0rem;
+  /* padding: 2rem; */
+/* >>>>>>> ab93233 (.) */
   text-align: center;
 }
 
