@@ -32,9 +32,7 @@ function RootLayout() {
       <React.Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </React.Suspense>
-      <div style={{ height: '100px'}}>
-        
-      </div>
+      <div style={{ height: "100px" }}></div>
       <Footer />
     </div>
   );
