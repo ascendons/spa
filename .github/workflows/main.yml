@@ -20,13 +20,13 @@ jobs:
           node-version: '18' # or your project's Node version
 
       - name: Install dependencies
-        working-directory: spa/my-app
+        working-directory: my-app
         run: npm install
 
       - name: Run linter
-        working-directory: spa/my-app
+        working-directory: my-app
         run: npm run lint
 
       - name: Run formatter
-        working-directory: spa/my-app
+        working-directory: my-app
         run: npm run format
