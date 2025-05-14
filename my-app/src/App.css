@@ -3,9 +3,7 @@
 #root {
   width: 100%;
   margin: 0 auto;
-  padding: 0rem;
-  /* padding: 2rem; */
-  /* >>>>>>> ab93233 (.) */
+  padding: 0;
   text-align: center;
 }
 
@@ -38,7 +36,7 @@
 }
 
 .card {
-  padding: 2em;
+  padding:0;
 }
 
 .read-the-docs {
