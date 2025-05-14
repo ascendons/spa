@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import ParticlesComponent from "../components/Particle.tsx";
@@ -14,11 +14,39 @@ const Home: React.FC = () => {
   const [paragraph2SlidUp, setParagraph2SlidUp] = useState(false);
   const [button2SlidUp, setButton2SlidUp] = useState(false);
 
+    // Create the ref objects directly in the component
+    const subpartRef1 = useRef<HTMLParagraphElement>(null);
+    const subpartRef2 = useRef<HTMLParagraphElement>(null);
+    const subpartRef3 = useRef<HTMLParagraphElement>(null);
 
-    const subpartRefs = [useRef<HTMLParagraphElement>(null), useRef<HTMLParagraphElement>(null), useRef<HTMLParagraphElement>(null)];
+    // Memoize the subpartRefs array using the ref objects
+    const subpartRefs = useMemo(() => [
+        subpartRef1,
+        subpartRef2,
+        subpartRef3,
+    ], [subpartRef1, subpartRef2, subpartRef3]);
+
   const [subpartSlidUp, setSubpartSlidUp] = useState([false, false, false]);
 
-
+  const cleanupObserver = useCallback((observer: IntersectionObserver) => {
+    if (paragraph1Ref.current && observer) {
+      observer.unobserve(paragraph1Ref.current);
+    }
+    if (button1Ref.current && observer) {
+      observer.unobserve(button1Ref.current);
+    }
+      if (paragraph2Ref.current && observer) {
+      observer.unobserve(paragraph2Ref.current);
+    }
+    if (button2Ref.current && observer) {
+      observer.unobserve(button2Ref.current);
+    }
+    subpartRefs.forEach((ref) => { // Iterate directly over the array of RefObjects
+      if (ref.current && observer) {
+        observer.unobserve(ref.current);
+      }
+    });
+  }, [paragraph1Ref, button1Ref, paragraph2Ref, button2Ref, subpartRefs]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,13 +58,13 @@ const Home: React.FC = () => {
             } else if (entry.target === button1Ref.current) {
               setButton1SlidUp(true);
             }
-             else if (entry.target === paragraph2Ref.current) {
+              else if (entry.target === paragraph2Ref.current) {
               setParagraph2SlidUp(true);
             } else if (entry.target === button2Ref.current) {
               setButton2SlidUp(true);
             }
             else {
-              subpartRefs.forEach((ref, index) => {
+              subpartRefs.forEach((ref, index) => { // Iterate directly over the array of RefObjects
                 if (entry.target === ref.current) {
                   const newSubpartSlidUp = [...subpartSlidUp];
                   newSubpartSlidUp[index] = true;
@@ -58,38 +86,22 @@ const Home: React.FC = () => {
     if (button1Ref.current) {
       observer.observe(button1Ref.current);
     }
-     if (paragraph2Ref.current) {
+      if (paragraph2Ref.current) {
       observer.observe(paragraph2Ref.current);
     }
     if (button2Ref.current) {
       observer.observe(button2Ref.current);
     }
-    subpartRefs.forEach((ref) => {
+    subpartRefs.forEach((ref) => { // Iterate directly over the array of RefObjects
       if (ref.current) {
         observer.observe(ref.current);
       }
     });
 
     return () => {
-      if (paragraph1Ref.current && observer) {
-        observer.unobserve(paragraph1Ref.current);
-      }
-      if (button1Ref.current && observer) {
-        observer.unobserve(button1Ref.current);
-      }
-       if (paragraph2Ref.current && observer) {
-        observer.unobserve(paragraph2Ref.current);
-      }
-      if (button2Ref.current && observer) {
-        observer.unobserve(button2Ref.current);
-      }
-      subpartRefs.forEach((ref) => {
-        if (ref.current && observer) {
-          observer.unobserve(ref.current);
-        }
-      });
+      cleanupObserver(observer);
     };
-  }, [subpartSlidUp]);
+  }, [cleanupObserver, subpartRefs, subpartSlidUp]);
 
   return (
     <>
@@ -117,9 +129,9 @@ const Home: React.FC = () => {
 
       <div className="text-section">
         <p ref={paragraph2Ref} className={`home-paragraph ${paragraph2SlidUp ? 'slide-up' : ''}`}>
-          <p ref={subpartRefs[0]} className={`subpart1 ${subpartSlidUp[0] ? 'slide-up' : ''}`}>WHAT WE OFFER</p>
-          <p ref={subpartRefs[1]} className={`subpart2 ${subpartSlidUp[1] ? 'slide-up' : ''}`}>Web & Mobile App Design, Bring Your Ideas to Life</p>
-          <p ref={subpartRefs[2]} className={`subpart3 ${subpartSlidUp[2] ? 'slide-up' : ''}`}>At Ascendons, we specialize in transforming your ideas into innovative digital solutions. Whether you need a stunning website, a high-performance mobile app, or a custom software solution, we’ve got you covered. From startups to established enterprises, we work on everything where tech is needed.</p>
+          <p ref={subpartRef1} className={`subpart1 ${subpartSlidUp[0] ? 'slide-up' : ''}`}>WHAT WE OFFER</p>
+          <p ref={subpartRef2} className={`subpart2 ${subpartSlidUp[1] ? 'slide-up' : ''}`}>Web & Mobile App Design, Bring Your Ideas to Life</p>
+          <p ref={subpartRef3} className={`subpart3 ${subpartSlidUp[2] ? 'slide-up' : ''}`}>At Ascendons, we specialize in transforming your ideas into innovative digital solutions. Whether you need a stunning website, a high-performance mobile app, or a custom software solution, we’ve got you covered. From startups to established enterprises, we work on everything where tech is needed.</p>
         </p>
         <Link ref={button2Ref} to="/contact" className={`home-button ${button2SlidUp ? 'slide-up' : ''}`}>
           Get Started Today
