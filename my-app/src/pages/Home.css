@@ -47,7 +47,7 @@
   color: #404044;
   margin-bottom: 2rem;
   max-width: 768px;
-  font-size: 38px; /* Adjusted font-size for better responsiveness */
+  font-size: 38px;
   font-weight: lighter;
   line-height: 1.75;
   transform: translateY(20px);
@@ -102,9 +102,7 @@
 
 .home-button:hover {
   background-color: white;
-
   border: 2px solid #ee76ad;
-
   color: #ee76ad;
 }
 
@@ -124,18 +122,15 @@
 
 .subpart1 {
   color: #00000033;
-
   font:
-    1rem Arial,
-    Sans-serif; /* Adjusted font-size for better responsiveness */
-
+    17px Arial,
+    Sans-serif;
   margin-bottom: 15px;
 
   transform: translateY(20px);
 
   transition: transform 0.5s ease-in-out;
 }
-
 .subpart1.slide-up {
   transform: translateY(0);
 }
@@ -148,28 +143,21 @@
   color: #404044;
 
   font-weight: bold;
-
   transform: translateY(20px);
-
   transition: transform 0.5s ease-in-out;
 }
-
 .subpart2.slide-up {
   transform: translateY(0);
 }
 
 .subpart3 {
   color: #8b8b92;
-
-  font-size: 1.4rem; /* Adjusted font-size for better responsiveness */
-
+  font-size: 23px;
   transform: translateY(20px);
-
   transition: transform 0.5s ease-in-out;
 
   line-height: 1.7;
 }
-
 .subpart3.slide-up {
   transform: translateY(0);
 }
