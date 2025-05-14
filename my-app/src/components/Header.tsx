@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../public/ascendons.png";
+import logo from "../ascendons.png";
 import "./Header.css";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [scrolled, setScrolled] = useState(false); // NEW
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -14,17 +14,17 @@ const Header = () => {
     };
 
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50); // NEW
+      setScrolled(window.scrollY > 50);
     };
 
     handleResize();
-    handleScroll(); // Initialize scroll state
+    handleScroll();
     window.addEventListener("resize", handleResize);
-    window.addEventListener("scroll", handleScroll); // NEW
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("resize", handleResize);
-      window.removeEventListener("scroll", handleScroll); // NEW
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
