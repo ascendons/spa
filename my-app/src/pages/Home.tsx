@@ -8,6 +8,7 @@ import React, {
 import { Link } from "react-router-dom";
 import "./Home.css";
 import ParticlesComponent from "../components/Particle.tsx";
+import { Lightbulb, Laptop, Cog, HelpCircle } from "lucide-react";
 
 const Home: React.FC = () => {
   const paragraph1Ref = useRef<HTMLParagraphElement>(null);
@@ -33,6 +34,18 @@ const Home: React.FC = () => {
 
   const [subpartSlidUp, setSubpartSlidUp] = useState([false, false, false]);
 
+  const strategyRef = useRef<HTMLDivElement>(null);
+  const designRef = useRef<HTMLDivElement>(null);
+  const developmentRef = useRef<HTMLDivElement>(null);
+  const helpSupportRef = useRef<HTMLDivElement>(null);
+
+  const [servicesSlidUp, setServicesSlidUp] = useState({
+    strategy: false,
+    design: false,
+    development: false,
+    helpSupport: false,
+  });
+
   const cleanupObserver = useCallback(
     (observer: IntersectionObserver) => {
       if (paragraph1Ref.current && observer) {
@@ -53,8 +66,25 @@ const Home: React.FC = () => {
           observer.unobserve(ref.current);
         }
       });
+      if (strategyRef.current && observer)
+        observer.unobserve(strategyRef.current);
+      if (designRef.current && observer) observer.unobserve(designRef.current);
+      if (developmentRef.current && observer)
+        observer.unobserve(developmentRef.current);
+      if (helpSupportRef.current && observer)
+        observer.unobserve(helpSupportRef.current);
     },
-    [paragraph1Ref, button1Ref, paragraph2Ref, button2Ref, subpartRefs],
+    [
+      paragraph1Ref,
+      button1Ref,
+      paragraph2Ref,
+      button2Ref,
+      subpartRefs,
+      strategyRef,
+      designRef,
+      developmentRef,
+      helpSupportRef,
+    ],
   );
 
   useEffect(() => {
@@ -70,7 +100,9 @@ const Home: React.FC = () => {
               setParagraph2SlidUp(true);
             } else if (entry.target === button2Ref.current) {
               setButton2SlidUp(true);
-            } else {
+            } else if (
+              subpartRefs.some((ref) => entry.target === ref.current)
+            ) {
               subpartRefs.forEach((ref, index) => {
                 // Iterate directly over the array of RefObjects
                 if (entry.target === ref.current) {
@@ -79,6 +111,14 @@ const Home: React.FC = () => {
                   setSubpartSlidUp(newSubpartSlidUp);
                 }
               });
+            } else if (entry.target === strategyRef.current) {
+              setServicesSlidUp((prev) => ({ ...prev, strategy: true }));
+            } else if (entry.target === designRef.current) {
+              setServicesSlidUp((prev) => ({ ...prev, design: true }));
+            } else if (entry.target === developmentRef.current) {
+              setServicesSlidUp((prev) => ({ ...prev, development: true }));
+            } else if (entry.target === helpSupportRef.current) {
+              setServicesSlidUp((prev) => ({ ...prev, helpSupport: true }));
             }
           }
         });
@@ -88,29 +128,30 @@ const Home: React.FC = () => {
       },
     );
 
-    if (paragraph1Ref.current) {
-      observer.observe(paragraph1Ref.current);
-    }
-    if (button1Ref.current) {
-      observer.observe(button1Ref.current);
-    }
-    if (paragraph2Ref.current) {
-      observer.observe(paragraph2Ref.current);
-    }
-    if (button2Ref.current) {
-      observer.observe(button2Ref.current);
-    }
+    if (paragraph1Ref.current) observer.observe(paragraph1Ref.current);
+    if (button1Ref.current) observer.observe(button1Ref.current);
+    if (paragraph2Ref.current) observer.observe(paragraph2Ref.current);
+    if (button2Ref.current) observer.observe(button2Ref.current);
     subpartRefs.forEach((ref) => {
-      // Iterate directly over the array of RefObjects
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
+      if (ref.current) observer.observe(ref.current);
     });
+    if (strategyRef.current) observer.observe(strategyRef.current);
+    if (designRef.current) observer.observe(designRef.current);
+    if (developmentRef.current) observer.observe(developmentRef.current);
+    if (helpSupportRef.current) observer.observe(helpSupportRef.current);
 
     return () => {
       cleanupObserver(observer);
     };
-  }, [cleanupObserver, subpartRefs, subpartSlidUp]);
+  }, [
+    cleanupObserver,
+    subpartRefs,
+    subpartSlidUp,
+    strategyRef,
+    designRef,
+    developmentRef,
+    helpSupportRef,
+  ]);
 
   return (
     <>
@@ -180,6 +221,61 @@ const Home: React.FC = () => {
           Get Started Today
         </Link>
       </div>
+
+      <section className="services-section">
+        <div
+          ref={strategyRef}
+          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
+        >
+          <Lightbulb className="service-icon" />
+          <p className="headi">Strategy</p>
+          <p>
+            We craft tailored strategies to align with your business goals,
+            ensuring your digital solutions drive growth and success. From
+            market research to product roadmaps, we’ve got you covered.
+          </p>
+          <button className="learn-more-button">Learn More</button>
+        </div>
+        <div
+          ref={designRef}
+          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
+        >
+          <Laptop className="service-icon" />
+          <p className="headi">Design</p>
+          <p>
+            Our design team creates visually stunning, user-friendly interfaces
+            that captivate your audience and enhance user experience. We focus
+            on aesthetics, usability, and brand consistency.
+          </p>
+          <button className="learn-more-button">Learn More</button>
+        </div>
+        <div
+          ref={developmentRef}
+          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
+        >
+          <Cog className="service-icon" />
+          <p className="headi">Development</p>
+          <p>
+            We build scalable, high-performance applications and websites using
+            the latest technologies. From custom software to third-party
+            integrations, we deliver solutions that grow with your business.
+          </p>
+          <button className="learn-more-button">Learn More</button>
+        </div>
+        <div
+          ref={helpSupportRef}
+          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
+        >
+          <HelpCircle className="service-icon" />
+          <p className="headi">Help & Support</p>
+          <p>
+            From deployment to maintenance, we provide end-to-end support to
+            ensure your systems run smoothly and efficiently. Our team is always
+            here to help with updates, troubleshooting, and scaling.
+          </p>
+          <button className="learn-more-button">Learn More</button>
+        </div>
+      </section>
     </>
   );
 };
