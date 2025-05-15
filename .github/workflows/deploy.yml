@@ -29,9 +29,6 @@ jobs:
         working-directory: my-app
         run: npm run build
 
-      - name: List build output
-        run: ls -alR
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
