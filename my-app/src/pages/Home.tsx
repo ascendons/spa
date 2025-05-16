@@ -8,7 +8,7 @@ import React, {
 import { Link } from "react-router-dom";
 import "./Home.css";
 import ParticlesComponent from "../components/Particle.tsx";
-import { Lightbulb, Laptop, Cog, HelpCircle } from "lucide-react";
+// import { Lightbulb, Laptop, Cog, HelpCircle } from "lucide-react";
 
 const Home: React.FC = () => {
   const paragraph1Ref = useRef<HTMLParagraphElement>(null);
@@ -227,9 +227,8 @@ const Home: React.FC = () => {
           ref={strategyRef}
           className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
         >
-          <Lightbulb className="service-icon" />
-          <p className="headi">Strategy</p>
-          <p>
+          <span className="headi">Strategy</span>
+          <p className="para">
             We craft tailored strategies to align with your business goals,
             ensuring your digital solutions drive growth and success. From
             market research to product roadmaps, we’ve got you covered.
@@ -240,9 +239,8 @@ const Home: React.FC = () => {
           ref={designRef}
           className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
         >
-          <Laptop className="service-icon" />
-          <p className="headi">Design</p>
-          <p>
+          <span className="headi">Design</span>
+          <p className="para">
             Our design team creates visually stunning, user-friendly interfaces
             that captivate your audience and enhance user experience. We focus
             on aesthetics, usability, and brand consistency.
@@ -253,9 +251,8 @@ const Home: React.FC = () => {
           ref={developmentRef}
           className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
         >
-          <Cog className="service-icon" />
-          <p className="headi">Development</p>
-          <p>
+          <span className="headi">Development</span>
+          <p className="para">
             We build scalable, high-performance applications and websites using
             the latest technologies. From custom software to third-party
             integrations, we deliver solutions that grow with your business.
@@ -266,14 +263,102 @@ const Home: React.FC = () => {
           ref={helpSupportRef}
           className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
         >
-          <HelpCircle className="service-icon" />
-          <p className="headi">Help & Support</p>
-          <p>
+          <span className="headi">Help & Support</span>
+          <p className="para">
             From deployment to maintenance, we provide end-to-end support to
             ensure your systems run smoothly and efficiently. Our team is always
             here to help with updates, troubleshooting, and scaling.
           </p>
           <button className="learn-more-button">Learn More</button>
+        </div>
+      </section>
+
+      <section className="emailsection">
+        <span className="span2">Join the Ascendons Community</span>
+        <p className="para2">
+          Subscribe to our newsletter and stay ahead with the latest trends,
+          insights, and innovations in technology. Be the first to know about
+          our updates, tips, and exclusive offers!
+        </p>
+        <div className="subscribe-container">
+          <input type="email" className="email-input" placeholder="Email" />
+          <button className="subscribe-button">Subscribe</button>
+        </div>
+      </section>
+
+      <div className="text-section">
+        <p
+          ref={paragraph2Ref}
+          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
+        >
+          <p
+            ref={subpartRef1}
+            className={`subpart1 ${subpartSlidUp[0] ? "slide-up" : ""}`}
+          >
+            WHY CHOOSE US?
+          </p>
+          <p
+            ref={subpartRef2}
+            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
+          >
+            Automation Solutions for Your Business
+          </p>
+          <p
+            ref={subpartRef3}
+            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
+          >
+            We deliver cutting-edge automation solutions to help your business
+            thrive. Let us streamline your processes and drive efficiency.
+          </p>
+        </p>
+      </div>
+
+      <section className="services-section">
+        <div
+          ref={strategyRef}
+          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
+        >
+          <span className="headi">Save Money</span>
+          <p className="para">
+            We help you save money by automating repetitive tasks and reducing
+            manual effort. Our solutions optimize processes, cutting down on
+            time and labor costs while boosting productivity.
+          </p>
+        </div>
+        <div
+          ref={designRef}
+          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
+        >
+          <span className="headi">Reduce Cycle time</span>
+          <p className="para">
+            Our automation solutions speed up your processes, allowing you to
+            handle more tasks in less time. This increases your capacity without
+            the need for additional labor, while faster service keeps your
+            customers happy.
+          </p>
+        </div>
+        <div
+          ref={developmentRef}
+          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
+        >
+          <span className="headi">Improve Quality</span>
+          <p className="para">
+            We help you minimize errors and rework by implementing automated
+            quality checks and process improvements. This ensures consistent,
+            high-quality results that protect your reputation and customer
+            trust.
+          </p>
+        </div>
+        <div
+          ref={helpSupportRef}
+          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
+        >
+          <span className="headi">Become Competitive</span>
+          <p className="para">
+            Your competitors are already automating their processes. We help you
+            stay ahead by implementing automation solutions that enhance
+            efficiency, reduce costs, and improve customer satisfaction.
+          </p>
         </div>
       </section>
     </>
