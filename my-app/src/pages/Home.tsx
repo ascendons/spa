@@ -362,7 +362,6 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-
       <div className="text-section">
         <p
           ref={paragraph2Ref}
