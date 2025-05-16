@@ -361,6 +361,187 @@ const Home: React.FC = () => {
           </p>
         </div>
       </section>
+
+
+      <div className="text-section">
+        <p
+          ref={paragraph2Ref}
+          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
+        >
+          <p
+            ref={subpartRef2}
+            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
+          >
+            AI Solutions Tailored for Your Success
+          </p>
+          <p
+            ref={subpartRef3}
+            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
+          >
+            We deliver cutting-edge AI solutions to help your business thrive in
+            a competitive landscape. Let us empower you with intelligent tools
+            and insights.
+          </p>
+        </p>
+      </div>
+
+      <section className="services-section">
+        <div
+          ref={strategyRef}
+          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
+        >
+          <span className="headi">Smarter Decision-Making</span>
+          <p className="para">
+            We provide AI tools that analyze data and deliver actionable
+            insights, helping you make faster, smarter decisions.
+          </p>
+        </div>
+        <div
+          ref={designRef}
+          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
+        >
+          <span className="headi">Personalized Experiences</span>
+          <p className="para">
+            Our AI solutions create tailored customer interactions, enhancing
+            engagement and building loyalty.
+          </p>
+        </div>
+        <div
+          ref={developmentRef}
+          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
+        >
+          <span className="headi">24/7 Customer Support</span>
+          <p className="para">
+            We implement AI-powered chatbots and virtual assistants to provide
+            instant, round-the-clock support for your customers.
+          </p>
+        </div>
+        <div
+          ref={helpSupportRef}
+          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
+        >
+          <span className="headi">Predictive Analysis</span>
+          <p className="para">
+            Our AI solutions predict trends and customer behavior, helping you
+            stay ahead of the competition.
+          </p>
+        </div>
+      </section>
+
+      <div className="text-section">
+        <p
+          ref={paragraph2Ref}
+          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
+        >
+          <p
+            ref={subpartRef1}
+            className={`subpart1 ${subpartSlidUp[0] ? "slide-up" : ""}`}
+          >
+            OUR EXPERTISE
+          </p>
+          <p
+            ref={subpartRef2}
+            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
+          >
+            Tech Solutions We Deliver
+          </p>
+          <p
+            ref={subpartRef3}
+            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
+          >
+            We provide cutting-edge technology consulting services to help your
+            business innovate, optimize, and grow. Here’s how we can add value
+            to your organization.
+          </p>
+        </p>
+      </div>
+
+      <section className="services-section">
+        <div
+          ref={strategyRef}
+          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
+        >
+          <span className="headi">Digital Transformation</span>
+          <p className="para">
+            We help businesses embrace digital technologies to streamline
+            operations, improve customer experiences, and stay competitive in a
+            rapidly evolving market.
+          </p>
+        </div>
+        <div
+          ref={designRef}
+          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
+        >
+          <span className="headi">Cloud Solutions </span>
+          <p className="para">
+            We design and implement cloud-based solutions to enhance
+            scalability, flexibility, and cost-efficiency for your business.
+          </p>
+        </div>
+        <div
+          ref={developmentRef}
+          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
+        >
+          <span className="headi">AI & Machine Learning</span>
+          <p className="para">
+            We develop AI-driven solutions to automate processes, predict
+            trends, and deliver personalized customer experiences.
+          </p>
+        </div>
+        <div
+          ref={helpSupportRef}
+          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
+        >
+          <span className="headi">Cyber security</span>
+          <p className="para">
+            We protect your business from cyber threats with robust security
+            strategies, tools, and best practices.
+          </p>
+        </div>
+      </section>
+
+      <section className="services-section">
+        <div
+          ref={strategyRef}
+          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
+        >
+          <span className="headi">Software Development</span>
+          <p className="para">
+            We build custom software solutions tailored to your business needs,
+            ensuring scalability, performance, and user satisfaction.
+          </p>
+        </div>
+        <div
+          ref={designRef}
+          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
+        >
+          <span className="headi">Data Analytics & Insights</span>
+          <p className="para">
+            We help you harness the power of data to make informed decisions,
+            identify trends, and uncover new opportunities.
+          </p>
+        </div>
+        <div
+          ref={developmentRef}
+          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
+        >
+          <span className="headi">IT Infrastructure Management</span>
+          <p className="para">
+            We optimize and manage your IT infrastructure to ensure reliability,
+            scalability, and cost-efficiency.
+          </p>
+        </div>
+        <div
+          ref={helpSupportRef}
+          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
+        >
+          <span className="headi">IoT Solutions</span>
+          <p className="para">
+            We design and implement IoT solutions to connect devices, collect
+            data, and drive smarter decision-making.
+          </p>
+        </div>
+      </section>
     </>
   );
 };

@@ -77,7 +77,7 @@
   padding: 1rem 2.2rem;
   border-radius: 2.2rem;
   transition: transform 0.5s ease-in-out;
-  font-size: 1.2rem; /* Adjusted font-size for better responsiveness */
+  font-size: 1.2rem;
   font-weight: 600;
   margin-top: 2rem;
   transform: translateY(20px);
@@ -117,7 +117,7 @@
 
 .subpart2 {
   margin-bottom: 24px;
-  font-size: 2.8rem; /* Adjusted font-size for better responsiveness */
+  font-size: 2.8rem;
   color: #404044;
   font-weight: bold;
   transform: translateY(20px);
@@ -168,7 +168,7 @@
   text-align: center;
   width: 25%;
   box-sizing: border-box;
-  border-right: none !important; /* Removed default right border */
+  border-right: none !important;
 }
 
 .service-card:nth-child(4n) {
@@ -183,7 +183,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* font-size: 3rem; */
   color: #fff;
   margin-bottom: 1rem;
 }
@@ -217,7 +216,7 @@
 .para {
   color: #9c9c9c;
   margin-bottom: 20px;
-  font-size: 20px; /* Set font size to 18px */
+  font-size: 20px;
 }
 
 .learn-more-button {
@@ -244,42 +243,42 @@
     180deg,
     #f8f4f2 0%,
     #e6dace 100%
-  ); /* Background gradient */
+  );
   padding: 70px;
   text-align: center;
 }
 
 .emailsection .span2 {
-  display: block; /* Make the span take full width for centering */
-  color: #333; /* Darker text color for the heading */
-  font-size: 2.5rem; /* Larger font size for the heading */
+  display: block;
+  color: #333;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 15px;
 }
 
 .emailsection .para2 {
-  color: #777; /* Slightly lighter text color for the paragraph */
+  color: #777;
   font-size: 1.3rem;
   line-height: 1.6;
   margin-bottom: 30px;
-  max-width: 600px; /* Limit paragraph width for better readability */
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .emailsection .subscribe-container {
   display: flex;
-  max-width: 400px; /* Limit the width of the input and button */
-  margin: 0 auto; /* Center the input and button */
+  max-width: 400px;
+  margin: 0 auto;
   border-radius: 30px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .emailsection .email-input {
-  padding: 12px 20px; /* Adjust padding */
+  padding: 12px 20px;
   border: none;
-  background-color: #fff; /* White input background */
+  background-color: #fff;
   color: #333;
   border-radius: 30px 0 0 30px;
   flex-grow: 1;
@@ -292,20 +291,20 @@
 }
 
 .emailsection .subscribe-button {
-  padding: 12px 25px; /* Adjust padding */
+  padding: 12px 25px;
   border: none;
-  background-color: #f08080; /* Similar to the pink in the image */
+  background-color: #f08080;
   color: #fff;
   border-radius: 0 30px 30px 0;
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   outline: none;
-  transition: background-color 0.3s ease; /* Smooth hover transition */
+  transition: background-color 0.3s ease;
 }
 
 .emailsection .subscribe-button:hover {
-  background-color: #e07070; /* Darker pink on hover */
+  background-color: #e07070;
 }
 
 .emailsection .privacy-text {
@@ -313,7 +312,7 @@
   font-size: 0.8rem;
   margin-top: 10px;
 }
-/* Medium screens (up to 1040px) - 2-2 layout */
+
 @media (max-width: 1040px) {
   .services-section {
     flex-direction: row;
@@ -324,7 +323,7 @@
   .service-card {
     width: 48%;
     margin-bottom: 20px;
-    border-right: none !important; /* Ensure no right border */
+    border-right: none !important;
   }
 
   .service-card:nth-child(2n) {
@@ -340,7 +339,7 @@
   }
 
   .para {
-    font-size: 18px; /* Ensure font size is 18px in 2-2 layout */
+    font-size: 18px;
   }
 
   .learn-more-button {
@@ -348,7 +347,6 @@
   }
 }
 
-/* Small screens (up to 560px) - 1-1-1-1 layout */
 @media (max-width: 700px) {
   .services-section {
     flex-direction: column;
@@ -358,7 +356,7 @@
   .service-card {
     width: 100%;
     margin-bottom: 25px;
-    border-right: none !important; /* Ensure no right border */
+    border-right: none !important;
   }
 
   .service-card:last-child {
@@ -370,7 +368,7 @@
   }
 
   .para {
-    font-size: 18px; /* Ensure font size is 18px in 1-1-1-1 layout */
+    font-size: 18px;
   }
 
   .learn-more-button {
@@ -378,7 +376,6 @@
   }
 }
 
-/* Default styles for larger screens (more than 1040px) - 4-column layout */
 @media (min-width: 1041px) {
   .services-section {
     display: flex;
@@ -391,7 +388,7 @@
 
   .service-card {
     width: 25%;
-    border-right: none !important; /* Ensure no right border */
+    border-right: none !important;
   }
 
   .service-card:nth-child(4n) {
@@ -403,7 +400,8 @@
   }
 
   .para {
-    font-size: 18px; /* Ensure font size is 18px in 4-column layout */
+
+    font-size: 18px;
   }
 
   .learn-more-button {
@@ -417,5 +415,73 @@
   }
   .home-paragraph {
     font-size: 28px;
+  }
+  .subpart2 {
+    font-size: 39px;
+  }
+  .subpart3 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 460px) {
+  .emailsection .subscribe-container {
+    flex-direction: row;
+    max-width: 400px;
+  }
+
+  .emailsection .email-input {
+    border-radius: 30px 0 0 30px;
+    flex-grow: 1;
+    width: auto;
+  }
+
+  .emailsection .subscribe-button {
+    border-radius: 0 30px 30px 0;
+    width: auto;
+  }
+}
+
+@media (max-width: 474px) {
+  .emailsection .subscribe-container {
+    /* flex-direction: column;  */
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .emailsection .email-input {
+    /* border-radius: 30px 30px 0 0;  */
+    width: 100%;
+  }
+
+  .emailsection .subscribe-button {
+    /* border-radius: 0 0 30px 30px; */
+    width: 100%;
+  }
+}
+@media (max-width: 334px) {
+  .emailsection .span2 {
+    font-size: 1.7rem;
+  }
+  .emailsection .para2 {
+    font-size: 1rem;
+  }
+  .emailsection .email-input::placeholder {
+    font-size: 0.9rem;
+  }
+  .emailsection .subscribe-button {
+    font-size: 0.9rem;
+    border-radius: 0 0 30px 30px;
+    width: 100%;
+  }
+  .emailsection .subscribe-container {
+    flex-direction: column;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .emailsection .email-input {
+    border-radius: 30px 30px 0 0;
+    width: 100%;
   }
 }

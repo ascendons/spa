@@ -30,3 +30,7 @@ jobs:
       - name: Run formatter
         working-directory: my-app
         run: npm run format
+
+      - name: Run build
+        working-directory: my-app
+        run: npm run build
