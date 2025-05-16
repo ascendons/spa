@@ -172,7 +172,7 @@
 }
 
 .service-card:nth-child(4n) {
-  border-right: none;
+  border-right: none; /* Ensure no right border on the last in the row */
 }
 
 .service-icon {
@@ -183,7 +183,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* font-size: 3rem; */
   color: #fff;
   margin-bottom: 1rem;
 }
@@ -240,7 +239,11 @@
 }
 
 .emailsection {
-  background: linear-gradient(180deg, #f8f4f2 0%, #e6dace 100%);
+  background: linear-gradient(
+    180deg,
+    #f8f4f2 0%,
+    #e6dace 100%
+  );
   padding: 70px;
   text-align: center;
 }
@@ -397,6 +400,7 @@
   }
 
   .para {
+
     font-size: 18px;
   }
 
