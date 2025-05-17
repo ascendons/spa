@@ -279,6 +279,31 @@ const Home: React.FC = () => {
         </section>
 
         <div className="text-section">
+        </div>
+        <div
+          ref={helpSupportRef}
+          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
+        >
+          <span className="headi">Become Competitive</span>
+          <p className="para">
+            Your competitors are already automating their processes. We help you
+            stay ahead by implementing automation solutions that enhance
+            efficiency, reduce costs, and improve customer satisfaction.
+          </p>
+        </div>
+      </section>
+
+      <div className="text-section">
+        <p
+          ref={paragraph2Ref}
+          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
+        >
+          <p
+            ref={subpartRef2}
+            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
+          >
+            AI Solutions Tailored for Your Success
+          </p>
           <p
               ref={paragraph2Ref}
               className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
