@@ -5,7 +5,10 @@ on:
     branches:
       - master
     types: [opened, synchronize, reopened]
-
+    
+permissions:
+  contents: write 
+  
 jobs:
   lint-and-format:
     runs-on: ubuntu-latest
