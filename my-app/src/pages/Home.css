@@ -39,6 +39,8 @@
   color: black;
   width: 100%;
   padding: 5rem 2rem;
+  /* padding-left: 20px;
+  padding-right: 20px; */
   z-index: 999;
   background-color: #fff;
 }
@@ -47,9 +49,9 @@
   color: #404044;
   margin-bottom: 2rem;
   max-width: 768px;
-  font-size: 38px;
+  font-size: 40px;
   font-weight: lighter;
-  /* line-height: 1.75rem; */
+  line-height: 1.75;
   transform: translateY(20px);
   transition: transform 0.5s ease-in-out;
 }
@@ -74,8 +76,8 @@
   color: #ee76ad;
   padding: 1rem 2.2rem;
   border-radius: 2.2rem;
-  transition: transform 0.5s ease-in-out; /* Added  */
-  font-size: 25px;
+  transition: transform 0.5s ease-in-out;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-top: 2rem;
   transform: translateY(20px);
@@ -96,16 +98,16 @@
   color: #efac78;
   padding-left: 5px;
   padding-right: 5px;
-  font-size: 38px;
+  font-size: 40px;
   font-weight: bold;
 }
 
 .subpart1 {
   color: #00000033;
   font:
-    17px Arial,
+    15px Arial,
     Sans-serif;
-  margin-bottom: 15px;
+  /* margin-bottom: 10px; */
   transform: translateY(20px);
   transition: transform 0.5s ease-in-out;
 }
@@ -115,7 +117,7 @@
 
 .subpart2 {
   margin-bottom: 24px;
-  font-size: 38px;
+  font-size: 2.8rem;
   color: #404044;
   font-weight: bold;
   transform: translateY(20px);
@@ -127,9 +129,10 @@
 
 .subpart3 {
   color: #8b8b92;
-  font-size: 23px;
+  font-size: 21px;
   transform: translateY(20px);
   transition: transform 0.5s ease-in-out;
+  line-height: 1.7;
 }
 .subpart3.slide-up {
   transform: translateY(0);
@@ -141,26 +144,394 @@
   border-radius: 3px;
 }
 
+.services-section {
+  display: flex;
+  padding: 35px;
+  background-color: #fff;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 0;
+  /* margin-top: 5rem; */
+}
+
+.service-card {
+  background-color: #fff;
+  padding: 35px;
+  border-radius: 0;
+  box-shadow: none;
+  transform: translateY(0);
+  opacity: 1;
+  transition: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 25%;
+  box-sizing: border-box;
+  border-right: none !important;
+}
+
+.service-card:nth-child(4n) {
+  border-right: none;
+}
+
+.service-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.strategy-icon {
+  background-color: #a7e9f7;
+  color: #00bcd4;
+}
+
+.design-icon {
+  background-color: #fdd8d7;
+  color: #e91e63;
+}
+
+.development-icon {
+  background-color: #ffe0b2;
+  color: #ff9800;
+}
+
+.helpsupport-icon {
+  background-color: #dcedc8;
+  color: #8bc34a;
+}
+
+.headi {
+  padding-bottom: 10px;
+  color: rgb(52, 52, 52);
+  font-size: 25px;
+}
+
+.para {
+  color: #9c9c9c;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.learn-more-button {
+  background-color: transparent;
+  color: #00bcd4;
+  border: 1px solid #00bcd4;
+  padding: 10px 20px;
+  border-radius: 2.2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.learn-more-button:hover {
+  background-color: #00bcd4;
+  color: #fff;
+}
+
+.emailsection {
+  background: linear-gradient(180deg, #f8f4f2 0%, #e6dace 100%);
+  padding: 70px;
+  text-align: center;
+}
+
+.emailsection .span2 {
+  display: block;
+  color: #333;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.emailsection .para2 {
+  color: #777;
+  font-size: 1.3rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.emailsection .subscribe-container {
+  display: flex;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.emailsection .email-input {
+  padding: 12px 20px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+  border-radius: 30px 0 0 30px;
+  flex-grow: 1;
+  font-size: 1rem;
+  outline: none;
+}
+
+.emailsection .email-input::placeholder {
+  color: #999;
+}
+
+.emailsection .subscribe-button {
+  padding: 12px 25px;
+  border: none;
+  background-color: #f08080;
+  color: #fff;
+  border-radius: 0 30px 30px 0;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.emailsection .subscribe-button:hover {
+  background-color: #e07070;
+}
+
+.emailsection .privacy-text {
+  color: #999;
+  font-size: 0.8rem;
+  margin-top: 10px;
+}
+
+.services-sect {
+  /* background-color: white; */
+  display: flex;
+  padding: 35px;
+  background-color: #fff;
+  text-align: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.par {
+  color: #9c9c9c;
+}
+.service-card1 {
+  background-color: #fff;
+  padding: 35px;
+  border-radius: 0;
+  box-shadow: none;
+  transform: translateY(0);
+  opacity: 1;
+  transition: none;
+  /* display: flex;
+  flex-direction: column;  */
+  align-items: center;
+  text-align: center;
+  width: 33%;
+  box-sizing: border-box;
+  margin-right: 0;
+  border-right: none !important;
+  font-size: 20px;
+}
+
+@media (max-width: 1040px) {
+  .services-section {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 20px;
+  }
+
+  .service-card {
+    width: 48%;
+    margin-bottom: 20px;
+    border-right: none !important;
+  }
+
+  .service-card:nth-child(2n) {
+    margin-right: 0;
+  }
+
+  .service-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .headi {
+    font-size: 20px;
+  }
+
+  .para {
+    font-size: 18px;
+  }
+
+  .learn-more-button {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .services-section {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .service-card {
+    width: 100%;
+    margin-bottom: 25px;
+    border-right: none !important;
+  }
+
+  .service-card:last-child {
+    margin-bottom: 0;
+  }
+
+  .headi {
+    font-size: 22px;
+  }
+
+  .para {
+    font-size: 18px;
+  }
+
+  .learn-more-button {
+    font-size: 1rem;
+  }
+
+}
+
+@media (min-width: 1041px) {
+  .services-section {
+    display: flex;
+    padding: 35px;
+    background-color: #fff;
+    text-align: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .service-card {
+    width: 25%;
+    border-right: none !important;
+  }
+
+  .service-card:nth-child(4n) {
+    border-right: none;
+  }
+
+  .headi {
+    font-size: 25px;
+  }
+
+  .para {
+    font-size: 18px;
+  }
+
+  .learn-more-button {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .home-heading {
-    font-size: 3rem;
-    line-height: 3.5rem;
+  .span1 {
+    font-size: 31px;
   }
-
   .home-paragraph {
+    font-size: 28px;
+  }
+  .subpart2 {
+    font-size: 39px;
+  }
+  .subpart3 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 460px) {
+  .emailsection .subscribe-container {
+    flex-direction: row;
+    max-width: 400px;
+  }
+
+  .emailsection .email-input {
+    border-radius: 30px 0 0 30px;
+    flex-grow: 1;
+    width: auto;
+  }
+
+  .emailsection .subscribe-button {
+    border-radius: 0 30px 30px 0;
+    width: auto;
+  }
+}
+
+@media (max-width: 474px) {
+  .emailsection .subscribe-container {
+    /* flex-direction: column;  */
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+  .emailsection .email-input {
+    /* border-radius: 30px 30px 0 0;  */
+    width: 100%;
+  }
+
+  .emailsection .subscribe-button {
+    /* border-radius: 0 0 30px 30px; */
+    width: 100%;
+  }
+}
+@media (max-width: 334px) {
+  .emailsection .span2 {
+    font-size: 1.7rem;
+  }
+  .emailsection .para2 {
     font-size: 1rem;
-    line-height: 1.5rem;
+  }
+  .emailsection .email-input::placeholder {
+    font-size: 0.9rem;
+  }
+  .emailsection .subscribe-button {
+    font-size: 0.9rem;
+    border-radius: 0 0 30px 30px;
+    width: 100%;
+  }
+  .emailsection .subscribe-container {
+    flex-direction: column;
+    border-radius: 30px;
+    overflow: hidden;
   }
 
-  .home-button {
-    font-size: 1rem;
+  .emailsection .email-input {
+    border-radius: 30px 30px 0 0;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .services-sect {
+    flex-direction: column;
+    padding: 20px;
   }
 
-  .home-content {
-    max-width: 95%;
+  .service-card1 {
+    width: 100%;
+    margin-bottom: 20px;
+    border-right: none;
   }
+}
 
-  .text-section {
-    padding: 3rem 1rem;
+@media (max-width: 480px) {
+  .service-card1 {
+    padding: 15px;
+    font-size: 16px;
+  }
+  .par {
+    font-size: 14px;
   }
 }
