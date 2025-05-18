@@ -7,7 +7,7 @@ const About: React.FC = () => {
       <section className="relative h-screen w-full overflow-hidden">
         <ParticlesComponent id="tsparticles" className="absolute inset-0" />
         <div className="ative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-          <h1 className=" text-white/90 mb-12 max-w-3xl">About Us</h1>
+          <h1 className=" text-white/90 mb-5 text-4xl font-bold max-w-3xl">About Us</h1>
           <p className="text-white text-2xl font-semibold">Your success is our mission</p>
         </div>
       </section>
