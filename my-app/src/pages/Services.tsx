@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
-import ParticlesComponent from "../components/Particle.tsx";
+import JParticlesEffect from "../components/JParticlesEffect";
 
 const Services: React.FC = () => {
   // const paragraph1Ref = useRef<HTMLParagraphElement>(null);
@@ -149,7 +149,8 @@ const Services: React.FC = () => {
   return (
     <>
       <section className="home-section">
-        <ParticlesComponent id="tsparticles" className="absolute inset-0" />
+        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
+        <JParticlesEffect/>
         <div className="home-content">
           <div className="home-heading">Services</div>
         </div>

@@ -6,27 +6,33 @@ import React, {
   useMemo,
 } from "react";
 import { Link } from "react-router-dom";
+import { useTypewriter, Cursor } from "react-simple-typewriter";
 import "./Home.css";
-import ParticlesComponent from "../components/Particle.tsx";
-// import { Lightbulb, Laptop, Cog, HelpCircle } from "lucide-react";
+import JParticlesEffect from "../components/JParticlesEffect";
 
 const Home: React.FC = () => {
+  const [text] = useTypewriter({
+    words: ["Smart, Scalable, and Stunning Software Solutions."],
+    loop: true,
+    typeSpeed: 150,    //speed of typing
+    deleteSpeed: 100,    //speed of deleting
+    delaySpeed: 5000,
+  });
+
   const paragraph1Ref = useRef<HTMLParagraphElement>(null);
   const button1Ref = useRef<HTMLAnchorElement>(null);
   const [paragraph1SlidUp, setParagraph1SlidUp] = useState(false);
-  const [button1SlidUp, setButton1SlidUp] = useState(false);
+  // const [button1SlidUp, setButton1SlidUp] = useState(false);
 
   const paragraph2Ref = useRef<HTMLParagraphElement>(null);
   const button2Ref = useRef<HTMLAnchorElement>(null);
   const [paragraph2SlidUp, setParagraph2SlidUp] = useState(false);
   const [button2SlidUp, setButton2SlidUp] = useState(false);
 
-  // Create the ref objects directly in the component
   const subpartRef1 = useRef<HTMLParagraphElement>(null);
   const subpartRef2 = useRef<HTMLParagraphElement>(null);
   const subpartRef3 = useRef<HTMLParagraphElement>(null);
 
-  // Memoize the subpartRefs array using the ref objects
   const subpartRefs = useMemo(
     () => [subpartRef1, subpartRef2, subpartRef3],
     [subpartRef1, subpartRef2, subpartRef3],
@@ -48,31 +54,19 @@ const Home: React.FC = () => {
 
   const cleanupObserver = useCallback(
     (observer: IntersectionObserver) => {
-      if (paragraph1Ref.current && observer) {
-        observer.unobserve(paragraph1Ref.current);
-      }
-      if (button1Ref.current && observer) {
-        observer.unobserve(button1Ref.current);
-      }
-      if (paragraph2Ref.current && observer) {
-        observer.unobserve(paragraph2Ref.current);
-      }
-      if (button2Ref.current && observer) {
-        observer.unobserve(button2Ref.current);
-      }
+      if (paragraph1Ref.current && observer) observer.unobserve(paragraph1Ref.current);
+      if (button1Ref.current && observer) observer.unobserve(button1Ref.current);
+      if (paragraph2Ref.current && observer) observer.unobserve(paragraph2Ref.current);
+      if (button2Ref.current && observer) observer.unobserve(button2Ref.current);
+
       subpartRefs.forEach((ref) => {
-        // Iterate directly over the array of RefObjects
-        if (ref.current && observer) {
-          observer.unobserve(ref.current);
-        }
+        if (ref.current && observer) observer.unobserve(ref.current);
       });
-      if (strategyRef.current && observer)
-        observer.unobserve(strategyRef.current);
+
+      if (strategyRef.current && observer) observer.unobserve(strategyRef.current);
       if (designRef.current && observer) observer.unobserve(designRef.current);
-      if (developmentRef.current && observer)
-        observer.unobserve(developmentRef.current);
-      if (helpSupportRef.current && observer)
-        observer.unobserve(helpSupportRef.current);
+      if (developmentRef.current && observer) observer.unobserve(developmentRef.current);
+      if (helpSupportRef.current && observer) observer.unobserve(helpSupportRef.current);
     },
     [
       paragraph1Ref,
@@ -95,7 +89,7 @@ const Home: React.FC = () => {
             if (entry.target === paragraph1Ref.current) {
               setParagraph1SlidUp(true);
             } else if (entry.target === button1Ref.current) {
-              setButton1SlidUp(true);
+              // setButton1SlidUp(true);
             } else if (entry.target === paragraph2Ref.current) {
               setParagraph2SlidUp(true);
             } else if (entry.target === button2Ref.current) {
@@ -104,7 +98,6 @@ const Home: React.FC = () => {
               subpartRefs.some((ref) => entry.target === ref.current)
             ) {
               subpartRefs.forEach((ref, index) => {
-                // Iterate directly over the array of RefObjects
                 if (entry.target === ref.current) {
                   const newSubpartSlidUp = [...subpartSlidUp];
                   newSubpartSlidUp[index] = true;
@@ -123,9 +116,7 @@ const Home: React.FC = () => {
           }
         });
       },
-      {
-        threshold: 0.1,
-      },
+      { threshold: 0.1 },
     );
 
     if (paragraph1Ref.current) observer.observe(paragraph1Ref.current);
@@ -156,10 +147,12 @@ const Home: React.FC = () => {
   return (
     <>
       <section className="home-section">
-        <ParticlesComponent id="tsparticles" className="absolute inset-0" />
+        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
+              <JParticlesEffect  />
         <div className="home-content">
           <div className="home-heading">
-            Smart, Scalable, and Stunning Software Solutions.
+            {text}
+            <Cursor cursorStyle="|" />
           </div>
           <Link to="/contact" className="home-butto">
             Get in touch
@@ -176,6 +169,7 @@ const Home: React.FC = () => {
           more than 5 years of experience in designing, developing and deploying
           web applications, websites and mobile apps.
         </p>
+        {/* <button>
         <Link
           ref={button1Ref}
           to="/contact"
@@ -183,6 +177,7 @@ const Home: React.FC = () => {
         >
           Get in touch
         </Link>
+        </button> */}
       </div>
 
       <div className="text-section">
@@ -358,186 +353,6 @@ const Home: React.FC = () => {
             Your competitors are already automating their processes. We help you
             stay ahead by implementing automation solutions that enhance
             efficiency, reduce costs, and improve customer satisfaction.
-          </p>
-        </div>
-      </section>
-
-      <div className="text-section">
-        <p
-          ref={paragraph2Ref}
-          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
-        >
-          <p
-            ref={subpartRef2}
-            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
-          >
-            AI Solutions Tailored for Your Success
-          </p>
-          <p
-            ref={subpartRef3}
-            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
-          >
-            We deliver cutting-edge AI solutions to help your business thrive in
-            a competitive landscape. Let us empower you with intelligent tools
-            and insights.
-          </p>
-        </p>
-      </div>
-
-      <section className="services-section">
-        <div
-          ref={strategyRef}
-          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
-        >
-          <span className="headi">Smarter Decision-Making</span>
-          <p className="para">
-            We provide AI tools that analyze data and deliver actionable
-            insights, helping you make faster, smarter decisions.
-          </p>
-        </div>
-        <div
-          ref={designRef}
-          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
-        >
-          <span className="headi">Personalized Experiences</span>
-          <p className="para">
-            Our AI solutions create tailored customer interactions, enhancing
-            engagement and building loyalty.
-          </p>
-        </div>
-        <div
-          ref={developmentRef}
-          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
-        >
-          <span className="headi">24/7 Customer Support</span>
-          <p className="para">
-            We implement AI-powered chatbots and virtual assistants to provide
-            instant, round-the-clock support for your customers.
-          </p>
-        </div>
-        <div
-          ref={helpSupportRef}
-          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
-        >
-          <span className="headi">Predictive Analysis</span>
-          <p className="para">
-            Our AI solutions predict trends and customer behavior, helping you
-            stay ahead of the competition.
-          </p>
-        </div>
-      </section>
-
-      <div className="text-section">
-        <p
-          ref={paragraph2Ref}
-          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
-        >
-          <p
-            ref={subpartRef1}
-            className={`subpart1 ${subpartSlidUp[0] ? "slide-up" : ""}`}
-          >
-            OUR EXPERTISE
-          </p>
-          <p
-            ref={subpartRef2}
-            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
-          >
-            Tech Solutions We Deliver
-          </p>
-          <p
-            ref={subpartRef3}
-            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
-          >
-            We provide cutting-edge technology consulting services to help your
-            business innovate, optimize, and grow. Here’s how we can add value
-            to your organization.
-          </p>
-        </p>
-      </div>
-
-      <section className="services-section">
-        <div
-          ref={strategyRef}
-          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
-        >
-          <span className="headi">Digital Transformation</span>
-          <p className="para">
-            We help businesses embrace digital technologies to streamline
-            operations, improve customer experiences, and stay competitive in a
-            rapidly evolving market.
-          </p>
-        </div>
-        <div
-          ref={designRef}
-          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
-        >
-          <span className="headi">Cloud Solutions </span>
-          <p className="para">
-            We design and implement cloud-based solutions to enhance
-            scalability, flexibility, and cost-efficiency for your business.
-          </p>
-        </div>
-        <div
-          ref={developmentRef}
-          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
-        >
-          <span className="headi">AI & Machine Learning</span>
-          <p className="para">
-            We develop AI-driven solutions to automate processes, predict
-            trends, and deliver personalized customer experiences.
-          </p>
-        </div>
-        <div
-          ref={helpSupportRef}
-          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
-        >
-          <span className="headi">Cyber security</span>
-          <p className="para">
-            We protect your business from cyber threats with robust security
-            strategies, tools, and best practices.
-          </p>
-        </div>
-      </section>
-
-      <section className="services-section">
-        <div
-          ref={strategyRef}
-          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
-        >
-          <span className="headi">Software Development</span>
-          <p className="para">
-            We build custom software solutions tailored to your business needs,
-            ensuring scalability, performance, and user satisfaction.
-          </p>
-        </div>
-        <div
-          ref={designRef}
-          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
-        >
-          <span className="headi">Data Analytics & Insights</span>
-          <p className="para">
-            We help you harness the power of data to make informed decisions,
-            identify trends, and uncover new opportunities.
-          </p>
-        </div>
-        <div
-          ref={developmentRef}
-          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
-        >
-          <span className="headi">IT Infrastructure Management</span>
-          <p className="para">
-            We optimize and manage your IT infrastructure to ensure reliability,
-            scalability, and cost-efficiency.
-          </p>
-        </div>
-        <div
-          ref={helpSupportRef}
-          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
-        >
-          <span className="headi">IoT Solutions</span>
-          <p className="para">
-            We design and implement IoT solutions to connect devices, collect
-            data, and drive smarter decision-making.
           </p>
         </div>
       </section>
