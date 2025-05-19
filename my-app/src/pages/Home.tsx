@@ -8,7 +8,7 @@ import React, {
 import { Link } from "react-router-dom";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import "./Home.css";
-import ParticlesComponent from "../components/Particle.tsx";
+import JParticlesEffect from "../components/JParticlesEffect";
 
 const Home: React.FC = () => {
   const [text] = useTypewriter({
@@ -147,7 +147,8 @@ const Home: React.FC = () => {
   return (
     <>
       <section className="home-section">
-        <ParticlesComponent id="tsparticles" className="absolute inset-0" />
+        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
+              <JParticlesEffect  />
         <div className="home-content">
           <div className="home-heading">
             {text}
@@ -168,6 +169,7 @@ const Home: React.FC = () => {
           more than 5 years of experience in designing, developing and deploying
           web applications, websites and mobile apps.
         </p>
+        {/* <button>
         <Link
           ref={button1Ref}
           to="/contact"
@@ -175,6 +177,7 @@ const Home: React.FC = () => {
         >
           Get in touch
         </Link>
+        </button> */}
       </div>
 
       <div className="text-section">

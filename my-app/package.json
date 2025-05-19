@@ -17,6 +17,7 @@
     "@tsparticles/engine": "^3.0.0",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.8.1",
+    "jparticles": "^3.5.0",
     "lucide-react": "^0.510.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
