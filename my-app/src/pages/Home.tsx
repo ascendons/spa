@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   const [text] = useTypewriter({
     words: ["Smart, Scalable, and Stunning Software Solutions."],
     loop: true,
-    typeSpeed: 140,    //speed of typing
+    typeSpeed: 150,    //speed of typing
     deleteSpeed: 100,    //speed of deleting
     delaySpeed: 5000,
   });
@@ -22,7 +22,7 @@ const Home: React.FC = () => {
   const paragraph1Ref = useRef<HTMLParagraphElement>(null);
   const button1Ref = useRef<HTMLAnchorElement>(null);
   const [paragraph1SlidUp, setParagraph1SlidUp] = useState(false);
-  const [button1SlidUp, setButton1SlidUp] = useState(false);
+  // const [button1SlidUp, setButton1SlidUp] = useState(false);
 
   const paragraph2Ref = useRef<HTMLParagraphElement>(null);
   const button2Ref = useRef<HTMLAnchorElement>(null);
@@ -89,7 +89,7 @@ const Home: React.FC = () => {
             if (entry.target === paragraph1Ref.current) {
               setParagraph1SlidUp(true);
             } else if (entry.target === button1Ref.current) {
-              setButton1SlidUp(true);
+              // setButton1SlidUp(true);
             } else if (entry.target === paragraph2Ref.current) {
               setParagraph2SlidUp(true);
             } else if (entry.target === button2Ref.current) {
