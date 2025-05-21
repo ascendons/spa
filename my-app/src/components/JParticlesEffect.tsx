@@ -1,17 +1,17 @@
 // src/components/JParticlesEffect.tsx
 import React, { useEffect } from "react";
-import JParticles from "jparticles"; 
+import JParticles from "jparticles";
 
 const JParticlesEffect: React.FC = () => {
   useEffect(() => {
     const canvas = document.getElementById("jparticles-canvas") as HTMLElement;
     if (canvas) {
       new JParticles.Particle(canvas, {
-         color: '#25bfff',
-    lineShape: 'cube',
-    range: 2000,
-    proximity: 100,
-    parallax: true,
+        color: "#25bfff",
+        lineShape: "cube",
+        range: 2000,
+        proximity: 100,
+        parallax: true,
       });
     }
   }, []);

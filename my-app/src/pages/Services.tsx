@@ -150,7 +150,7 @@ const Services: React.FC = () => {
     <>
       <section className="home-section">
         {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
-        <JParticlesEffect/>
+        <JParticlesEffect />
         <div className="home-content">
           <div className="home-heading">Services</div>
         </div>
@@ -469,4 +469,3 @@ const Services: React.FC = () => {
 };
 
 export default Services;
-

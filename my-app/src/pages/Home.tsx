@@ -14,8 +14,8 @@ const Home: React.FC = () => {
   const [text] = useTypewriter({
     words: ["Smart, Scalable, and Stunning Software Solutions."],
     loop: true,
-    typeSpeed: 150,    //speed of typing
-    deleteSpeed: 100,    //speed of deleting
+    typeSpeed: 150, //speed of typing
+    deleteSpeed: 100, //speed of deleting
     delaySpeed: 5000,
   });
 
@@ -52,21 +52,53 @@ const Home: React.FC = () => {
     helpSupport: false,
   });
 
+  // Refs for the new section
+  const journeySectionRef = useRef<HTMLDivElement>(null);
+  const statCard1Ref = useRef<HTMLDivElement>(null);
+  const statCard2Ref = useRef<HTMLDivElement>(null);
+  const statCard3Ref = useRef<HTMLDivElement>(null);
+  const joinButtonRef = useRef<HTMLAnchorElement>(null);
+
+  const [journeySectionVisible, setJourneySectionVisible] = useState(false);
+  const [statCard1SlidUp, setStatCard1SlidUp] = useState(false);
+  const [statCard2SlidUp, setStatCard2SlidUp] = useState(false);
+  const [statCard3SlidUp, setStatCard3SlidUp] = useState(false);
+  const [joinButtonSlidUp, setJoinButtonSlidUp] = useState(false);
+
   const cleanupObserver = useCallback(
     (observer: IntersectionObserver) => {
-      if (paragraph1Ref.current && observer) observer.unobserve(paragraph1Ref.current);
-      if (button1Ref.current && observer) observer.unobserve(button1Ref.current);
-      if (paragraph2Ref.current && observer) observer.unobserve(paragraph2Ref.current);
-      if (button2Ref.current && observer) observer.unobserve(button2Ref.current);
+      if (paragraph1Ref.current && observer)
+        observer.unobserve(paragraph1Ref.current);
+      if (button1Ref.current && observer)
+        observer.unobserve(button1Ref.current);
+      if (paragraph2Ref.current && observer)
+        observer.unobserve(paragraph2Ref.current);
+      if (button2Ref.current && observer)
+        observer.unobserve(button2Ref.current);
 
       subpartRefs.forEach((ref) => {
         if (ref.current && observer) observer.unobserve(ref.current);
       });
 
-      if (strategyRef.current && observer) observer.unobserve(strategyRef.current);
+      if (strategyRef.current && observer)
+        observer.unobserve(strategyRef.current);
       if (designRef.current && observer) observer.unobserve(designRef.current);
-      if (developmentRef.current && observer) observer.unobserve(developmentRef.current);
-      if (helpSupportRef.current && observer) observer.unobserve(helpSupportRef.current);
+      if (developmentRef.current && observer)
+        observer.unobserve(developmentRef.current);
+      if (helpSupportRef.current && observer)
+        observer.unobserve(helpSupportRef.current);
+
+      // Clean up for new section
+      if (journeySectionRef.current && observer)
+        observer.unobserve(journeySectionRef.current);
+      if (statCard1Ref.current && observer)
+        observer.unobserve(statCard1Ref.current);
+      if (statCard2Ref.current && observer)
+        observer.unobserve(statCard2Ref.current);
+      if (statCard3Ref.current && observer)
+        observer.unobserve(statCard3Ref.current);
+      if (joinButtonRef.current && observer)
+        observer.unobserve(joinButtonRef.current);
     },
     [
       paragraph1Ref,
@@ -78,6 +110,11 @@ const Home: React.FC = () => {
       designRef,
       developmentRef,
       helpSupportRef,
+      journeySectionRef,
+      statCard1Ref,
+      statCard2Ref,
+      statCard3Ref,
+      joinButtonRef,
     ],
   );
 
@@ -112,6 +149,16 @@ const Home: React.FC = () => {
               setServicesSlidUp((prev) => ({ ...prev, development: true }));
             } else if (entry.target === helpSupportRef.current) {
               setServicesSlidUp((prev) => ({ ...prev, helpSupport: true }));
+            } else if (entry.target === journeySectionRef.current) {
+              setJourneySectionVisible(true);
+            } else if (entry.target === statCard1Ref.current) {
+              setStatCard1SlidUp(true);
+            } else if (entry.target === statCard2Ref.current) {
+              setStatCard2SlidUp(true);
+            } else if (entry.target === statCard3Ref.current) {
+              setStatCard3SlidUp(true);
+            } else if (entry.target === joinButtonRef.current) {
+              setJoinButtonSlidUp(true);
             }
           }
         });
@@ -131,6 +178,13 @@ const Home: React.FC = () => {
     if (developmentRef.current) observer.observe(developmentRef.current);
     if (helpSupportRef.current) observer.observe(helpSupportRef.current);
 
+    // Observe new section elements
+    if (journeySectionRef.current) observer.observe(journeySectionRef.current);
+    if (statCard1Ref.current) observer.observe(statCard1Ref.current);
+    if (statCard2Ref.current) observer.observe(statCard2Ref.current);
+    if (statCard3Ref.current) observer.observe(statCard3Ref.current);
+    if (joinButtonRef.current) observer.observe(joinButtonRef.current);
+
     return () => {
       cleanupObserver(observer);
     };
@@ -142,13 +196,18 @@ const Home: React.FC = () => {
     designRef,
     developmentRef,
     helpSupportRef,
+    journeySectionRef,
+    statCard1Ref,
+    statCard2Ref,
+    statCard3Ref,
+    joinButtonRef,
   ]);
 
   return (
     <>
       <section className="home-section">
         {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
-              <JParticlesEffect  />
+        <JParticlesEffect />
         <div className="home-content">
           <div className="home-heading">
             {text}
@@ -355,6 +414,62 @@ const Home: React.FC = () => {
             efficiency, reduce costs, and improve customer satisfaction.
           </p>
         </div>
+      </section>
+
+      {/* New section from the image */}
+      <section
+        className={`ascendons-journey-section ${journeySectionVisible ? "visible" : ""}`}
+        ref={journeySectionRef}
+      >
+        <h2>Our Journey at ASCENDONS</h2>
+        <p>
+          At Ascendons, we believe in pushing boundaries and achieving the
+          extraordinary. From empowering businesses to delighting customers, our
+          journey is defined by innovation, dedication, and results. Here's a
+          glimpse of what we've accomplished so far:
+        </p>
+        <div className="ascendons-stats-container">
+          <div
+            className={`ascendons-stat-card ${statCard1SlidUp ? "slide-up" : ""}`}
+            ref={statCard1Ref}
+          >
+            <h3>15</h3>
+            <strong>Happy Clients Trusting Ascendons</strong>
+            <span>
+              Our clients are at the heart of everything we do. Their success is
+              our greatest achievement.
+            </span>
+          </div>
+          <div
+            className={`ascendons-stat-card ${statCard2SlidUp ? "slide-up" : ""}`}
+            ref={statCard2Ref}
+          >
+            <h3>32</h3>
+            <strong>Innovative Solutions Delivered</strong>
+            <span>
+              From cutting-edge technology to creative strategies, we've built
+              solutions that inspire growth.
+            </span>
+          </div>
+          <div
+            className={`ascendons-stat-card ${statCard3SlidUp ? "slide-up" : ""}`}
+            ref={statCard3Ref}
+          >
+            <h3>60</h3>
+            <strong>Moments of Exceptional Support</strong>
+            <span>
+              Our team is always here, ensuring your experience with Ascendons
+              is seamless and rewarding.
+            </span>
+          </div>
+        </div>
+        <Link
+          to="/contact"
+          className={`join-journey-button ${joinButtonSlidUp ? "slide-up" : ""}`}
+          ref={joinButtonRef}
+        >
+          Join the Ascendons Journey
+        </Link>
       </section>
     </>
   );
