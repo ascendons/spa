@@ -67,26 +67,38 @@ const Home: React.FC = () => {
 
   const cleanupObserver = useCallback(
     (observer: IntersectionObserver) => {
-      if (paragraph1Ref.current && observer) observer.unobserve(paragraph1Ref.current);
-      if (button1Ref.current && observer) observer.unobserve(button1Ref.current);
-      if (paragraph2Ref.current && observer) observer.unobserve(paragraph2Ref.current);
-      if (button2Ref.current && observer) observer.unobserve(button2Ref.current);
+      if (paragraph1Ref.current && observer)
+        observer.unobserve(paragraph1Ref.current);
+      if (button1Ref.current && observer)
+        observer.unobserve(button1Ref.current);
+      if (paragraph2Ref.current && observer)
+        observer.unobserve(paragraph2Ref.current);
+      if (button2Ref.current && observer)
+        observer.unobserve(button2Ref.current);
 
       subpartRefs.forEach((ref) => {
         if (ref.current && observer) observer.unobserve(ref.current);
       });
 
-      if (strategyRef.current && observer) observer.unobserve(strategyRef.current);
+      if (strategyRef.current && observer)
+        observer.unobserve(strategyRef.current);
       if (designRef.current && observer) observer.unobserve(designRef.current);
-      if (developmentRef.current && observer) observer.unobserve(developmentRef.current);
-      if (helpSupportRef.current && observer) observer.unobserve(helpSupportRef.current);
+      if (developmentRef.current && observer)
+        observer.unobserve(developmentRef.current);
+      if (helpSupportRef.current && observer)
+        observer.unobserve(helpSupportRef.current);
 
       // Clean up for new section
-      if (journeySectionRef.current && observer) observer.unobserve(journeySectionRef.current);
-      if (statCard1Ref.current && observer) observer.unobserve(statCard1Ref.current);
-      if (statCard2Ref.current && observer) observer.unobserve(statCard2Ref.current);
-      if (statCard3Ref.current && observer) observer.unobserve(statCard3Ref.current);
-      if (joinButtonRef.current && observer) observer.unobserve(joinButtonRef.current);
+      if (journeySectionRef.current && observer)
+        observer.unobserve(journeySectionRef.current);
+      if (statCard1Ref.current && observer)
+        observer.unobserve(statCard1Ref.current);
+      if (statCard2Ref.current && observer)
+        observer.unobserve(statCard2Ref.current);
+      if (statCard3Ref.current && observer)
+        observer.unobserve(statCard3Ref.current);
+      if (joinButtonRef.current && observer)
+        observer.unobserve(joinButtonRef.current);
     },
     [
       paragraph1Ref,
@@ -172,7 +184,6 @@ const Home: React.FC = () => {
     if (statCard2Ref.current) observer.observe(statCard2Ref.current);
     if (statCard3Ref.current) observer.observe(statCard3Ref.current);
     if (joinButtonRef.current) observer.observe(joinButtonRef.current);
-
 
     return () => {
       cleanupObserver(observer);
@@ -406,16 +417,22 @@ const Home: React.FC = () => {
       </section>
 
       {/* New section from the image */}
-      <section className={`ascendons-journey-section ${journeySectionVisible ? "visible" : ""}`} ref={journeySectionRef}>
+      <section
+        className={`ascendons-journey-section ${journeySectionVisible ? "visible" : ""}`}
+        ref={journeySectionRef}
+      >
         <h2>Our Journey at ASCENDONS</h2>
         <p>
           At Ascendons, we believe in pushing boundaries and achieving the
-          extraordinary. From empowering businesses to delighting customers,
-          our journey is defined by innovation, dedication, and results. Here's
-          a glimpse of what we've accomplished so far:
+          extraordinary. From empowering businesses to delighting customers, our
+          journey is defined by innovation, dedication, and results. Here's a
+          glimpse of what we've accomplished so far:
         </p>
         <div className="ascendons-stats-container">
-          <div className={`ascendons-stat-card ${statCard1SlidUp ? "slide-up" : ""}`} ref={statCard1Ref}>
+          <div
+            className={`ascendons-stat-card ${statCard1SlidUp ? "slide-up" : ""}`}
+            ref={statCard1Ref}
+          >
             <h3>15</h3>
             <strong>Happy Clients Trusting Ascendons</strong>
             <span>
@@ -423,7 +440,10 @@ const Home: React.FC = () => {
               our greatest achievement.
             </span>
           </div>
-          <div className={`ascendons-stat-card ${statCard2SlidUp ? "slide-up" : ""}`} ref={statCard2Ref}>
+          <div
+            className={`ascendons-stat-card ${statCard2SlidUp ? "slide-up" : ""}`}
+            ref={statCard2Ref}
+          >
             <h3>32</h3>
             <strong>Innovative Solutions Delivered</strong>
             <span>
@@ -431,7 +451,10 @@ const Home: React.FC = () => {
               solutions that inspire growth.
             </span>
           </div>
-          <div className={`ascendons-stat-card ${statCard3SlidUp ? "slide-up" : ""}`} ref={statCard3Ref}>
+          <div
+            className={`ascendons-stat-card ${statCard3SlidUp ? "slide-up" : ""}`}
+            ref={statCard3Ref}
+          >
             <h3>60</h3>
             <strong>Moments of Exceptional Support</strong>
             <span>
@@ -440,7 +463,11 @@ const Home: React.FC = () => {
             </span>
           </div>
         </div>
-        <Link to="/contact" className={`join-journey-button ${joinButtonSlidUp ? "slide-up" : ""}`} ref={joinButtonRef}>
+        <Link
+          to="/contact"
+          className={`join-journey-button ${joinButtonSlidUp ? "slide-up" : ""}`}
+          ref={joinButtonRef}
+        >
           Join the Ascendons Journey
         </Link>
       </section>
