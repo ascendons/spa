@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import ParticlesComponent from "../components/Particle.tsx";
+import JParticlesEffect from '../components/JParticlesEffect';
 import "./Contact.css";
 
 const Contact: React.FC = () => {
@@ -41,12 +41,14 @@ const Contact: React.FC = () => {
 
   return (
     <>
-      {/* Hero Section with Particles */}
-      <section className="relative h-screen w-full overflow-hidden">
-        <ParticlesComponent id="tsparticles" className="absolute inset-0" />
-        <div className="relative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-          <h1 className="text-white/90 mb-12 max-w-3xl text-6xl font-extrabold tracking-tight">
-            Contact
+      <section className="relative h-screen w-full overflow-hidden bg-linear bg-gradient-to-r from-[#010102] to-[#1E2C6E] ">
+        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
+        <JParticlesEffect />
+
+        <div className="ative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+
+          <h1 className=" text-white/90 mb-5 text-4xl font-bold max-w-3xl">
+            Contact Us
           </h1>
         </div>
       </section>
