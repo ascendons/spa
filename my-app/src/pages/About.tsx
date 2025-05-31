@@ -9,6 +9,7 @@ const About: React.FC = () => {
         <JParticlesEffect />
 
         <div className="ative z-10 h-full flex flex-col justify-center items-center text-center px-4">
+
           <h1 className=" text-white/90 mb-5 text-4xl font-bold max-w-3xl">
             About Us
           </h1>
@@ -97,6 +98,7 @@ const About: React.FC = () => {
           </div>
 
           {/* Why Choose Us */}
+
           <h3 className="text-gray-800 text-left text-3xl font-semibold mb-6">
             Why Choose Us?
           </h3>
@@ -155,13 +157,16 @@ const About: React.FC = () => {
             building apps and websites-we’re building relationships. Let’s work
             together to create something extraordinary. Your success is our
             mission.
+
           </p>
 
           {/* Get in touch button */}
           <div>
             <a
               href="/contact"
+
               className="inline-block bg-pink-200 !text-pink-400 font-semibold px-8 py-3 rounded-full text-lg border-2 border-transparent transition
+
     hover:bg-transparent !hover:text-pink-400 hover:border-pink-400"
             >
               Get in touch
@@ -174,3 +179,4 @@ const About: React.FC = () => {
 };
 
 export default About;
+
