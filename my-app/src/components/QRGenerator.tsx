@@ -12,12 +12,16 @@ const QrGenerator: React.FC = () => {
   useEffect(() => {
     const fetchSessionId = async () => {
       try {
-        const response = await fetch(API_URL + "/api/session/create");
-        console.log("Response::", response);
+        const response = await fetch(API_URL + "/api/session/create",{
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         console.log("Data::", data);
         setSessionId(data.sessionId);
-        // setSessionId("wertyhgbvcxse4r5t6yu7654e3drfghnbvcdxe4r5t6y7u8i98u7ytrfghjm");
+
       } catch (err) {
         console.error("Error fetching session ID:", err);
         setError("Failed to generate QR code.");
