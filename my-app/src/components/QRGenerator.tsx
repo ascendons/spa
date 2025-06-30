@@ -21,6 +21,7 @@ const QrGenerator: React.FC = () => {
         const data = await response.json();
         console.log("Data::", data);
         setSessionId(data.sessionId);
+
       } catch (err) {
         console.error("Error fetching session ID:", err);
         setError("Failed to generate QR code.");
