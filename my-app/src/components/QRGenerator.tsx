@@ -8,20 +8,21 @@ const QrGenerator: React.FC = () => {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState<string>("waiting");
 
+  // Create session on mount
   useEffect(() => {
     const fetchSessionId = async () => {
       try {
-        const response = await fetch(API_URL + "/api/session/create",{
+        const response = await fetch(`${API_URL}/api/session/create`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
         });
         const data = await response.json();
-        console.log("Data::", data);
+        console.log("Session Created:", data);
         setSessionId(data.sessionId);
-
       } catch (err) {
         console.error("Error fetching session ID:", err);
         setError("Failed to generate QR code.");
@@ -32,6 +33,29 @@ const QrGenerator: React.FC = () => {
 
     fetchSessionId();
   }, []);
+
+  useEffect(() => {
+    console.log("Session ID poll:", sessionId);
+    if (!sessionId) return;
+    console.log("Polling for session status...");
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/session/status/${sessionId}`);
+        const data = await res.json();
+        console.log("Session status:", data.status);
+        setStatus(data.status);
+
+        if (data.status === "paired") {
+          clearInterval(interval);
+          alert("Session paired successfully!");
+        }
+      } catch (err) {
+        console.error("Error checking session status:", err);
+      }
+    }, 3000);
+
+    return () => clearInterval(interval); 
+  }, [sessionId]);
 
   if (loading) {
     return <p>Loading QR Code...</p>;
@@ -50,6 +74,7 @@ const QrGenerator: React.FC = () => {
           <QRCode value={sessionId || ""} size={400} />
         </div>
         <p>Session ID: {sessionId}</p>
+        <p>Status: <strong>{status}</strong></p>
       </div>
     </section>
   );
