@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import JParticlesEffect from '../components/JParticlesEffect';
+import JParticlesEffect from "../components/JParticlesEffect";
 import "./Contact.css";
 
 const Contact: React.FC = () => {
@@ -8,6 +8,14 @@ const Contact: React.FC = () => {
   const infoGridRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
 
   const [titleSlidUp, setTitleSlidUp] = useState(false);
   const [subtitleSlidUp, setSubtitleSlidUp] = useState(false);
@@ -28,7 +36,7 @@ const Contact: React.FC = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     if (titleRef.current) observer.observe(titleRef.current);
     if (subtitleRef.current) observer.observe(subtitleRef.current);
@@ -39,55 +47,77 @@ const Contact: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Form submitted"); // ✅ Debug check
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbx_5H7euCkpYZ6Ozimb3aP2kr9vizl2MDTD9YGX3qpIBklOg6x0_wXMP6gKeXg8gXvLkg/exec",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
+      const result = await response.text();
+      console.log("Result:", result);
+      alert("Message sent successfully!");
+      form.reset();
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was an error sending your message. Please try again.");
+    }
+  };
+
   return (
     <>
       <section className="relative h-screen w-full overflow-hidden bg-linear bg-gradient-to-r from-[#010102] to-[#1E2C6E] ">
-        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
         <JParticlesEffect />
-
-        <div className="ative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-
-          <h1 className=" text-white/90 mb-5 text-4xl font-bold max-w-3xl">
+        <div className="z-10 h-full flex flex-col justify-center items-center text-center px-4">
+          <h1 className="text-white/90 mb-5 text-4xl font-bold max-w-3xl">
             Contact Us
           </h1>
         </div>
       </section>
 
-      {/* Contact Content Section */}
       <section className="relative w-full bg-white py-20">
         <div className="max-w-6xl mx-auto px-4">
-          {/* Title and Subtitle */}
           <h2
             ref={titleRef}
-            className={`text-gray-800 text-center text-3xl font-semibold mb-3 ${
-              titleSlidUp ? "slide-up" : "slide-up-init"
-            }`}
+            className={`text-gray-800 text-center text-3xl font-semibold mb-3 ${titleSlidUp ? "slide-up" : "slide-up-init"}`}
           >
             Get in Touch with Us
           </h2>
           <p
             ref={subtitleRef}
-            className={`text-center text-gray-500 text-lg mb-10 ${
-              subtitleSlidUp ? "slide-up" : "slide-up-init"
-            }`}
+            className={`text-center text-gray-500 text-lg mb-10 ${subtitleSlidUp ? "slide-up" : "slide-up-init"}`}
           >
-            We'd love to hear from you! Whether you have a question, a project idea, or just want to say hello, feel free to reach out.
+            We'd love to hear from you! Whether you have a question, a project
+            idea, or just want to say hello, feel free to reach out.
           </p>
 
-          {/* Info Grid */}
           <div
             ref={infoGridRef}
-            className={`grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-center ${
-              infoGridSlidUp ? "slide-up" : "slide-up-init"
-            }`}
+            className={`grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-center ${infoGridSlidUp ? "slide-up" : "slide-up-init"}`}
           >
-            {/* ...info grid content as before... */}
             <div>
               <div className="text-3xl mb-2">📍</div>
               <div className="font-bold">Address:</div>
               <div className="text-gray-600 mt-1 leading-relaxed">
-                Plot No. J-72, Vastu Villa,<br />
-                Mansarovar, Godadara, Gujarat,<br />
+                Plot No. J-72, Vastu Villa,
+                <br />
+                Mansarovar, Godadara, Gujarat,
+                <br />
                 IN - 395012
               </div>
             </div>
@@ -108,71 +138,66 @@ const Contact: React.FC = () => {
             </div>
           </div>
 
-          {/*Contact form and google map*/}
           <div className="flex flex-col lg:flex-row gap-10">
             <form
               ref={formRef}
-              className={`flex-1 bg-white rounded-xl shadow-lg p-8 flex flex-col gap-5 ${
-                formSlidUp ? "slide-up" : "slide-up-init"
-              }`}
-              onSubmit={e => e.preventDefault()}
+              className={`flex-1 bg-white rounded-xl shadow-lg p-8 flex flex-col gap-5 ${formSlidUp ? "slide-up" : "slide-up-init"}`}
+              onSubmit={handleSubmit}
             >
               <h3 className="text-left text-2xl font-semibold mb-2 text-gray-800">
                 Send Us a Message
               </h3>
               <input
                 type="text"
+                name="name"
                 placeholder="Your Name"
-                className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
+                value={formData.name}
+                onChange={handleChange}
                 required
+                className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
               />
               <input
                 type="email"
+                name="email"
                 placeholder="Your Email"
-                className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
+                value={formData.email}
+                onChange={handleChange}
                 required
-              />
-              <input
-                type="text"
-                placeholder="Your Phone Number"
                 className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
               />
               <input
                 type="text"
+                name="phone"
+                placeholder="Your Phone Number"
+                value={formData.phone}
+                onChange={handleChange}
+                className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
+              />
+              <input
+                type="text"
+                name="subject"
                 placeholder="Subject"
+                value={formData.subject}
+                onChange={handleChange}
                 className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
               />
               <textarea
+                name="message"
                 placeholder="Your Message"
                 rows={4}
-                className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
+                value={formData.message}
+                onChange={handleChange}
                 required
+                className="text-gray-800 border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-pink-200"
               />
               <button
                 type="submit"
-                className="
-                  w-60
-                  py-4
-                  rounded-full
-                  bg-pink-100
-                  text-pink-400
-                  font-semibold
-                  text-xl
-                  shadow-md
-                  border-2
-                  border-pink-100
-                  transition
-                  duration-200
-                  hover:bg-transparent
-                  hover:border-pink-400
-                  hover:text-pink-400
-                  focus:outline-none ml-2"
+                className="w-60 py-4 rounded-full bg-pink-100 text-pink-400 font-semibold text-xl shadow-md border-2 border-pink-100 transition duration-200 hover:bg-transparent hover:border-pink-400 hover:text-pink-400 focus:outline-none ml-2"
               >
                 Send Message
               </button>
             </form>
 
-            {/*Google map*/}
             <div
               ref={mapRef}
               className={`flex-1 relative w-full pb-[56.25%] rounded-xl overflow-hidden shadow-lg bg-white min-h-[340px] ${

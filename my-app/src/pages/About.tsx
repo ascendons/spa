@@ -4,18 +4,12 @@ import JParticlesEffect from "../components/JParticlesEffect";
 const About: React.FC = () => {
   return (
     <>
-      <section className="relative h-screen w-full overflow-hidden bg-linear bg-gradient-to-r from-[#010102] to-[#1E2C6E] ">
+      <section className="home-section">
         {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
         <JParticlesEffect />
 
-        <div className="ative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-
-          <h1 className=" text-white/90 mb-5 text-4xl font-bold max-w-3xl">
-            About Us
-          </h1>
-          <p className="text-white text-2xl font-semibold">
-            Your success is our mission
-          </p>
+        <div className="home-content">
+          <div className="home-heading">About us</div>
         </div>
       </section>
 
@@ -157,14 +151,12 @@ const About: React.FC = () => {
             building apps and websites-we’re building relationships. Let’s work
             together to create something extraordinary. Your success is our
             mission.
-
           </p>
 
           {/* Get in touch button */}
           <div>
             <a
               href="/contact"
-
               className="inline-block bg-pink-200 !text-pink-400 font-semibold px-8 py-3 rounded-full text-lg border-2 border-transparent transition
 
     hover:bg-transparent !hover:text-pink-400 hover:border-pink-400"
@@ -179,4 +171,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-
