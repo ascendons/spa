@@ -36,7 +36,7 @@ const Contact: React.FC = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
     if (titleRef.current) observer.observe(titleRef.current);
     if (subtitleRef.current) observer.observe(subtitleRef.current);
@@ -47,23 +47,29 @@ const Contact: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Form submitted"); // ✅ Debug check
-  
+
     const form = e.currentTarget;
     const formData = new FormData(form);
-  
+
     try {
-      const response = await fetch("https://script.google.com/macros/s/AKfycbx_5H7euCkpYZ6Ozimb3aP2kr9vizl2MDTD9YGX3qpIBklOg6x0_wXMP6gKeXg8gXvLkg/exec", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbx_5H7euCkpYZ6Ozimb3aP2kr9vizl2MDTD9YGX3qpIBklOg6x0_wXMP6gKeXg8gXvLkg/exec",
+        {
+          method: "POST",
+          body: formData,
+        },
+      );
       const result = await response.text();
+      console.log("Result:", result);
       alert("Message sent successfully!");
       form.reset();
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
@@ -72,14 +78,15 @@ const Contact: React.FC = () => {
       alert("There was an error sending your message. Please try again.");
     }
   };
-  
 
   return (
     <>
       <section className="relative h-screen w-full overflow-hidden bg-linear bg-gradient-to-r from-[#010102] to-[#1E2C6E] ">
         <JParticlesEffect />
         <div className="z-10 h-full flex flex-col justify-center items-center text-center px-4">
-          <h1 className="text-white/90 mb-5 text-4xl font-bold max-w-3xl">Contact Us</h1>
+          <h1 className="text-white/90 mb-5 text-4xl font-bold max-w-3xl">
+            Contact Us
+          </h1>
         </div>
       </section>
 
@@ -95,7 +102,8 @@ const Contact: React.FC = () => {
             ref={subtitleRef}
             className={`text-center text-gray-500 text-lg mb-10 ${subtitleSlidUp ? "slide-up" : "slide-up-init"}`}
           >
-            We'd love to hear from you! Whether you have a question, a project idea, or just want to say hello, feel free to reach out.
+            We'd love to hear from you! Whether you have a question, a project
+            idea, or just want to say hello, feel free to reach out.
           </p>
 
           <div
@@ -106,8 +114,10 @@ const Contact: React.FC = () => {
               <div className="text-3xl mb-2">📍</div>
               <div className="font-bold">Address:</div>
               <div className="text-gray-600 mt-1 leading-relaxed">
-                Plot No. J-72, Vastu Villa,<br />
-                Mansarovar, Godadara, Gujarat,<br />
+                Plot No. J-72, Vastu Villa,
+                <br />
+                Mansarovar, Godadara, Gujarat,
+                <br />
                 IN - 395012
               </div>
             </div>

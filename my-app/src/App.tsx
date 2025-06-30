@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       { path: "services", element: <Services /> },
       { path: "contact", element: <Contact /> },
       { path: "products", element: <Products /> },
-      {path: "qr", element: <QrGenerator />},
+      { path: "qr", element: <QrGenerator /> },
       { path: "*", element: <Home /> },
     ],
   },

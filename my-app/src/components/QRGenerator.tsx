@@ -12,8 +12,12 @@ const QrGenerator: React.FC = () => {
   useEffect(() => {
     const fetchSessionId = async () => {
       try {
-        const response = await fetch(API_URL+'/api/session/create');
-        setSessionId("wertyhgbvcxse4r5t6yu7654e3drfghnbvcdxe4r5t6y7u8i98u7ytrfghjm");
+        const response = await fetch(API_URL + "/api/session/create");
+        console.log("Response::", response);
+        const data = await response.json();
+        console.log("Data::", data);
+        setSessionId(data.sessionId);
+        // setSessionId("wertyhgbvcxse4r5t6yu7654e3drfghnbvcdxe4r5t6y7u8i98u7ytrfghjm");
       } catch (err) {
         console.error("Error fetching session ID:", err);
         setError("Failed to generate QR code.");
@@ -35,14 +39,14 @@ const QrGenerator: React.FC = () => {
 
   return (
     <section className="home-section">
-        <JParticlesEffect />
-    <div style={styles.container}>
-      <h2>Scan this QR Code</h2>
-      <div style={styles.qrBox}>
-        <QRCode value={sessionId || ""} size={400} />
+      <JParticlesEffect />
+      <div style={styles.container}>
+        <h2>Scan this QR Code</h2>
+        <div style={styles.qrBox}>
+          <QRCode value={sessionId || ""} size={400} />
+        </div>
+        <p>Session ID: {sessionId}</p>
       </div>
-      <p>Session ID: {sessionId}</p>
-    </div>
     </section>
   );
 };

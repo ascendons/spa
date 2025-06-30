@@ -5,7 +5,7 @@ const About: React.FC = () => {
   return (
     <>
       <section className="home-section">
-          {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
+        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
         <JParticlesEffect />
 
         <div className="home-content">
@@ -151,14 +151,12 @@ const About: React.FC = () => {
             building apps and websites-we’re building relationships. Let’s work
             together to create something extraordinary. Your success is our
             mission.
-
           </p>
 
           {/* Get in touch button */}
           <div>
             <a
               href="/contact"
-
               className="inline-block bg-pink-200 !text-pink-400 font-semibold px-8 py-3 rounded-full text-lg border-2 border-transparent transition
 
     hover:bg-transparent !hover:text-pink-400 hover:border-pink-400"
@@ -173,4 +171,3 @@ const About: React.FC = () => {
 };
 
 export default About;
-
