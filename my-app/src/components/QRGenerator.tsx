@@ -15,6 +15,7 @@ const QrGenerator: React.FC = () => {
     const fetchSessionId = async () => {
       try {
         const response = await fetch(`${API_URL}/api/session/create`, {
+
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -61,6 +62,7 @@ const QrGenerator: React.FC = () => {
     }, 10000);
 
     return () => clearInterval(interval);
+
   }, [sessionId]);
 
   if (loading) {
@@ -83,6 +85,7 @@ const QrGenerator: React.FC = () => {
         <p>
           Status: <strong>{status}</strong>
         </p>
+
       </div>
     </section>
   );
