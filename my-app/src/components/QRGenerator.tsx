@@ -15,6 +15,7 @@ const QrGenerator: React.FC = () => {
     const fetchSessionId = async () => {
       try {
         const response = await fetch(`${API_URL}/api/session/create`, {
+
           method: "POST",
           headers: {
             "Content-Type": "application/json",
