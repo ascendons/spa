@@ -42,10 +42,11 @@ const QrGenerator: React.FC = () => {
     const interval = setInterval(async () => {
       try {
         const res = await fetch(`${API_URL}/api/session/status/${sessionId}`, {
-          method: "GET",
+          method: "POST",
           headers: {
             "Accept": "application/json",
             "User-Agent": "ReactApp",
+            "Content-Type": "application/json",
           },
         });
         const data = await res.json();
