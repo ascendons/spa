@@ -44,7 +44,7 @@ const QrGenerator: React.FC = () => {
         const res = await fetch(`${API_URL}/api/session/status/${sessionId}`, {
           method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            "Accept": "application/json",
             "User-Agent": "ReactApp",
           },
         });
