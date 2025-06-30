@@ -4,18 +4,12 @@ import JParticlesEffect from "../components/JParticlesEffect";
 const About: React.FC = () => {
   return (
     <>
-      <section className="relative h-screen w-full overflow-hidden bg-linear bg-gradient-to-r from-[#010102] to-[#1E2C6E] ">
-        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
+      <section className="home-section">
+          {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
         <JParticlesEffect />
 
-        <div className="ative z-10 h-full flex flex-col justify-center items-center text-center px-4">
-
-          <h1 className=" text-white/90 mb-5 text-4xl font-bold max-w-3xl">
-            About Us
-          </h1>
-          <p className="text-white text-2xl font-semibold">
-            Your success is our mission
-          </p>
+        <div className="home-content">
+          <div className="home-heading">About us</div>
         </div>
       </section>
 

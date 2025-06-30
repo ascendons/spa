@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
+import Products from "./pages/Products";
+import QrGenerator from "./components/QRGenerator";
 // import ParticlesComponent from "./components/Particle";
 
 const router = createBrowserRouter([
@@ -19,6 +21,8 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "services", element: <Services /> },
       { path: "contact", element: <Contact /> },
+      { path: "products", element: <Products /> },
+      {path: "qr", element: <QrGenerator />},
       { path: "*", element: <Home /> },
     ],
   },
