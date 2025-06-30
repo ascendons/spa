@@ -41,7 +41,13 @@ const QrGenerator: React.FC = () => {
     console.log("Polling for session status...");
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`${API_URL}/api/session/status/${sessionId}`);
+        const res = await fetch(`${API_URL}/api/session/status/${sessionId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "User-Agent": "ReactApp",
+          },
+        });
         const data = await res.json();
         console.log("Session status:", data.status);
         setStatus(data.status);
@@ -53,9 +59,10 @@ const QrGenerator: React.FC = () => {
       } catch (err) {
         console.error("Error checking session status:", err);
       }
-    }, 3000);
+    }, 10000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
+
   }, [sessionId]);
 
   if (loading) {
@@ -75,7 +82,10 @@ const QrGenerator: React.FC = () => {
           <QRCode value={sessionId || ""} size={400} />
         </div>
         <p>Session ID: {sessionId}</p>
-        <p>Status: <strong>{status}</strong></p>
+        <p>
+          Status: <strong>{status}</strong>
+        </p>
+
       </div>
     </section>
   );
