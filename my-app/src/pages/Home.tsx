@@ -240,7 +240,7 @@ const Home: React.FC = () => {
       </div>
 
       <div className="text-section">
-        <p
+        <div
           ref={paragraph2Ref}
           className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
         >
@@ -266,7 +266,7 @@ const Home: React.FC = () => {
             got you covered. From startups to established enterprises, we work
             on everything where tech is needed.
           </p>
-        </p>
+        </div>
         <Link
           ref={button2Ref}
           to="/contact"
@@ -341,7 +341,7 @@ const Home: React.FC = () => {
       </section>
 
       <div className="text-section">
-        <p
+        <div
           ref={paragraph2Ref}
           className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
         >
@@ -364,7 +364,7 @@ const Home: React.FC = () => {
             We deliver cutting-edge automation solutions to help your business
             thrive. Let us streamline your processes and drive efficiency.
           </p>
-        </p>
+        </div>
       </div>
 
       <section className="services-section">

@@ -81,12 +81,11 @@ const Contact: React.FC = () => {
 
   return (
     <>
-      <section className="relative h-screen w-full overflow-hidden bg-linear bg-gradient-to-r from-[#010102] to-[#1E2C6E] ">
+      <section className="home-section">
+        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
         <JParticlesEffect />
-        <div className="z-10 h-full flex flex-col justify-center items-center text-center px-4">
-          <h1 className="text-white/90 mb-5 text-4xl font-bold max-w-3xl">
-            Contact Us
-          </h1>
+        <div className="home-content">
+          <div className="home-heading">Contact Us</div>
         </div>
       </section>
 

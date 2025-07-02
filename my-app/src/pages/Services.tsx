@@ -10,9 +10,6 @@ import "./Home.css";
 import JParticlesEffect from "../components/JParticlesEffect";
 
 const Services: React.FC = () => {
-  // const paragraph1Ref = useRef<HTMLParagraphElement>(null);
-  // const button1Ref = useRef<HTMLAnchorElement>(null);
-
   const paragraph2Ref = useRef<HTMLParagraphElement>(null);
   const button2Ref = useRef<HTMLAnchorElement>(null);
   const [paragraph2SlidUp, setParagraph2SlidUp] = useState(false);
@@ -43,12 +40,6 @@ const Services: React.FC = () => {
 
   const cleanupObserver = useCallback(
     (observer: IntersectionObserver) => {
-      // if (paragraph1Ref.current && observer) {
-      //   observer.unobserve(paragraph1Ref.current);
-      // }
-      // if (button1Ref.current && observer) {
-      //   observer.unobserve(button1Ref.current);
-      // }
       if (paragraph2Ref.current && observer) {
         observer.unobserve(paragraph2Ref.current);
       }
@@ -69,8 +60,6 @@ const Services: React.FC = () => {
         observer.unobserve(helpSupportRef.current);
     },
     [
-      // paragraph1Ref,
-      // button1Ref,
       paragraph2Ref,
       button2Ref,
       subpartRefs,
@@ -86,10 +75,6 @@ const Services: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // if (entry.target === paragraph1Ref.current) {
-
-            // } else if (entry.target === button1Ref.current) {
-
             if (entry.target === paragraph2Ref.current) {
               setParagraph2SlidUp(true);
             } else if (entry.target === button2Ref.current) {
@@ -120,9 +105,6 @@ const Services: React.FC = () => {
         threshold: 0.1,
       },
     );
-
-    // if (paragraph1Ref.current) observer.observe(paragraph1Ref.current);
-    // if (button1Ref.current) observer.observe(button1Ref.current);
     if (paragraph2Ref.current) observer.observe(paragraph2Ref.current);
     if (button2Ref.current) observer.observe(button2Ref.current);
     subpartRefs.forEach((ref) => {
@@ -157,7 +139,7 @@ const Services: React.FC = () => {
       </section>
 
       <div className="text-section">
-        <p
+        <div
           ref={paragraph2Ref}
           className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
         >
@@ -183,7 +165,7 @@ const Services: React.FC = () => {
             got you covered. From startups to established enterprises, we work
             on everything where tech is needed.
           </p>
-        </p>
+        </div>
         <Link
           ref={button2Ref}
           to="/contact"
@@ -281,7 +263,7 @@ const Services: React.FC = () => {
       </section>
 
       <div className="text-section">
-        <p
+        <div
           ref={paragraph2Ref}
           className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
         >
@@ -305,7 +287,7 @@ const Services: React.FC = () => {
             business innovate, optimize, and grow. Here’s how we can add value
             to your organization.
           </p>
-        </p>
+        </div>
       </div>
 
       <section className="services-section">
@@ -396,7 +378,7 @@ const Services: React.FC = () => {
       </section>
 
       <div className="text-section">
-        <p
+        <div
           ref={paragraph2Ref}
           className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
         >
@@ -419,7 +401,7 @@ const Services: React.FC = () => {
             Beyond our core offerings, we provide a range of specialized
             services to address your unique business challenges.
           </p>
-        </p>
+        </div>
       </div>
 
       <section className="services-section">
