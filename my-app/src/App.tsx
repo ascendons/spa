@@ -10,7 +10,6 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import React from "react";
 import Products from "./pages/Products";
 import QrGenerator from "./components/QRGenerator";
-// import ParticlesComponent from "./components/Particle";
 
 const router = createBrowserRouter([
   {
