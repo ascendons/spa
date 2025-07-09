@@ -3,7 +3,7 @@ import QRCode from "react-qr-code";
 import JParticlesEffect from "./JParticlesEffect";
 import { FileViewer } from "./FileViewer";
 
-const API_URL = "https://4f7f-202-168-85-208.ngrok-free.app";
+const API_URL = "https://1a0c5feb11cf.ngrok-free.app";
 
 const QrGenerator: React.FC = () => {
   const [sessionId, setSessionId] = useState<string | null>(null);
