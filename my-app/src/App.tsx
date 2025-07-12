@@ -6,12 +6,16 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 
-import { createBrowserRouter, Navigate, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  Outlet,
+  RouterProvider,
+} from "react-router-dom";
 import React from "react";
 import Products from "./pages/Products";
 import QrGenerator from "./components/QRGenerator";
 import BalanceSheet from "./components/BalanceSheet";
-
 
 const router = createBrowserRouter([
   {
@@ -25,7 +29,7 @@ const router = createBrowserRouter([
       { path: "products", element: <Products /> },
       { path: "qr", element: <QrGenerator /> },
       { path: "balancesheet", element: <BalanceSheet /> },
-      { path: "*" ,element: <Navigate to="/" replace />},
+      { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
 ]);

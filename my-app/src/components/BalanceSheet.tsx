@@ -10,33 +10,44 @@ import {
   MenuItem,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { ProfitAndLossData, type ProfitAndLossDataField } from "./balanceSheet/model/ProfitandLossData";
+import {
+  ProfitAndLossData,
+  type ProfitAndLossDataField,
+} from "./balanceSheet/model/ProfitandLossData";
 import GenericAccordionContent from "./GenericAccordionContent";
 
 const BalanceSheet: React.FC = () => {
   const [expanded, setExpanded] = useState<string | false>("panel1");
 
   const financialYears = [
-    { label: 'FY22', value: '2022' },
-    { label: 'FY23', value: '2023' },
-    { label: 'FY24', value: '2024' },
-    { label: 'FY25', value: '2025' },
-    { label: 'FY26', value: '2026' },
-    { label: 'FY27', value: '2027' },
-  ];  
+    { label: "FY22", value: "2022" },
+    { label: "FY23", value: "2023" },
+    { label: "FY24", value: "2024" },
+    { label: "FY25", value: "2025" },
+    { label: "FY26", value: "2026" },
+    { label: "FY27", value: "2027" },
+  ];
 
-  const [companyName, setCompanyName] = useState('');
-  const [financialYear, setFinancialYear] = useState<{ label: string; value: string } | null>(null);
-  const [profitAndLossYear1, setProfitAndLossYear1] = useState(ProfitAndLossData.builder());
-  const [profitAndLossYear2, setProfitAndLossYear2] = useState(ProfitAndLossData.builder());
-  
+  const [companyName, setCompanyName] = useState("");
+  const [financialYear, setFinancialYear] = useState<{
+    label: string;
+    value: string;
+  } | null>(null);
+  const [profitAndLossYear1, setProfitAndLossYear1] = useState(
+    ProfitAndLossData.builder(),
+  );
+  const [profitAndLossYear2, setProfitAndLossYear2] = useState(
+    ProfitAndLossData.builder(),
+  );
+
   const handleProfitAndLossChange = (
-    year: 'year1' | 'year2',
+    year: "year1" | "year2",
     field: ProfitAndLossDataField,
-    value: number
+    value: number,
   ) => {
-    const setter = year === 'year1' ? setProfitAndLossYear1 : setProfitAndLossYear2;
-    const current = year === 'year1' ? profitAndLossYear1 : profitAndLossYear2;
+    const setter =
+      year === "year1" ? setProfitAndLossYear1 : setProfitAndLossYear2;
+    const current = year === "year1" ? profitAndLossYear1 : profitAndLossYear2;
     setter(ProfitAndLossData.fromObject(current.toObject()).set(field, value));
   };
 
@@ -45,22 +56,22 @@ const BalanceSheet: React.FC = () => {
       setExpanded(isExpanded ? panel : false);
     };
 
- // Inside BalanceSheet.tsx
-    const panelOrder = ['panel1', 'panel2', 'panel3', 'panel4', 'panel5'];
+  // Inside BalanceSheet.tsx
+  const panelOrder = ["panel1", "panel2", "panel3", "panel4", "panel5"];
 
-    const handleNextSection = () => {
+  const handleNextSection = () => {
     const index = panelOrder.indexOf(expanded as string);
     if (index < panelOrder.length - 1) {
-        setExpanded(panelOrder[index + 1]);
+      setExpanded(panelOrder[index + 1]);
     }
-    };
+  };
 
-    const handlePreviousSection = () => {
+  const handlePreviousSection = () => {
     const index = panelOrder.indexOf(expanded as string);
     if (index > 0) {
-        setExpanded(panelOrder[index - 1]);
+      setExpanded(panelOrder[index - 1]);
     }
-    };
+  };
 
   return (
     <>
@@ -78,17 +89,22 @@ const BalanceSheet: React.FC = () => {
             variant="outlined"
             fullWidth
             value={companyName}
-            onChange={e => setCompanyName(e.target.value)}
+            onChange={(e) => setCompanyName(e.target.value)}
           />
           <TextField
             select
             label="Financial Year"
-            value={financialYear?.value || ''}
-            onChange={e => setFinancialYear(financialYears.find(fy => fy.value === e.target.value) || null)}
+            value={financialYear?.value || ""}
+            onChange={(e) =>
+              setFinancialYear(
+                financialYears.find((fy) => fy.value === e.target.value) ||
+                  null,
+              )
+            }
             variant="outlined"
             fullWidth
           >
-            {financialYears.map(year => (
+            {financialYears.map((year) => (
               <MenuItem key={year.label} value={year.value}>
                 {year.label}
               </MenuItem>
@@ -96,35 +112,42 @@ const BalanceSheet: React.FC = () => {
           </TextField>
         </div>
 
-        <Accordion expanded={expanded === "panel1"} onChange={handleChange("panel1")}>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+        <Accordion
+          expanded={expanded === "panel1"}
+          onChange={handleChange("panel1")}
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="h6">Profit and Loss</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
+          </AccordionSummary>
+          <AccordionDetails>
             <ProfitAndLoss
-            year1={profitAndLossYear1}
-            year2={profitAndLossYear2}
-            onChange={handleProfitAndLossChange}
-            financialYear={financialYear}
-            onNext={handleNextSection}
-            onPrevious={handlePreviousSection}
+              year1={profitAndLossYear1}
+              year2={profitAndLossYear2}
+              onChange={handleProfitAndLossChange}
+              financialYear={financialYear}
+              onNext={handleNextSection}
+              onPrevious={handlePreviousSection}
             />
-        </AccordionDetails>
+          </AccordionDetails>
         </Accordion>
 
-        {['panel2', 'panel3', 'panel4', 'panel5'].map((panel) => (
-        <Accordion key={panel} expanded={expanded === panel} onChange={handleChange(panel)}>
+        {["panel2", "panel3", "panel4", "panel5"].map((panel) => (
+          <Accordion
+            key={panel}
+            expanded={expanded === panel}
+            onChange={handleChange(panel)}
+          >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography variant="h6">Accordion {panel.slice(-1)}</Typography>
+              <Typography variant="h6">Accordion {panel.slice(-1)}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-            <GenericAccordionContent
+              <GenericAccordionContent
                 title={`Accordion ${panel.slice(-1)}`}
                 onNext={handleNextSection}
                 onPrevious={handlePreviousSection}
-            />
+              />
             </AccordionDetails>
-        </Accordion>
+          </Accordion>
         ))}
       </section>
     </>
