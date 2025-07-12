@@ -12,6 +12,7 @@ import Products from "./pages/Products";
 import QrGenerator from "./components/QRGenerator";
 import BalanceSheet from "./components/BalanceSheet";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
