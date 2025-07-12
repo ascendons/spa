@@ -10,6 +10,8 @@ import {
   TableRow,
   TextField,
   Typography,
+  Button,
+  Box,
 } from '@mui/material';
 import { ProfitAndLossData, type ProfitAndLossDataField } from './model/ProfitandLossData';
 
@@ -17,9 +19,12 @@ interface ProfitAndLossProps {
   year1: ProfitAndLossData;
   year2: ProfitAndLossData;
   onChange: (year: 'year1' | 'year2', field: ProfitAndLossDataField, value: number) => void;
+  financialYear: { label: string; value: string } | null;
+  onNext: () => void;
+  onPrevious: () => void;
 }
 
-const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange }) => {
+const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange, financialYear, onNext, onPrevious }) => {
   const handleChange = (
     field: ProfitAndLossDataField,
     year: 'year1' | 'year2',
@@ -41,8 +46,12 @@ const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange })
             <TableHead>
               <TableRow>
                 <TableCell><strong>Particulars</strong></TableCell>
-                <TableCell><strong>31 March 20XX</strong></TableCell>
-                <TableCell><strong>31 March 20XY</strong></TableCell>
+                <TableCell>
+                  <strong>{financialYear?.value ? Number(`20${financialYear.value.slice(2)}`)-1 : 'Previous Year'}</strong>
+                </TableCell>
+                <TableCell>
+                  <strong>{financialYear?.label ? Number(`20${financialYear.value.slice(2)}`) : 'Current Year'}</strong>
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -72,6 +81,10 @@ const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange })
             </TableBody>
           </Table>
         </TableContainer>
+        <Box display="flex" justifyContent="space-between" mt={3}>
+          <Button variant="outlined" onClick={onPrevious}>Previous</Button>
+          <Button variant="contained" color="primary" onClick={onNext}>Next</Button>
+        </Box>
       </Paper>
     </Container>
   );
