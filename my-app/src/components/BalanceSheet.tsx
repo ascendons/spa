@@ -112,7 +112,7 @@ const BalanceSheet: React.FC = () => {
         </AccordionDetails>
         </Accordion>
 
-        {['panel2', 'panel3', 'panel4', 'panel5'].map((panel, index) => (
+        {['panel2', 'panel3', 'panel4', 'panel5'].map((panel) => (
         <Accordion key={panel} expanded={expanded === panel} onChange={handleChange(panel)}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Typography variant="h6">Accordion {panel.slice(-1)}</Typography>
