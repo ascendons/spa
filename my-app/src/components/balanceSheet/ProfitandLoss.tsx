@@ -21,6 +21,7 @@ import {
 interface ProfitAndLossProps {
   year1: ProfitAndLossData;
   year2: ProfitAndLossData;
+
   onChange: (
     year: "year1" | "year2",
     field: ProfitAndLossDataField,
