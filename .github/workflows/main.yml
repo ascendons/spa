@@ -30,10 +30,6 @@ jobs:
         working-directory: my-app
         run: npm run lint
 
-      - name: Run formatter
-        working-directory: my-app
-        run: npm run format
-
       - name: Run build
         working-directory: my-app
         run: npm run build
