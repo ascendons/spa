@@ -1,25 +1,25 @@
-name: Deploy to GitHub Pages (Public Repo)
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - master  # Or your default branch
-
+      
 permissions:
-  contents: write
+  contents: write 
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout source code
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '22'  # Match your project Node version
 
       - name: Install dependencies
         working-directory: my-app
@@ -29,12 +29,9 @@ jobs:
         working-directory: my-app
         run: npm run build
 
-      - name: Deploy to public GitHub Pages repo
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.DEPLOY_PAT }}
-          external_repository: ascendons/spa-dist
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: my-app/dist
-          publish_branch: main 
-          cname: www.ascendons.in
           clean: true
