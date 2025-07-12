@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Container,
   Paper,
@@ -12,23 +12,38 @@ import {
   Typography,
   Button,
   Box,
-} from '@mui/material';
-import { ProfitAndLossData, type ProfitAndLossDataField } from './model/ProfitandLossData';
+} from "@mui/material";
+import {
+  ProfitAndLossData,
+  type ProfitAndLossDataField,
+} from "./model/ProfitandLossData";
 
 interface ProfitAndLossProps {
   year1: ProfitAndLossData;
   year2: ProfitAndLossData;
-  onChange: (year: 'year1' | 'year2', field: ProfitAndLossDataField, value: number) => void;
+
+  onChange: (
+    year: "year1" | "year2",
+    field: ProfitAndLossDataField,
+    value: number,
+  ) => void;
   financialYear: { label: string; value: string } | null;
   onNext: () => void;
   onPrevious: () => void;
 }
 
-const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange, financialYear, onNext, onPrevious }) => {
+const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({
+  year1,
+  year2,
+  onChange,
+  financialYear,
+  onNext,
+  onPrevious,
+}) => {
   const handleChange = (
     field: ProfitAndLossDataField,
-    year: 'year1' | 'year2',
-    value: string
+    year: "year1" | "year2",
+    value: string,
   ) => {
     const numValue = parseFloat(value) || 0;
     onChange(year, field, numValue);
@@ -45,12 +60,22 @@ const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange, f
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell><strong>Particulars</strong></TableCell>
                 <TableCell>
-                  <strong>{financialYear?.value ? Number(`20${financialYear.value.slice(2)}`)-1 : 'Previous Year'}</strong>
+                  <strong>Particulars</strong>
                 </TableCell>
                 <TableCell>
-                  <strong>{financialYear?.label ? Number(`20${financialYear.value.slice(2)}`) : 'Current Year'}</strong>
+                  <strong>
+                    {financialYear?.value
+                      ? Number(`20${financialYear.value.slice(2)}`) - 1
+                      : "Previous Year"}
+                  </strong>
+                </TableCell>
+                <TableCell>
+                  <strong>
+                    {financialYear?.label
+                      ? Number(`20${financialYear.value.slice(2)}`)
+                      : "Current Year"}
+                  </strong>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -64,7 +89,9 @@ const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange, f
                       size="small"
                       variant="outlined"
                       value={year1.get(key)}
-                      onChange={e => handleChange(key, 'year1', e.target.value)}
+                      onChange={(e) =>
+                        handleChange(key, "year1", e.target.value)
+                      }
                     />
                   </TableCell>
                   <TableCell>
@@ -73,7 +100,9 @@ const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange, f
                       size="small"
                       variant="outlined"
                       value={year2.get(key)}
-                      onChange={e => handleChange(key, 'year2', e.target.value)}
+                      onChange={(e) =>
+                        handleChange(key, "year2", e.target.value)
+                      }
                     />
                   </TableCell>
                 </TableRow>
@@ -82,8 +111,12 @@ const ProfitAndLoss: React.FC<ProfitAndLossProps> = ({ year1, year2, onChange, f
           </Table>
         </TableContainer>
         <Box display="flex" justifyContent="space-between" mt={3}>
-          <Button variant="outlined" onClick={onPrevious}>Previous</Button>
-          <Button variant="contained" color="primary" onClick={onNext}>Next</Button>
+          <Button variant="outlined" onClick={onPrevious}>
+            Previous
+          </Button>
+          <Button variant="contained" color="primary" onClick={onNext}>
+            Next
+          </Button>
         </Box>
       </Paper>
     </Container>
