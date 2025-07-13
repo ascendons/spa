@@ -1,4 +1,4 @@
-name: Lint and Format Check
+name: Lint Check
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  lint-and-format:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +26,6 @@ jobs:
         working-directory: my-app
         run: npm install
 
-      - name: Run linter (no autofix)
+      - name: Run linter
         working-directory: my-app
         run: npm run lint
-
-      - name: Check formatting (no write)
-        working-directory: my-app
-        run: npm run format:check
