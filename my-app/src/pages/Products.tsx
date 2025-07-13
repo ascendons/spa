@@ -34,7 +34,6 @@ const Products: React.FC = () => {
               </p>
             </Link>
 
-
             {/* Card 2 - Placeholder */}
             <div className="border rounded-lg shadow p-6 bg-white text-center">
               <Link
