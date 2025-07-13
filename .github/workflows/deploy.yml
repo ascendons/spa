@@ -3,10 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - master  # Or your default branch
-      
+      - master
+
 permissions:
-  contents: write 
+  contents: write
 
 jobs:
   deploy:
@@ -14,18 +14,18 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'  # Match your project Node version
+          node-version: '18'
 
       - name: Install dependencies
         working-directory: my-app
         run: npm install
 
-      - name: Build the app
+      - name: Build app
         working-directory: my-app
         run: npm run build
 
