@@ -5,10 +5,10 @@ on:
     branches:
       - master
     types: [opened, synchronize, reopened]
-    
+
 permissions:
-  contents: write 
-  
+  contents: read
+
 jobs:
   lint-and-format:
     runs-on: ubuntu-latest
@@ -20,23 +20,16 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18' # or your project's Node version
+          node-version: '18'
 
       - name: Install dependencies
         working-directory: my-app
         run: npm install
 
-      - name: Run linter
+      - name: Run linter (no autofix)
         working-directory: my-app
         run: npm run lint
 
-      - name: Run build
+      - name: Check formatting (no write)
         working-directory: my-app
-        run: npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: my-app/dist
-          clean: true
+        run: npm run format:check
