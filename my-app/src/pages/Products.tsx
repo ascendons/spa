@@ -16,10 +16,6 @@ const Products: React.FC = () => {
       {/* Our Products Section */}
       <section className="relative w-full bg-white py-20">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-gray-800 text-left text-3xl font-semibold mb-8">
-            Our Products
-          </h2>
-
           {/* Card Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 - QR Generator */}
@@ -27,11 +23,17 @@ const Products: React.FC = () => {
               to="/qr"
               className="border rounded-lg shadow hover:shadow-lg transition p-6 bg-white text-center"
             >
-              <h3 className="text-xl font-bold mb-2">QR Generator</h3>
-              <p className="text-gray-600 text-sm">
+              <h3
+                className="text-xl font-bold mb-2"
+                style={{ color: "#1a202c" }}
+              >
+                QR Session for Vault
+              </h3>
+              <p className="text-gray-600 text-sm" style={{ color: "#1a202c" }}>
                 Generate a QR code linked to a secure session.
               </p>
             </Link>
+
 
             {/* Card 2 - Placeholder */}
             <div className="border rounded-lg shadow p-6 bg-white text-center">
@@ -48,11 +50,20 @@ const Products: React.FC = () => {
               </Link>
             </div>
 
-            {/* Card 3 - Placeholder */}
-            <div className="border rounded-lg shadow p-6 bg-white text-center">
-              <h3 className="text-xl font-bold mb-2">Product 3</h3>
-              <p className="text-gray-600 text-sm">Coming soon.</p>
-            </div>
+            <Link
+              to="/balancesheet"
+              className="border rounded-lg shadow hover:shadow-lg transition p-6 bg-white text-center"
+            >
+              <h3
+                className="text-xl font-bold mb-2"
+                style={{ color: "#1a202c" }}
+              >
+                ClassMate
+              </h3>
+              <p className="text-gray-600 text-sm" style={{ color: "#1a202c" }}>
+                Coming Soon
+              </p>
+            </Link>
           </div>
         </div>
       </section>
