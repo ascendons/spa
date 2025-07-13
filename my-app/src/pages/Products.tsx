@@ -34,20 +34,21 @@ const Products: React.FC = () => {
               </p>
             </Link>
 
-            <Link
-              to="/balancesheet"
-              className="border rounded-lg shadow hover:shadow-lg transition p-6 bg-white text-center"
-            >
-              <h3
-                className="text-xl font-bold mb-2"
-                style={{ color: "#1a202c" }}
+
+            {/* Card 2 - Placeholder */}
+            <div className="border rounded-lg shadow p-6 bg-white text-center">
+              <Link
+                to="/balancesheet"
+                className="text-gray-800 hover:text-blue-600"
               >
-                Balance Sheet Generator
-              </h3>
-              <p className="text-gray-600 text-sm" style={{ color: "#1a202c" }}>
-                Create a Balance Sheet with latest format
-              </p>
-            </Link>
+                <h3 className="text-xl font-bold mb-2">
+                  Balance Sheet Generator
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Create a Balance Sheet with latest format
+                </p>
+              </Link>
+            </div>
 
             <Link
               to="/balancesheet"

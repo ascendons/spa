@@ -22,6 +22,7 @@ const BalanceSheet: React.FC = () => {
   const [expanded, setExpanded] = useState<string | false>("panel1");
 
   const financialYears = [
+
     { label: "FY22", value: "2022" },
     { label: "FY23", value: "2023" },
     { label: "FY24", value: "2024" },
@@ -58,7 +59,6 @@ const BalanceSheet: React.FC = () => {
       setExpanded(isExpanded ? panel : false);
     };
 
-  // Inside BalanceSheet.tsx
   const panelOrder = ["panel1", "panel2", "panel3", "panel4", "panel5"];
 
   const handleNextSection = () => {
@@ -119,6 +119,7 @@ const BalanceSheet: React.FC = () => {
           onChange={handleChange("panel1")}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+
             <Typography variant="h6">Profit and Loss</Typography>
           </AccordionSummary>
           <AccordionDetails>
