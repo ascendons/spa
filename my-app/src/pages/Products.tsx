@@ -20,7 +20,7 @@ const Products: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 - QR Generator */}
             <Link
-              to="/qr"
+              to="/"
               className="border rounded-lg shadow hover:shadow-lg transition p-6 bg-white text-center"
             >
               <h3
@@ -30,7 +30,7 @@ const Products: React.FC = () => {
                 QR Session for Vault
               </h3>
               <p className="text-gray-600 text-sm" style={{ color: "#1a202c" }}>
-                Generate a QR code linked to a secure session.
+                Coming Soon
               </p>
             </Link>
 
@@ -38,20 +38,20 @@ const Products: React.FC = () => {
             {/* Card 2 - Placeholder */}
             <div className="border rounded-lg shadow p-6 bg-white text-center">
               <Link
-                to="/balancesheet"
+                to="/"
                 className="text-gray-800 hover:text-blue-600"
               >
                 <h3 className="text-xl font-bold mb-2">
                   Balance Sheet Generator
                 </h3>
                 <p className="text-gray-600 text-sm">
-                  Create a Balance Sheet with latest format
+                  Coming soon
                 </p>
               </Link>
             </div>
 
             <Link
-              to="/balancesheet"
+              to="/"
               className="border rounded-lg shadow hover:shadow-lg transition p-6 bg-white text-center"
             >
               <h3
