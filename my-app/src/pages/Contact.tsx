@@ -123,7 +123,7 @@ const Contact: React.FC = () => {
             <div>
               <div className="text-3xl mb-2">📞</div>
               <div className="font-bold">Phone:</div>
-              <div className="text-gray-600 mt-1">+91 7258078088</div>
+              <div className="text-gray-600 mt-1">+91 9523297323</div>
             </div>
             <div>
               <div className="text-3xl mb-2">✉️</div>
@@ -133,7 +133,7 @@ const Contact: React.FC = () => {
             <div>
               <div className="text-3xl mb-2">🌐</div>
               <div className="font-bold">Website:</div>
-              <div className="text-gray-600 mt-1">www.ascendons.com</div>
+              <div className="text-gray-600 mt-1">www.ascendons.in</div>
             </div>
           </div>
 
