@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
 import "./Home.css";
 import JParticlesEffect from "../components/JParticlesEffect";
+import type { Testimonial } from "../components/TestimonialCarousel";
+import TestimonialsCarousel from "../components/TestimonialCarousel";
 
 const Home: React.FC = () => {
   const [text] = useTypewriter({
@@ -51,8 +53,33 @@ const Home: React.FC = () => {
     development: false,
     helpSupport: false,
   });
+  const testimonials: Testimonial[] = [
+    {
+      id: "t1",
+      quote:
+        "Working with Ascendons was the push our engineering roadmap needed. They dove into our legacy systems, proposed a focused plan, and incrementally replaced brittle processes with robust automation. Beyond shipping features, they helped us clarify priorities and improved developer velocity across the board. Short version: less firefighting, more product work.",
+      author: "Viaksh Roy",
+      role: "Founder and CEO, WattGlow Power",
+      avatarUrl: "/wattglow.png",
+    },
+    {
+      id: "t2",
+      quote:
+        "I've worked with Ascendons for a while now, and they’ve consistently exceeded my expectations. The team is not only technically strong but also genuinely curious about understanding the business problem before jumping into code. They bring structure, creativity, and accountability to every project—traits that are rare to find together. From the very first engagement, they’ve shown a level of dedication and professionalism that made them feel more like an in-house team than an external partner. Every milestone with Ascendons has added measurable value to our operations and product roadmap.",
+      author: "Pranav Kumar",
+      role: "Founder, People Kind Pharma",
+      avatarUrl: "/pkpharma.jpeg",
+    },
+    {
+      id: "t3",
+      quote:
+        "Partnering with Ascendons has been a turning point for RK Enterprises. Their team streamlined our internal workflows, built reliable digital tools for our operations, and helped us move away from manual processes that slowed us down for years. What stood out most was their proactive approach — they anticipate challenges before they become issues. It’s refreshing to work with a team that treats your business goals like their own.",
+      author: "Vijay Goyal",
+      role: "Managing Director, RK Enterprises",
+      avatarUrl: "/rkent.png",
+    },
+  ];
 
-  // Refs for the new section
   const journeySectionRef = useRef<HTMLDivElement>(null);
   const statCard1Ref = useRef<HTMLDivElement>(null);
   const statCard2Ref = useRef<HTMLDivElement>(null);
@@ -327,7 +354,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="emailsection">
+      {/* <section className="emailsection">
         <span className="span2">Join the Ascendons Community</span>
         <p className="para2">
           Subscribe to our newsletter and stay ahead with the latest trends,
@@ -338,7 +365,7 @@ const Home: React.FC = () => {
           <input type="email" className="email-input" placeholder="Email" />
           <button className="subscribe-button">Subscribe</button>
         </div>
-      </section>
+      </section> */}
 
       <div className="text-section">
         <div
@@ -463,6 +490,8 @@ const Home: React.FC = () => {
             </span>
           </div>
         </div>
+
+        <TestimonialsCarousel testimonials={testimonials} intervalMs={7000} />
         <Link
           to="/contact"
           className={`join-journey-button ${joinButtonSlidUp ? "slide-up" : ""}`}
