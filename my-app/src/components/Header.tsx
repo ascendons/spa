@@ -84,11 +84,6 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/products" className="nav-link">
-                        Products
-                      </Link>
-                    </li>
-                    <li>
                       <Link to="/contact" className="nav-link contact">
                         Get in touch
                       </Link>
@@ -113,11 +108,6 @@ const Header = () => {
                 <li>
                   <Link to="/services" className="desktop-link">
                     Services
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/products" className="desktop-link">
-                    Products
                   </Link>
                 </li>
                 <li>
