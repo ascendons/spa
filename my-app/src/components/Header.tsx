@@ -69,22 +69,38 @@ const Header = () => {
                 <nav className="mobile-nav">
                   <ul className="nav-list">
                     <li>
-                      <Link to="/" className="nav-link">
+                      <Link
+                        to="/"
+                        className="nav-link"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
                         Home
                       </Link>
                     </li>
                     <li>
-                      <Link to="/about" className="nav-link">
+                      <Link
+                        to="/about"
+                        className="nav-link"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
                         About
                       </Link>
                     </li>
                     <li>
-                      <Link to="/services" className="nav-link">
+                      <Link
+                        to="/services"
+                        className="nav-link"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
                         Services
                       </Link>
                     </li>
                     <li>
-                      <Link to="/contact" className="nav-link contact">
+                      <Link
+                        to="/contact"
+                        className="nav-link contact"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
                         Get in touch
                       </Link>
                     </li>
