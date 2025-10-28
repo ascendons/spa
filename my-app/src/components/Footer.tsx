@@ -46,7 +46,7 @@ function Footer() {
           <p className="text-sm">
             Plot No. J-72, Vastu Villa, Mansarovar, Godadara, Gujarat - 395012
           </p>
-          <p className="mt-2 text-sm">+91 7258078088</p>
+          <p className="mt-2 text-sm">+91 9523297323</p>
           <p className="mt-2 text-sm">contact@ascendons.com</p>
         </div>
 
