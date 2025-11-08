@@ -37,6 +37,11 @@ function Footer() {
                 Contact
               </a>
             </li>
+            <li>
+              <a href="privacy" className="text-white hover:underline">
+                Privacy Policy
+              </a>
+            </li>
           </ul>
         </div>
 

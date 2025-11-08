@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       { path: "qr", element: <QrGenerator /> },
       { path: "balancesheet", element: <BalanceSheet /> },
       { path: "*", element: <Navigate to="/" replace /> },
+      {path: "privacy", element: "<PrivacyPolicy />"},
     ],
   },
 ]);
