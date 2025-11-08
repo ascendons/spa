@@ -15,6 +15,7 @@ import {
 import React from "react";
 import QrGenerator from "./components/QRGenerator";
 import BalanceSheet from "./components/BalanceSheet";
+import PrivacyPolicy from "./components/privacy";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
       { path: "qr", element: <QrGenerator /> },
       { path: "balancesheet", element: <BalanceSheet /> },
       { path: "*", element: <Navigate to="/" replace /> },
-      {path: "privacy", element: "<PrivacyPolicy />"},
+      {path: "privacy", element: <PrivacyPolicy />},
     ],
   },
 ]);
