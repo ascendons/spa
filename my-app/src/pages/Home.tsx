@@ -441,6 +441,7 @@ const Home: React.FC = () => {
             efficiency, reduce costs, and improve customer satisfaction.
           </p>
         </div>
+        <TestimonialsCarousel testimonials={testimonials} intervalMs={7000} />
       </section>
 
       {/* New section from the image */}
@@ -491,7 +492,6 @@ const Home: React.FC = () => {
           </div>
         </div>
 
-        <TestimonialsCarousel testimonials={testimonials} intervalMs={7000} />
         <Link
           to="/contact"
           className={`join-journey-button ${joinButtonSlidUp ? "slide-up" : ""}`}

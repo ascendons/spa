@@ -69,3 +69,14 @@ export default tseslint.config({
   },
 });
 ```
+
+## Privacy banner / policy
+
+This project includes a simple site-wide privacy banner component at
+`src/components/PrivacyPolicy.tsx` and a full privacy page at
+`src/pages/Privacy.tsx` (available at `/privacy`). The banner uses
+localStorage to remember a user's acceptance using key
+`privacy_policy_accepted_v1`.
+
+To customize the short banner message or style, edit `PrivacyPolicy.tsx`
+and `PrivacyPolicy.css`.
