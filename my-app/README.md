@@ -80,4 +80,3 @@ localStorage to remember a user's acceptance using key
 
 To customize the short banner message or style, edit `PrivacyPolicy.tsx`
 and `PrivacyPolicy.css`.
-

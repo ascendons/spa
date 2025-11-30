@@ -442,7 +442,6 @@ const Home: React.FC = () => {
           </p>
         </div>
         <TestimonialsCarousel testimonials={testimonials} intervalMs={7000} />
-
       </section>
 
       {/* New section from the image */}

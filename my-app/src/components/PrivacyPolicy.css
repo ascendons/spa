@@ -25,9 +25,19 @@
   font-size: 14px;
 }
 
-.privacy-text { flex: 1; line-height: 1.25; }
-.privacy-actions { display: flex; gap: 8px; align-items: center; }
-.privacy-more { color: #d7d7d7; text-decoration: underline; }
+.privacy-text {
+  flex: 1;
+  line-height: 1.25;
+}
+.privacy-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.privacy-more {
+  color: #d7d7d7;
+  text-decoration: underline;
+}
 .privacy-accept {
   background: #f1c40f; /* yellow */
   color: #111;
@@ -39,6 +49,13 @@
 }
 
 @media (max-width: 640px) {
-  .privacy-content { flex-direction: column; align-items: flex-start; font-size: 13px; }
-  .privacy-actions { width: 100%; justify-content: flex-end; }
+  .privacy-content {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 13px;
+  }
+  .privacy-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
 }

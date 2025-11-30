@@ -33,15 +33,23 @@ const PrivacyPolicy: React.FC = () => {
       <div className="privacy-content">
         <div className="privacy-text">
           <strong>Privacy notice:</strong> We use cookies and similar
-          technologies to personalize content, measure and improve our site.
-          By continuing to browse you consent to our use of such technologies.
+          technologies to personalize content, measure and improve our site. By
+          continuing to browse you consent to our use of such technologies.
         </div>
 
         <div className="privacy-actions">
-          <Link to="/privacy" className="privacy-more" aria-label="Read our full privacy policy">
+          <Link
+            to="/privacy"
+            className="privacy-more"
+            aria-label="Read our full privacy policy"
+          >
             Read full policy
           </Link>
-          <button onClick={accept} className="privacy-accept" aria-label="Accept privacy policy">
+          <button
+            onClick={accept}
+            className="privacy-accept"
+            aria-label="Accept privacy policy"
+          >
             Accept
           </button>
         </div>

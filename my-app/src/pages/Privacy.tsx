@@ -49,14 +49,23 @@ const Privacy: React.FC = () => {
 
       <section className="mb-6">
         <h2 className="text-xl font-semibold mb-2">Contact</h2>
-        <p>If you have privacy-related questions, reach out to contact@ascendons.com.</p>
+        <p>
+          If you have privacy-related questions, reach out to
+          contact@ascendons.com.
+        </p>
       </section>
 
       <div className="flex gap-3">
-        <button onClick={acceptAndReturn} className="bg-[#f1c40f] px-4 py-2 rounded-md font-semibold">
+        <button
+          onClick={acceptAndReturn}
+          className="bg-[#f1c40f] px-4 py-2 rounded-md font-semibold"
+        >
           Accept and return
         </button>
-        <button onClick={() => navigate(-1)} className="px-4 py-2 rounded-md border">
+        <button
+          onClick={() => navigate(-1)}
+          className="px-4 py-2 rounded-md border"
+        >
           Back
         </button>
       </div>
