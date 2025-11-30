@@ -12,7 +12,7 @@ const PrivacyPolicy: React.FC = () => {
       const accepted = localStorage.getItem(STORAGE_KEY);
       if (!accepted) setVisible(true);
     } catch (err) {
-      // if localStorage is disabled, still show the banner
+      console.error(err);
       setVisible(true);
     }
   }, []);
@@ -21,7 +21,7 @@ const PrivacyPolicy: React.FC = () => {
     try {
       localStorage.setItem(STORAGE_KEY, "true");
     } catch (err) {
-      // ignore storage errors
+      console.error(err);
     }
     setVisible(false);
   };
