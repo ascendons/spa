@@ -9,7 +9,9 @@ const Privacy: React.FC = () => {
   const acceptAndReturn = () => {
     try {
       localStorage.setItem(STORAGE_KEY, "true");
-    } catch (err) {}
+    } catch (err) {
+        console.error(err);
+    }
     navigate(-1);
   };
 
