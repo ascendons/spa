@@ -1,0 +1,44 @@
+.privacy-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  display: flex;
+  justify-content: center;
+  z-index: 9999;
+  padding: 0 12px;
+  pointer-events: none; /* allow clicks through padding area */
+}
+
+.privacy-content {
+  pointer-events: auto; /* card is interactive */
+  max-width: 1100px;
+  width: 100%;
+  background: rgba(44, 44, 44, 0.95);
+  color: #fff;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 14px 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+}
+
+.privacy-text { flex: 1; line-height: 1.25; }
+.privacy-actions { display: flex; gap: 8px; align-items: center; }
+.privacy-more { color: #d7d7d7; text-decoration: underline; }
+.privacy-accept {
+  background: #f1c40f; /* yellow */
+  color: #111;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .privacy-content { flex-direction: column; align-items: flex-start; font-size: 13px; }
+  .privacy-actions { width: 100%; justify-content: flex-end; }
+}

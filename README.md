@@ -11,3 +11,7 @@ If you encounter package installation issues due to React version conflicts (par
 This flag tells npm to ignore peer dependency conflicts, which can occur when packages haven't yet been updated to support React 19's new peer dependency requirements.
 
 Testing workflow 4
+
+## Privacy
+
+The site now includes a privacy banner and a privacy page available at `/privacy`. The banner persists acceptance with localStorage (key `privacy_policy_accepted_v1`).
