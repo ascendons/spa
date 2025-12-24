@@ -74,13 +74,21 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link to="/about" className="nav-link">
-                        About
+                      <Link to="/our-work" className="nav-link">
+                        Our Work
                       </Link>
                     </li>
                     <li>
-                      <Link to="/services" className="nav-link">
-                        Services
+                      <Link
+                        to="/solutions/whatsapp-business-automation"
+                        className="nav-link"
+                      >
+                        Solutions
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/about" className="nav-link">
+                        About
                       </Link>
                     </li>
                     <li>
@@ -101,13 +109,21 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="desktop-link">
-                    About
+                  <Link to="/our-work" className="desktop-link">
+                    Our Work
                   </Link>
                 </li>
                 <li>
-                  <Link to="/services" className="desktop-link">
-                    Services
+                  <Link
+                    to="/solutions/whatsapp-business-automation"
+                    className="desktop-link"
+                  >
+                    Solutions
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="desktop-link">
+                    About
                   </Link>
                 </li>
                 <li>

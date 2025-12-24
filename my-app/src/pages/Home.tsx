@@ -1,164 +1,97 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useTypewriter, Cursor } from "react-simple-typewriter";
 import "./Home.css";
 import JParticlesEffect from "../components/JParticlesEffect";
 
 const Home: React.FC = () => {
-  const [text] = useTypewriter({
-    words: ["Smart, Scalable, and Stunning Software Solutions."],
-    loop: true,
-    typeSpeed: 150, //speed of typing
-    deleteSpeed: 100, //speed of deleting
-    delaySpeed: 5000,
+  // Refs for hero section
+  const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
+  const heroSubheadingRef = useRef<HTMLParagraphElement>(null);
+  const heroCTA1Ref = useRef<HTMLAnchorElement>(null);
+  const heroCTA2Ref = useRef<HTMLAnchorElement>(null);
+  const [heroVisible, setHeroVisible] = useState(false);
+
+  // Refs for What We Do section
+  const whatWeDoSectionRef = useRef<HTMLDivElement>(null);
+  const solutionCard1Ref = useRef<HTMLDivElement>(null);
+  const solutionCard2Ref = useRef<HTMLDivElement>(null);
+  const solutionCard3Ref = useRef<HTMLDivElement>(null);
+  const [whatWeDoVisible, setWhatWeDoVisible] = useState(false);
+  const [solutionCardsVisible, setSolutionCardsVisible] = useState({
+    card1: false,
+    card2: false,
+    card3: false,
   });
 
-  const paragraph1Ref = useRef<HTMLParagraphElement>(null);
-  const button1Ref = useRef<HTMLAnchorElement>(null);
-  const [paragraph1SlidUp, setParagraph1SlidUp] = useState(false);
-  // const [button1SlidUp, setButton1SlidUp] = useState(false);
+  // Refs for Trust & Authority section
+  const trustSectionRef = useRef<HTMLDivElement>(null);
+  const [trustVisible, setTrustVisible] = useState(false);
 
-  const paragraph2Ref = useRef<HTMLParagraphElement>(null);
-  const button2Ref = useRef<HTMLAnchorElement>(null);
-  const [paragraph2SlidUp, setParagraph2SlidUp] = useState(false);
-  const [button2SlidUp, setButton2SlidUp] = useState(false);
-
-  const subpartRef1 = useRef<HTMLParagraphElement>(null);
-  const subpartRef2 = useRef<HTMLParagraphElement>(null);
-  const subpartRef3 = useRef<HTMLParagraphElement>(null);
-
-  const subpartRefs = useMemo(
-    () => [subpartRef1, subpartRef2, subpartRef3],
-    [subpartRef1, subpartRef2, subpartRef3],
-  );
-
-  const [subpartSlidUp, setSubpartSlidUp] = useState([false, false, false]);
-
-  const strategyRef = useRef<HTMLDivElement>(null);
-  const designRef = useRef<HTMLDivElement>(null);
-  const developmentRef = useRef<HTMLDivElement>(null);
-  const helpSupportRef = useRef<HTMLDivElement>(null);
-
-  const [servicesSlidUp, setServicesSlidUp] = useState({
-    strategy: false,
-    design: false,
-    development: false,
-    helpSupport: false,
+  // Refs for CTA section
+  const ctaSectionRef = useRef<HTMLDivElement>(null);
+  const [ctaVisible, setCtaVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    problem: "",
   });
 
-  // Refs for the new section
-  const journeySectionRef = useRef<HTMLDivElement>(null);
-  const statCard1Ref = useRef<HTMLDivElement>(null);
-  const statCard2Ref = useRef<HTMLDivElement>(null);
-  const statCard3Ref = useRef<HTMLDivElement>(null);
-  const joinButtonRef = useRef<HTMLAnchorElement>(null);
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  const [journeySectionVisible, setJourneySectionVisible] = useState(false);
-  const [statCard1SlidUp, setStatCard1SlidUp] = useState(false);
-  const [statCard2SlidUp, setStatCard2SlidUp] = useState(false);
-  const [statCard3SlidUp, setStatCard3SlidUp] = useState(false);
-  const [joinButtonSlidUp, setJoinButtonSlidUp] = useState(false);
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // Use the same Google Apps Script endpoint as Contact page
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("company", formData.company);
+    formDataToSend.append("problem", formData.problem);
+    formDataToSend.append("subject", "Homepage Strategy Call Request");
 
-  const cleanupObserver = useCallback(
-    (observer: IntersectionObserver) => {
-      if (paragraph1Ref.current && observer)
-        observer.unobserve(paragraph1Ref.current);
-      if (button1Ref.current && observer)
-        observer.unobserve(button1Ref.current);
-      if (paragraph2Ref.current && observer)
-        observer.unobserve(paragraph2Ref.current);
-      if (button2Ref.current && observer)
-        observer.unobserve(button2Ref.current);
-
-      subpartRefs.forEach((ref) => {
-        if (ref.current && observer) observer.unobserve(ref.current);
-      });
-
-      if (strategyRef.current && observer)
-        observer.unobserve(strategyRef.current);
-      if (designRef.current && observer) observer.unobserve(designRef.current);
-      if (developmentRef.current && observer)
-        observer.unobserve(developmentRef.current);
-      if (helpSupportRef.current && observer)
-        observer.unobserve(helpSupportRef.current);
-
-      // Clean up for new section
-      if (journeySectionRef.current && observer)
-        observer.unobserve(journeySectionRef.current);
-      if (statCard1Ref.current && observer)
-        observer.unobserve(statCard1Ref.current);
-      if (statCard2Ref.current && observer)
-        observer.unobserve(statCard2Ref.current);
-      if (statCard3Ref.current && observer)
-        observer.unobserve(statCard3Ref.current);
-      if (joinButtonRef.current && observer)
-        observer.unobserve(joinButtonRef.current);
-    },
-    [
-      paragraph1Ref,
-      button1Ref,
-      paragraph2Ref,
-      button2Ref,
-      subpartRefs,
-      strategyRef,
-      designRef,
-      developmentRef,
-      helpSupportRef,
-      journeySectionRef,
-      statCard1Ref,
-      statCard2Ref,
-      statCard3Ref,
-      joinButtonRef,
-    ],
-  );
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbx_5H7euCkpYZ6Ozimb3aP2kr9vizl2MDTD9YGX3qpIBklOg6x0_wXMP6gKeXg8gXvLkg/exec",
+        {
+          method: "POST",
+          body: formDataToSend,
+        },
+      );
+      const result = await response.text();
+      console.log("Result:", result);
+      alert(
+        "Thank you! We'll be in touch soon to schedule your strategy call.",
+      );
+      setFormData({ name: "", email: "", company: "", problem: "" });
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was an error submitting your request. Please try again.");
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            if (entry.target === paragraph1Ref.current) {
-              setParagraph1SlidUp(true);
-            } else if (entry.target === button1Ref.current) {
-              // setButton1SlidUp(true);
-            } else if (entry.target === paragraph2Ref.current) {
-              setParagraph2SlidUp(true);
-            } else if (entry.target === button2Ref.current) {
-              setButton2SlidUp(true);
-            } else if (
-              subpartRefs.some((ref) => entry.target === ref.current)
-            ) {
-              subpartRefs.forEach((ref, index) => {
-                if (entry.target === ref.current) {
-                  const newSubpartSlidUp = [...subpartSlidUp];
-                  newSubpartSlidUp[index] = true;
-                  setSubpartSlidUp(newSubpartSlidUp);
-                }
-              });
-            } else if (entry.target === strategyRef.current) {
-              setServicesSlidUp((prev) => ({ ...prev, strategy: true }));
-            } else if (entry.target === designRef.current) {
-              setServicesSlidUp((prev) => ({ ...prev, design: true }));
-            } else if (entry.target === developmentRef.current) {
-              setServicesSlidUp((prev) => ({ ...prev, development: true }));
-            } else if (entry.target === helpSupportRef.current) {
-              setServicesSlidUp((prev) => ({ ...prev, helpSupport: true }));
-            } else if (entry.target === journeySectionRef.current) {
-              setJourneySectionVisible(true);
-            } else if (entry.target === statCard1Ref.current) {
-              setStatCard1SlidUp(true);
-            } else if (entry.target === statCard2Ref.current) {
-              setStatCard2SlidUp(true);
-            } else if (entry.target === statCard3Ref.current) {
-              setStatCard3SlidUp(true);
-            } else if (entry.target === joinButtonRef.current) {
-              setJoinButtonSlidUp(true);
+            if (entry.target === heroHeadlineRef.current) {
+              setHeroVisible(true);
+            } else if (entry.target === whatWeDoSectionRef.current) {
+              setWhatWeDoVisible(true);
+            } else if (entry.target === solutionCard1Ref.current) {
+              setSolutionCardsVisible((prev) => ({ ...prev, card1: true }));
+            } else if (entry.target === solutionCard2Ref.current) {
+              setSolutionCardsVisible((prev) => ({ ...prev, card2: true }));
+            } else if (entry.target === solutionCard3Ref.current) {
+              setSolutionCardsVisible((prev) => ({ ...prev, card3: true }));
+            } else if (entry.target === trustSectionRef.current) {
+              setTrustVisible(true);
+            } else if (entry.target === ctaSectionRef.current) {
+              setCtaVisible(true);
             }
           }
         });
@@ -166,310 +99,271 @@ const Home: React.FC = () => {
       { threshold: 0.1 },
     );
 
-    if (paragraph1Ref.current) observer.observe(paragraph1Ref.current);
-    if (button1Ref.current) observer.observe(button1Ref.current);
-    if (paragraph2Ref.current) observer.observe(paragraph2Ref.current);
-    if (button2Ref.current) observer.observe(button2Ref.current);
-    subpartRefs.forEach((ref) => {
-      if (ref.current) observer.observe(ref.current);
-    });
-    if (strategyRef.current) observer.observe(strategyRef.current);
-    if (designRef.current) observer.observe(designRef.current);
-    if (developmentRef.current) observer.observe(developmentRef.current);
-    if (helpSupportRef.current) observer.observe(helpSupportRef.current);
+    if (heroHeadlineRef.current) observer.observe(heroHeadlineRef.current);
+    if (whatWeDoSectionRef.current)
+      observer.observe(whatWeDoSectionRef.current);
+    if (solutionCard1Ref.current) observer.observe(solutionCard1Ref.current);
+    if (solutionCard2Ref.current) observer.observe(solutionCard2Ref.current);
+    if (solutionCard3Ref.current) observer.observe(solutionCard3Ref.current);
+    if (trustSectionRef.current) observer.observe(trustSectionRef.current);
+    if (ctaSectionRef.current) observer.observe(ctaSectionRef.current);
 
-    // Observe new section elements
-    if (journeySectionRef.current) observer.observe(journeySectionRef.current);
-    if (statCard1Ref.current) observer.observe(statCard1Ref.current);
-    if (statCard2Ref.current) observer.observe(statCard2Ref.current);
-    if (statCard3Ref.current) observer.observe(statCard3Ref.current);
-    if (joinButtonRef.current) observer.observe(joinButtonRef.current);
-
-    return () => {
-      cleanupObserver(observer);
-    };
-  }, [
-    cleanupObserver,
-    subpartRefs,
-    subpartSlidUp,
-    strategyRef,
-    designRef,
-    developmentRef,
-    helpSupportRef,
-    journeySectionRef,
-    statCard1Ref,
-    statCard2Ref,
-    statCard3Ref,
-    joinButtonRef,
-  ]);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
+      {/* HERO SECTION */}
       <section className="home-section">
-        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
         <JParticlesEffect />
         <div className="home-content">
-          <div className="home-heading">
-            {text}
-            <Cursor cursorStyle="|" />
+          <h1
+            ref={heroHeadlineRef}
+            className={`home-heading ${heroVisible ? "slide-up" : ""}`}
+          >
+            Build Platforms That Scale.
+            <br />
+            Automate Workflows That Deliver.
+          </h1>
+          <p
+            ref={heroSubheadingRef}
+            className={`hero-subheading ${heroVisible ? "slide-up" : ""}`}
+          >
+            Ascendons is a premium automation-first platform and product
+            engineering partner. We build WhatsApp Business automation,
+            fundraising platforms, and enterprise admin systems for founders,
+            CXOs, and nonprofit leaders who need real outcomes, not just code.
+          </p>
+          <div className="hero-cta-container">
+            <Link
+              ref={heroCTA1Ref}
+              to="/contact"
+              className={`home-butto hero-cta-primary ${heroVisible ? "slide-up" : ""}`}
+            >
+              Book a Strategy Call
+            </Link>
+            <Link
+              ref={heroCTA2Ref}
+              to="/solutions/whatsapp-business-automation"
+              className={`home-butto hero-cta-secondary ${heroVisible ? "slide-up" : ""}`}
+            >
+              Explore Solutions
+            </Link>
           </div>
-          <Link to="/contact" className="home-butto">
-            Get in touch
-          </Link>
         </div>
       </section>
 
-      <div className="text-section">
-        <p
-          ref={paragraph1Ref}
-          className={`home-paragraph ${paragraph1SlidUp ? "slide-up" : ""}`}
-        >
-          <span className="span1"> UI/UX, Backend, Web designers </span> with
-          more than 5 years of experience in designing, developing and deploying
-          web applications, websites and mobile apps.
-        </p>
-        {/* <button>
-        <Link
-          ref={button1Ref}
-          to="/contact"
-          className={`home-button ${button1SlidUp ? "slide-up" : ""}`}
-        >
-          Get in touch
-        </Link>
-        </button> */}
-      </div>
+      {/* WHAT WE DO SECTION */}
+      <section className="text-section">
+        <div ref={whatWeDoSectionRef} className="what-we-do-container">
+          <p className={`subpart1 ${whatWeDoVisible ? "slide-up" : ""}`}>
+            WHAT WE DO
+          </p>
+          <h2 className={`subpart2 ${whatWeDoVisible ? "slide-up" : ""}`}>
+            Platform Engineering & Automation Solutions
+          </h2>
+          <p className={`subpart3 ${whatWeDoVisible ? "slide-up" : ""}`}>
+            We design and build automation-first platforms that handle real
+            financial flows, complex workflows, and compliance requirements.
+            Every system we deliver is production-ready, scalable, and built for
+            outcomes.
+          </p>
+        </div>
 
-      <div className="text-section">
-        <div
-          ref={paragraph2Ref}
-          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
-        >
-          <p
-            ref={subpartRef1}
-            className={`subpart1 ${subpartSlidUp[0] ? "slide-up" : ""}`}
+        <div className="solutions-grid">
+          <div
+            ref={solutionCard1Ref}
+            className={`solution-card ${solutionCardsVisible.card1 ? "slide-up" : ""}`}
           >
-            WHAT WE OFFER
-          </p>
-          <p
-            ref={subpartRef2}
-            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
-          >
-            Web & Mobile App Design, Bring Your Ideas to Life
-          </p>
-          <p
-            ref={subpartRef3}
-            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
-          >
-            At Ascendons, we specialize in transforming your ideas into
-            innovative digital solutions. Whether you need a stunning website, a
-            high-performance mobile app, or a custom software solution, we’ve
-            got you covered. From startups to established enterprises, we work
-            on everything where tech is needed.
-          </p>
-        </div>
-        <Link
-          ref={button2Ref}
-          to="/contact"
-          className={`home-button ${button2SlidUp ? "slide-up" : ""}`}
-        >
-          Get Started Today
-        </Link>
-      </div>
+            <div className="solution-icon whatsapp-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+              </svg>
+            </div>
+            <h3 className="solution-title">WhatsApp Business Automation</h3>
+            <p className="solution-description">
+              Scale customer engagement with automated WhatsApp workflows. We
+              build end-to-end messaging systems using WhatsApp Cloud API that
+              handle lead qualification, customer support, and transactional
+              communications at scale.
+            </p>
+            <Link
+              to="/solutions/whatsapp-business-automation"
+              className="solution-link"
+            >
+              Learn More →
+            </Link>
+          </div>
 
-      <section className="services-section">
-        <div
-          ref={strategyRef}
-          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
-        >
-          <span className="headi">Strategy</span>
-          <p className="para">
-            We craft tailored strategies to align with your business goals,
-            ensuring your digital solutions drive growth and success. From
-            market research to product roadmaps, we’ve got you covered.
-          </p>
-          <button className="learn-more-button">Learn More</button>
-        </div>
-        <div
-          ref={designRef}
-          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
-        >
-          <span className="headi">Design</span>
-          <p className="para">
-            Our design team creates visually stunning, user-friendly interfaces
-            that captivate your audience and enhance user experience. We focus
-            on aesthetics, usability, and brand consistency.
-          </p>
-          <button className="learn-more-button">Learn More</button>
-        </div>
-        <div
-          ref={developmentRef}
-          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
-        >
-          <span className="headi">Development</span>
-          <p className="para">
-            We build scalable, high-performance applications and websites using
-            the latest technologies. From custom software to third-party
-            integrations, we deliver solutions that grow with your business.
-          </p>
-          <button className="learn-more-button">Learn More</button>
-        </div>
-        <div
-          ref={helpSupportRef}
-          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
-        >
-          <span className="headi">Help & Support</span>
-          <p className="para">
-            From deployment to maintenance, we provide end-to-end support to
-            ensure your systems run smoothly and efficiently. Our team is always
-            here to help with updates, troubleshooting, and scaling.
-          </p>
-          <button className="learn-more-button">Learn More</button>
+          <div
+            ref={solutionCard2Ref}
+            className={`solution-card ${solutionCardsVisible.card2 ? "slide-up" : ""}`}
+          >
+            <div className="solution-icon fundraising-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3 className="solution-title">Fundraising & Workflow Platforms</h3>
+            <p className="solution-description">
+              Complete platform solutions for nonprofits and institutions.
+              Organization onboarding, document verification, admin approvals,
+              role-based access, secure payments, and audit-ready workflows—all
+              in one integrated system.
+            </p>
+            <Link
+              to="/solutions/fundraising-workflow-platforms"
+              className="solution-link"
+            >
+              Learn More →
+            </Link>
+          </div>
+
+          <div
+            ref={solutionCard3Ref}
+            className={`solution-card ${solutionCardsVisible.card3 ? "slide-up" : ""}`}
+          >
+            <div className="solution-icon enterprise-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M9 9h6v6H9z" />
+              </svg>
+            </div>
+            <h3 className="solution-title">
+              Custom Admin & Enterprise Systems
+            </h3>
+            <p className="solution-description">
+              Enterprise-grade admin panels and workflow systems tailored to
+              your operations. We build systems that handle complex business
+              logic, multi-tenant architectures, and compliance requirements
+              with precision.
+            </p>
+            <Link to="/contact" className="solution-link">
+              Discuss Your Needs →
+            </Link>
+          </div>
         </div>
       </section>
 
-      <section className="emailsection">
-        <span className="span2">Join the Ascendons Community</span>
-        <p className="para2">
-          Subscribe to our newsletter and stay ahead with the latest trends,
-          insights, and innovations in technology. Be the first to know about
-          our updates, tips, and exclusive offers!
-        </p>
-        <div className="subscribe-container">
-          <input type="email" className="email-input" placeholder="Email" />
-          <button className="subscribe-button">Subscribe</button>
-        </div>
-      </section>
-
-      <div className="text-section">
-        <div
-          ref={paragraph2Ref}
-          className={`home-paragraph ${paragraph2SlidUp ? "slide-up" : ""}`}
-        >
-          <p
-            ref={subpartRef1}
-            className={`subpart1 ${subpartSlidUp[0] ? "slide-up" : ""}`}
-          >
-            WHY CHOOSE US?
-          </p>
-          <p
-            ref={subpartRef2}
-            className={`subpart2 ${subpartSlidUp[1] ? "slide-up" : ""}`}
-          >
-            Automation Solutions for Your Business
-          </p>
-          <p
-            ref={subpartRef3}
-            className={`subpart3 ${subpartSlidUp[2] ? "slide-up" : ""}`}
-          >
-            We deliver cutting-edge automation solutions to help your business
-            thrive. Let us streamline your processes and drive efficiency.
-          </p>
-        </div>
-      </div>
-
-      <section className="services-section">
-        <div
-          ref={strategyRef}
-          className={`service-card ${servicesSlidUp.strategy ? "slide-up" : ""}`}
-        >
-          <span className="headi">Save Money</span>
-          <p className="para">
-            We help you save money by automating repetitive tasks and reducing
-            manual effort. Our solutions optimize processes, cutting down on
-            time and labor costs while boosting productivity.
-          </p>
-        </div>
-        <div
-          ref={designRef}
-          className={`service-card ${servicesSlidUp.design ? "slide-up" : ""}`}
-        >
-          <span className="headi">Reduce Cycle time</span>
-          <p className="para">
-            Our automation solutions speed up your processes, allowing you to
-            handle more tasks in less time. This increases your capacity without
-            the need for additional labor, while faster service keeps your
-            customers happy.
-          </p>
-        </div>
-        <div
-          ref={developmentRef}
-          className={`service-card ${servicesSlidUp.development ? "slide-up" : ""}`}
-        >
-          <span className="headi">Improve Quality</span>
-          <p className="para">
-            We help you minimize errors and rework by implementing automated
-            quality checks and process improvements. This ensures consistent,
-            high-quality results that protect your reputation and customer
-            trust.
-          </p>
-        </div>
-        <div
-          ref={helpSupportRef}
-          className={`service-card ${servicesSlidUp.helpSupport ? "slide-up" : ""}`}
-        >
-          <span className="headi">Become Competitive</span>
-          <p className="para">
-            Your competitors are already automating their processes. We help you
-            stay ahead by implementing automation solutions that enhance
-            efficiency, reduce costs, and improve customer satisfaction.
-          </p>
-        </div>
-      </section>
-
-      {/* New section from the image */}
+      {/* TRUST & AUTHORITY SECTION */}
       <section
-        className={`ascendons-journey-section ${journeySectionVisible ? "visible" : ""}`}
-        ref={journeySectionRef}
+        ref={trustSectionRef}
+        className={`trust-section ${trustVisible ? "visible" : ""}`}
       >
-        <h2>Our Journey at ASCENDONS</h2>
-        <p>
-          At Ascendons, we believe in pushing boundaries and achieving the
-          extraordinary. From empowering businesses to delighting customers, our
-          journey is defined by innovation, dedication, and results. Here's a
-          glimpse of what we've accomplished so far:
-        </p>
-        <div className="ascendons-stats-container">
-          <div
-            className={`ascendons-stat-card ${statCard1SlidUp ? "slide-up" : ""}`}
-            ref={statCard1Ref}
-          >
-            <h3>15</h3>
-            <strong>Happy Clients Trusting Ascendons</strong>
-            <span>
-              Our clients are at the heart of everything we do. Their success is
-              our greatest achievement.
-            </span>
-          </div>
-          <div
-            className={`ascendons-stat-card ${statCard2SlidUp ? "slide-up" : ""}`}
-            ref={statCard2Ref}
-          >
-            <h3>32</h3>
-            <strong>Innovative Solutions Delivered</strong>
-            <span>
-              From cutting-edge technology to creative strategies, we've built
-              solutions that inspire growth.
-            </span>
-          </div>
-          <div
-            className={`ascendons-stat-card ${statCard3SlidUp ? "slide-up" : ""}`}
-            ref={statCard3Ref}
-          >
-            <h3>60</h3>
-            <strong>Moments of Exceptional Support</strong>
-            <span>
-              Our team is always here, ensuring your experience with Ascendons
-              is seamless and rewarding.
-            </span>
+        <div className="trust-content">
+          <h2 className="trust-heading">Built for Real-World Impact</h2>
+          <p className="trust-description">
+            We've worked with nonprofits, startups, and enterprises to build
+            platforms that handle real users, real financial flows, and real
+            compliance requirements. Every system we deliver is production-ready
+            and built to scale.
+          </p>
+          <div className="trust-points">
+            <div className="trust-point">
+              <strong>Real-User Platforms</strong>
+              <span>
+                Systems that handle thousands of users, complex workflows, and
+                high transaction volumes.
+              </span>
+            </div>
+            <div className="trust-point">
+              <strong>Financial Flows</strong>
+              <span>
+                Secure payment integrations, transaction processing, and
+                financial reporting built for compliance.
+              </span>
+            </div>
+            <div className="trust-point">
+              <strong>Compliance-Ready</strong>
+              <span>
+                Audit-ready workflows, document verification, and role-based
+                access controls from day one.
+              </span>
+            </div>
           </div>
         </div>
-        <Link
-          to="/contact"
-          className={`join-journey-button ${joinButtonSlidUp ? "slide-up" : ""}`}
-          ref={joinButtonRef}
-        >
-          Join the Ascendons Journey
-        </Link>
+      </section>
+
+      {/* CTA SECTION WITH LEAD FORM */}
+      <section
+        ref={ctaSectionRef}
+        className={`cta-section ${ctaVisible ? "visible" : ""}`}
+      >
+        <div className="cta-content">
+          <h2 className="cta-heading">Talk to an Architect</h2>
+          <p className="cta-description">
+            Ready to build a platform that scales? Let's discuss your automation
+            needs, workflow challenges, and how we can deliver outcomes that
+            matter.
+          </p>
+          <form onSubmit={handleFormSubmit} className="cta-form">
+            <div className="cta-form-row">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleFormChange}
+                required
+                className="cta-input"
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleFormChange}
+                required
+                className="cta-input"
+              />
+            </div>
+            <div className="cta-form-row">
+              <input
+                type="text"
+                name="company"
+                placeholder="Company / Organization"
+                value={formData.company}
+                onChange={handleFormChange}
+                required
+                className="cta-input"
+              />
+            </div>
+            <textarea
+              name="problem"
+              placeholder="Tell us about your automation or platform needs..."
+              value={formData.problem}
+              onChange={handleFormChange}
+              required
+              rows={4}
+              className="cta-textarea"
+            />
+            <button type="submit" className="cta-submit-button">
+              Request Strategy Call
+            </button>
+          </form>
+        </div>
       </section>
     </>
   );

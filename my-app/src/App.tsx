@@ -5,6 +5,9 @@ import About from "./pages/About";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
+import WhatsAppAutomation from "./pages/WhatsAppAutomation";
+import FundraisingPlatforms from "./pages/FundraisingPlatforms";
+import OurWork from "./pages/OurWork";
 
 import {
   createBrowserRouter,
@@ -25,6 +28,15 @@ const router = createBrowserRouter([
       { path: "about", element: <About /> },
       { path: "services", element: <Services /> },
       { path: "contact", element: <Contact /> },
+      { path: "our-work", element: <OurWork /> },
+      {
+        path: "solutions/whatsapp-business-automation",
+        element: <WhatsAppAutomation />,
+      },
+      {
+        path: "solutions/fundraising-workflow-platforms",
+        element: <FundraisingPlatforms />,
+      },
       { path: "qr", element: <QrGenerator /> },
       { path: "balancesheet", element: <BalanceSheet /> },
       { path: "*", element: <Navigate to="/" replace /> },

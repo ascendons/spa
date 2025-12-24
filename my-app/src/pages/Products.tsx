@@ -34,19 +34,13 @@ const Products: React.FC = () => {
               </p>
             </Link>
 
-
             {/* Card 2 - Placeholder */}
             <div className="border rounded-lg shadow p-6 bg-white text-center">
-              <Link
-                to="/"
-                className="text-gray-800 hover:text-blue-600"
-              >
+              <Link to="/" className="text-gray-800 hover:text-blue-600">
                 <h3 className="text-xl font-bold mb-2">
                   Balance Sheet Generator
                 </h3>
-                <p className="text-gray-600 text-sm">
-                  Coming soon
-                </p>
+                <p className="text-gray-600 text-sm">Coming soon</p>
               </Link>
             </div>
 

@@ -686,3 +686,387 @@
     max-width: 350px;
   }
 }
+
+/* NEW HOMEPAGE STYLES */
+
+/* Hero Section Enhancements */
+.hero-subheading {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.3rem;
+  line-height: 1.8;
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+  transform: translateY(20px);
+  transition: transform 0.5s ease-in-out;
+}
+
+.hero-subheading.slide-up {
+  transform: translateY(0);
+}
+
+.hero-cta-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-cta-primary {
+  background: #ee76ad;
+  color: white;
+  border: 1.5px solid #ee76ad;
+}
+
+.hero-cta-primary:hover {
+  background: #d8659a;
+  border-color: #d8659a;
+}
+
+.hero-cta-secondary {
+  background: transparent;
+  color: white;
+  border: 1.5px solid white;
+}
+
+.hero-cta-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* What We Do Section */
+.what-we-do-container {
+  max-width: 900px;
+  margin: 0 auto 3rem;
+}
+
+.solutions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.solution-card {
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 2.5rem;
+  text-align: left;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.solution-card.slide-up {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.solution-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.solution-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.whatsapp-icon {
+  background: #e8f5e9;
+  color: #25d366;
+}
+
+.fundraising-icon {
+  background: #fff3e0;
+  color: #ff9800;
+}
+
+.enterprise-icon {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.solution-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #404044;
+  margin-bottom: 1rem;
+}
+
+.solution-description {
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.solution-link {
+  color: #ee76ad;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.solution-link:hover {
+  color: #d8659a;
+}
+
+/* Trust & Authority Section */
+.trust-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 5rem 2rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.trust-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trust-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.trust-heading {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.trust-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trust-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.trust-point {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: left;
+}
+
+.trust-point strong {
+  display: block;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.trust-point span {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(180deg, #f8f4f2 0%, #e6dace 100%);
+  padding: 5rem 2rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+}
+
+.cta-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cta-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.cta-heading {
+  color: #404044;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-description {
+  color: #6b7280;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.cta-form {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.cta-form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cta-input,
+.cta-textarea {
+  width: 100%;
+  padding: 0.875rem 1.25rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #404044;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+  font-family: inherit;
+}
+
+.cta-input:focus,
+.cta-textarea:focus {
+  outline: none;
+  border-color: #ee76ad;
+  box-shadow: 0 0 0 3px rgba(238, 118, 173, 0.1);
+}
+
+.cta-textarea {
+  resize: vertical;
+  min-height: 120px;
+  margin-bottom: 1.5rem;
+}
+
+.cta-submit-button {
+  width: 100%;
+  background: #ee76ad;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.cta-submit-button:hover {
+  background: #d8659a;
+  transform: translateY(-2px);
+}
+
+.cta-submit-button:active {
+  transform: translateY(0);
+}
+
+/* Responsive Styles for New Sections */
+@media (max-width: 768px) {
+  .home-heading {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  .hero-subheading {
+    font-size: 1.1rem;
+  }
+
+  .hero-cta-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-cta-primary,
+  .hero-cta-secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .solutions-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .trust-heading {
+    font-size: 2rem;
+  }
+
+  .trust-description {
+    font-size: 1rem;
+  }
+
+  .trust-points {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-heading {
+    font-size: 2rem;
+  }
+
+  .cta-description {
+    font-size: 1rem;
+  }
+
+  .cta-form {
+    padding: 1.5rem;
+  }
+
+  .cta-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-heading {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+
+  .hero-subheading {
+    font-size: 1rem;
+  }
+
+  .solution-card {
+    padding: 1.5rem;
+  }
+
+  .trust-heading {
+    font-size: 1.75rem;
+  }
+
+  .cta-heading {
+    font-size: 1.75rem;
+  }
+}
