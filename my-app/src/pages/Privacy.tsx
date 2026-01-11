@@ -10,7 +10,7 @@ const Privacy: React.FC = () => {
     try {
       localStorage.setItem(STORAGE_KEY, "true");
     } catch (err) {
-        console.error(err);
+      console.error(err);
     }
     navigate(-1);
   };

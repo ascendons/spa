@@ -514,7 +514,7 @@ const Home: React.FC = () => {
 
         <div
           className="solutions-grid"
-          style={{ marginTop: "2rem", maxWidth: "1000px" }}
+          style={{ marginTop: "2rem", maxWidth: "1200px" }}
         >
           <div
             className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
@@ -911,7 +911,7 @@ const Home: React.FC = () => {
 
         <div
           style={{
-            maxWidth: "900px",
+            maxWidth: "1200px",
             margin: "2rem auto 0",
             position: "relative",
             zIndex: 1,
