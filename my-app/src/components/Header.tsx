@@ -69,38 +69,27 @@ const Header = () => {
                 <nav className="mobile-nav">
                   <ul className="nav-list">
                     <li>
-                      <Link
-                        to="/"
-                        className="nav-link"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
+                      <Link to="/" className="nav-link">
                         Home
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/about"
-                        className="nav-link"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        About
+                      <Link to="/our-work" className="nav-link">
+                        Our Work
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/services"
-                        className="nav-link"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
+                      <Link to="/services" className="nav-link">
                         Services
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/contact"
-                        className="nav-link contact"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
+                      <Link to="/about" className="nav-link">
+                        About
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/contact" className="nav-link contact">
                         Get in touch
                       </Link>
                     </li>
@@ -117,13 +106,18 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="desktop-link">
-                    About
+                  <Link to="/our-work" className="desktop-link">
+                    Our Work
                   </Link>
                 </li>
                 <li>
                   <Link to="/services" className="desktop-link">
                     Services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/about" className="desktop-link">
+                    About
                   </Link>
                 </li>
                 <li>

@@ -2,7 +2,7 @@ import { FaLinkedinIn, FaFacebookF, FaInstagram } from "react-icons/fa";
 
 function Footer() {
   return (
-    <footer className="bg-[#5c4713] text-white py-10 px-6 md:px-20 font-sans">
+    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-10 px-6 md:px-20 font-sans relative z-10">
       <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between gap-12">
         <div className="md:w-1/4 text-left">
           <h2 className="text-xl font-bold mb-6">ASCENDONS</h2>
@@ -54,19 +54,19 @@ function Footer() {
           <div className="flex space-x-4">
             <a
               href="https://www.linkedin.com/company/ascendons1/"
-              className="bg-[#4b3d0f] p-2 rounded-full hover:bg-[#3a2f0c]"
+              className="bg-blue-900 p-2 rounded-full hover:bg-blue-700 transition-colors"
             >
               <FaLinkedinIn />
             </a>
             <a
               href="#"
-              className="bg-[#4b3d0f] p-2 rounded-full hover:bg-[#3a2f0c]"
+              className="bg-blue-900 p-2 rounded-full hover:bg-blue-700 transition-colors"
             >
               <FaFacebookF />
             </a>
             <a
               href="https://www.instagram.com/ascendonstech/#"
-              className="bg-[#4b3d0f] p-2 rounded-full hover:bg-[#3a2f0c]"
+              className="bg-blue-900 p-2 rounded-full hover:bg-blue-700 transition-colors"
             >
               <FaInstagram />
             </a>
