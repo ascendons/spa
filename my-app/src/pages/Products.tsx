@@ -22,7 +22,7 @@ const Products: React.FC = () => {
           </h2>
           <p
             className="subpart3 text-center mb-12"
-            style={{ maxWidth: "700px", margin: "0 auto 3rem" }}
+            style={{ maxWidth: "1200px", margin: "0 auto 3rem" }}
           >
             Explore our innovative solutions designed to streamline your
             workflow and boost productivity.

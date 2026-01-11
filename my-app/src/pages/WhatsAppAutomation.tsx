@@ -406,7 +406,7 @@ const WhatsAppAutomation: React.FC = () => {
           {/* Workflow Diagram */}
           <div
             style={{
-              maxWidth: "900px",
+              maxWidth: "1200px",
               margin: "2rem auto",
               padding: "2rem",
               background: "rgba(255, 255, 255, 0.95)",

@@ -139,19 +139,6 @@ const OurWork: React.FC = () => {
           </ul>
 
           <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            Technologies Used
-          </h3>
-          <p
-            className="solution-description"
-            style={{ marginBottom: "1.5rem" }}
-          >
-            <strong>Tech Stack:</strong> WhatsApp Cloud API, Node.js,
-            Express.js, PostgreSQL, React.js, Redis for caching, Webhook
-            integrations with CRM systems (HubSpot/Salesforce), RESTful APIs for
-            order management, Google Sheets API for reporting.
-          </p>
-
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
             Results & Impact
           </h3>
           <div
@@ -165,7 +152,7 @@ const OurWork: React.FC = () => {
               <p className="solution-description">
                 <strong>
                   Response time reduced from 5 minutes to 2 minutes average.
-                </strong>
+                </strong>{" "}
                 Automated handling of 80% of routine queries, freeing up the
                 team to focus on complex customer issues and strategic work.
               </p>
@@ -177,7 +164,7 @@ const OurWork: React.FC = () => {
               <p className="solution-description">
                 <strong>
                   Handles 5,000+ daily conversations without additional staff.
-                </strong>
+                </strong>{" "}
                 System scales automatically, enabling 24/7 customer engagement
                 with zero downtime since deployment.
               </p>
@@ -213,7 +200,7 @@ const OurWork: React.FC = () => {
         <div
           className="solution-card slide-up"
           style={{
-            maxWidth: "900px",
+            maxWidth: "1200px",
             margin: "1.5rem auto 0",
             textAlign: "left",
             background: "white",
@@ -291,20 +278,6 @@ const OurWork: React.FC = () => {
           </ul>
 
           <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            Technologies Used
-          </h3>
-          <p
-            className="solution-description"
-            style={{ marginBottom: "1.5rem" }}
-          >
-            <strong>Tech Stack:</strong> React.js, Node.js, Express.js,
-            PostgreSQL, AWS S3 for document storage, Razorpay/Stripe payment
-            gateways, JWT authentication, Role-based access control (RBAC),
-            Redis for session management, Email service integrations
-            (SendGrid/AWS SES), PDF generation for reports.
-          </p>
-
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
             Results & Impact
           </h3>
           <div
@@ -319,7 +292,7 @@ const OurWork: React.FC = () => {
                 <strong>
                   Onboarding reduced from 3 weeks to 2 days (85% time
                   reduction).
-                </strong>
+                </strong>{" "}
                 Automated workflows and self-service registration enable faster
                 organization activation with complete document verification.
               </p>

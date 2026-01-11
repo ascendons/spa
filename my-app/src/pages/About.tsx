@@ -185,24 +185,6 @@ const About: React.FC = () => {
               </p>
             </div>
           </div>
-
-          {/* Closing Statement */}
-          <p className="subpart3 text-left mb-8">
-            At <span className="font-bold">ASCENDONS</span>, we’re not just
-            building apps and websites-we’re building relationships. Let’s work
-            together to create something extraordinary. Your success is our
-            mission.
-          </p>
-
-          {/* Get in touch button */}
-          <div>
-            <a
-              href="/contact"
-              className="inline-block bg-blue-100 !text-blue-600 font-semibold px-8 py-3 rounded-full text-lg border-2 border-transparent transition hover:bg-transparent !hover:text-blue-600 hover:border-blue-600"
-            >
-              Get in touch
-            </a>
-          </div>
         </div>
       </section>
     </>
