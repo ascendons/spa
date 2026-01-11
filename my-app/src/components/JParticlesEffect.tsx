@@ -2,13 +2,9 @@
 import React, { useEffect } from "react";
 import JParticles from "jparticles";
 
-interface ParticleInstance {
-  destroy?: () => void;
-}
-
 const JParticlesEffect: React.FC = () => {
   useEffect(() => {
-    let particleInstance: ParticleInstance | null = null;
+    let particleInstance: any = null;
 
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
