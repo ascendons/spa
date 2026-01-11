@@ -2,13 +2,9 @@
 import React, { useEffect } from "react";
 import JParticles from "jparticles";
 
-interface ParticleInstance {
-  destroy?: () => void;
-}
-
 const JParticlesEffect: React.FC = () => {
   useEffect(() => {
-    let particleInstance: ParticleInstance | null = null;
+    let particleInstance: unknown = null;
 
     // Small delay to ensure DOM is ready
     const timer = setTimeout(() => {
@@ -36,7 +32,13 @@ const JParticlesEffect: React.FC = () => {
     return () => {
       clearTimeout(timer);
       // Cleanup if needed
-      if (particleInstance && typeof particleInstance.destroy === "function") {
+      if (
+        particleInstance &&
+        typeof particleInstance === "object" &&
+        particleInstance !== null &&
+        "destroy" in particleInstance &&
+        typeof particleInstance.destroy === "function"
+      ) {
         particleInstance.destroy();
       }
     };
