@@ -21,6 +21,8 @@ import {
 import React, { useEffect } from "react";
 import QrGenerator from "./components/QRGenerator";
 import BalanceSheet from "./components/BalanceSheet";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import Privacy from "./pages/Privacy";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +44,7 @@ const router = createBrowserRouter([
       },
       { path: "qr", element: <QrGenerator /> },
       { path: "balancesheet", element: <BalanceSheet /> },
+      { path: "privacy", element: <Privacy /> },
       { path: "*", element: <Navigate to="/" replace /> },
     ],
   },
@@ -69,6 +72,8 @@ function RootLayout() {
       <React.Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </React.Suspense>
+      {/* site-wide privacy banner */}
+      <PrivacyPolicy />
       <Footer />
       <CookieConsent onAccept={handleCookieConsent} />
     </div>

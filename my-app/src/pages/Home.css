@@ -808,7 +808,7 @@
 
 .join-journey-button {
   display: inline-block;
-  background-color: #ff99cc; /* Pink color for the button, similar to the image */
+  background-color: #1d9d30;
   color: #fff;
   padding: 15px 30px;
   border-radius: 30px;
@@ -830,7 +830,7 @@
 }
 
 .join-journey-button:hover {
-  background-color: #e68acd; /* Slightly darker pink on hover */
+  background-color: #157518;
 }
 
 /* Responsive adjustments */
