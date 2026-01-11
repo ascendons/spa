@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import JParticlesEffect from "../components/JParticlesEffect";
 import "./Home.css";
 
 const FundraisingPlatforms: React.FC = () => {
@@ -63,7 +62,6 @@ const FundraisingPlatforms: React.FC = () => {
     <>
       {/* Hero Section */}
       <section className="home-section">
-        <JParticlesEffect />
         <div className="home-content">
           <h1
             ref={heroRef}
@@ -133,9 +131,6 @@ const FundraisingPlatforms: React.FC = () => {
       <section
         ref={solutionRef}
         className={`trust-section ${visible.solution ? "visible" : ""}`}
-        style={{
-          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-        }}
       >
         <div className="trust-content">
           <h2 className="trust-heading">Platform-Driven Approach</h2>
@@ -317,7 +312,7 @@ const FundraisingPlatforms: React.FC = () => {
           >
             Why Choose Our Platform Approach
           </h2>
-          <div className="solutions-grid">
+          <div className="solutions-grid solutions-grid-3col">
             <div
               className={`solution-card ${visible.whyChoose ? "slide-up" : ""}`}
             >

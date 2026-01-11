@@ -8,6 +8,9 @@ import Home from "./pages/Home";
 import WhatsAppAutomation from "./pages/WhatsAppAutomation";
 import FundraisingPlatforms from "./pages/FundraisingPlatforms";
 import OurWork from "./pages/OurWork";
+import JParticlesEffect from "./components/JParticlesEffect";
+import CookieConsent from "./components/CookieConsent";
+import { initializeAnalytics } from "./utils/userAnalytics";
 
 import {
   createBrowserRouter,
@@ -15,7 +18,7 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 import QrGenerator from "./components/QRGenerator";
 import BalanceSheet from "./components/BalanceSheet";
 
@@ -45,14 +48,29 @@ const router = createBrowserRouter([
 ]);
 
 function RootLayout() {
+  const handleCookieConsent = (consent: boolean) => {
+    if (consent) {
+      initializeAnalytics();
+    }
+  };
+
+  useEffect(() => {
+    // Initialize analytics if consent was already given
+    const consent = localStorage.getItem("cookieConsent");
+    if (consent === "accepted") {
+      initializeAnalytics();
+    }
+  }, []);
+
   return (
     <div className="App">
+      <JParticlesEffect />
       <Header />
-      {/*<ParticlesComponent id="tsparticles" className="absolute inset-0" />*/}
       <React.Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </React.Suspense>
       <Footer />
+      <CookieConsent onAccept={handleCookieConsent} />
     </div>
   );
 }

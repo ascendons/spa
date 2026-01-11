@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import QRCode from "react-qr-code";
-import JParticlesEffect from "./JParticlesEffect";
 import { FileViewer } from "./FileViewer";
 
 const API_URL = "https://5ae73257282f.ngrok-free.app";
@@ -85,7 +84,6 @@ const QrGenerator: React.FC = () => {
 
   return (
     <section className="home-section">
-      <JParticlesEffect />
       <div style={styles.container}>
         {fileUrl ? (
           <>

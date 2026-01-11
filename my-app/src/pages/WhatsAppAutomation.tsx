@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import JParticlesEffect from "../components/JParticlesEffect";
 import "./Home.css";
 
 const WhatsAppAutomation: React.FC = () => {
@@ -63,7 +62,6 @@ const WhatsAppAutomation: React.FC = () => {
     <>
       {/* Hero Section */}
       <section className="home-section">
-        <JParticlesEffect />
         <div className="home-content">
           <h1
             ref={heroRef}
@@ -100,7 +98,10 @@ const WhatsAppAutomation: React.FC = () => {
           </p>
         </div>
 
-        <div className="solutions-grid" style={{ marginTop: "2rem" }}>
+        <div
+          className="solutions-grid solutions-grid-3col"
+          style={{ marginTop: "2rem" }}
+        >
           <div className={`solution-card ${visible.problem ? "slide-up" : ""}`}>
             <h3 className="solution-title">Missed Opportunities</h3>
             <p className="solution-description">
@@ -131,39 +132,61 @@ const WhatsAppAutomation: React.FC = () => {
       <section
         ref={solutionRef}
         className={`trust-section ${visible.solution ? "visible" : ""}`}
-        style={{
-          background: "linear-gradient(135deg, #25d366 0%, #128c7e 100%)",
-        }}
       >
         <div className="trust-content">
-          <h2 className="trust-heading">Our Automation-First Approach</h2>
+          <h2 className="trust-heading">What We Integrate With</h2>
           <p className="trust-description">
-            We build end-to-end WhatsApp automation systems using WhatsApp Cloud
-            API that integrate seamlessly with your existing workflows. Our
-            solutions handle lead qualification, customer support, order
-            tracking, and transactional communications—all automated, all
-            scalable.
+            Our WhatsApp automation systems integrate seamlessly with your
+            existing tools and workflows. Connect with CRMs, ERPs, databases,
+            payment gateways, and APIs to automate every aspect of customer
+            communication.
           </p>
           <div className="trust-points" style={{ marginTop: "2rem" }}>
             <div className="trust-point">
-              <strong>Automated Workflows</strong>
+              <strong>CRM Systems</strong>
               <span>
-                Intelligent conversation flows that qualify leads, answer FAQs,
-                and route complex queries to human agents.
+                Integrate with HubSpot, Salesforce, Zoho CRM, Pipedrive, or any
+                custom CRM. Auto-create contacts, update lead status, sync
+                conversations, and trigger workflows.
               </span>
             </div>
             <div className="trust-point">
-              <strong>API Integration</strong>
+              <strong>Payment Gateways</strong>
               <span>
-                Seamless integration with your CRM, order management, and
-                payment systems for real-time data and actions.
+                Connect with Razorpay, Stripe, PayU, Paytm, and other payment
+                processors. Send payment links, confirm transactions, and
+                automate payment reminders.
               </span>
             </div>
             <div className="trust-point">
-              <strong>Scalable Architecture</strong>
+              <strong>ERP & Business Tools</strong>
               <span>
-                Built to handle thousands of concurrent conversations without
-                performance degradation or cost overruns.
+                Integrate with SAP, Oracle, Microsoft Dynamics, or custom ERPs.
+                Sync inventory, order status, delivery tracking, and customer
+                data in real-time.
+              </span>
+            </div>
+            <div className="trust-point">
+              <strong>Google Sheets & Databases</strong>
+              <span>
+                Automatically log conversations, update spreadsheets, sync with
+                PostgreSQL, MySQL, MongoDB, or any database. Real-time data
+                updates without manual entry.
+              </span>
+            </div>
+            <div className="trust-point">
+              <strong>Email & Communication</strong>
+              <span>
+                Integrate with email services (SendGrid, AWS SES), SMS gateways,
+                and Slack/Teams for multi-channel notifications and alerts.
+              </span>
+            </div>
+            <div className="trust-point">
+              <strong>Custom APIs</strong>
+              <span>
+                Connect with any RESTful API or webhook. We can integrate with
+                your existing systems, third-party services, or build custom
+                integrations for your specific needs.
               </span>
             </div>
           </div>
@@ -224,11 +247,14 @@ const WhatsAppAutomation: React.FC = () => {
                 <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
               </svg>
             </div>
-            <h3 className="solution-title">Startups & E-commerce</h3>
+            <h3 className="solution-title">E-commerce & Retail</h3>
             <p className="solution-description">
               Automate lead qualification, order confirmations, shipping
-              updates, and customer support. Convert more leads and reduce
-              support costs.
+              updates, and customer support.{" "}
+              <strong style={{ color: "#1e40af" }}>
+                Convert 35% more leads and reduce support costs by 40%
+              </strong>{" "}
+              with 24/7 automated responses.
             </p>
           </div>
           <div
@@ -247,25 +273,281 @@ const WhatsAppAutomation: React.FC = () => {
                 <path d="M9 9h6v6H9z" />
               </svg>
             </div>
-            <h3 className="solution-title">Enterprises</h3>
+            <h3 className="solution-title">Real Estate</h3>
             <p className="solution-description">
-              Large-scale customer communication, transactional messaging, and
-              support automation. Integrate with existing enterprise systems and
-              workflows.
+              Automate property inquiries, schedule site visits, send property
+              details, and qualify leads automatically.{" "}
+              <strong style={{ color: "#1e40af" }}>
+                Reduce response time from hours to seconds,
+              </strong>{" "}
+              capturing more qualified leads.
             </p>
+          </div>
+          <div
+            className={`solution-card ${visible.useCases ? "slide-up" : ""}`}
+          >
+            <div className="solution-icon fundraising-icon">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg>
+            </div>
+            <h3 className="solution-title">Service Businesses</h3>
+            <p className="solution-description">
+              Automate appointment booking, service confirmations, follow-ups,
+              and payment reminders.{" "}
+              <strong style={{ color: "#1e40af" }}>
+                Reduce no-shows by 50%
+              </strong>
+              with automated reminders and streamline operations.
+            </p>
+          </div>
+        </div>
+
+        {/* Benefits Section */}
+        <div style={{ marginTop: "3rem", textAlign: "center" }}>
+          <h3 className="solution-title" style={{ marginBottom: "2rem" }}>
+            Key Benefits
+          </h3>
+          <div
+            className="solutions-grid"
+            style={{
+              marginTop: "2rem",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+            }}
+          >
+            <div
+              className={`solution-card ${visible.useCases ? "slide-up" : ""}`}
+            >
+              <h4
+                className="solution-title"
+                style={{ fontSize: "1.1rem", color: "#1e40af" }}
+              >
+                ⚡ Faster Response Times
+              </h4>
+              <p className="solution-description">
+                Instant automated responses reduce wait times from hours to
+                seconds, improving customer satisfaction and capturing more
+                leads.
+              </p>
+            </div>
+            <div
+              className={`solution-card ${visible.useCases ? "slide-up" : ""}`}
+            >
+              <h4
+                className="solution-title"
+                style={{ fontSize: "1.1rem", color: "#1e40af" }}
+              >
+                💰 Cost Reduction
+              </h4>
+              <p className="solution-description">
+                Eliminate manual tasks and reduce support staff workload. Handle
+                thousands of conversations without hiring additional team
+                members.
+              </p>
+            </div>
+            <div
+              className={`solution-card ${visible.useCases ? "slide-up" : ""}`}
+            >
+              <h4
+                className="solution-title"
+                style={{ fontSize: "1.1rem", color: "#1e40af" }}
+              >
+                📈 Scale Seamlessly
+              </h4>
+              <p className="solution-description">
+                Scale from hundreds to thousands of daily conversations without
+                performance issues. Built for enterprise-grade volume and
+                reliability.
+              </p>
+            </div>
+            <div
+              className={`solution-card ${visible.useCases ? "slide-up" : ""}`}
+            >
+              <h4
+                className="solution-title"
+                style={{ fontSize: "1.1rem", color: "#1e40af" }}
+              >
+                🔗 System Integration
+              </h4>
+              <p className="solution-description">
+                Connect with CRM, ERP, payment gateways, and databases.
+                Real-time data sync eliminates manual entry and ensures
+                accuracy.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Architecture Explanation */}
-      <section className="text-section" style={{ background: "#f9fafb" }}>
+      {/* Workflow Diagram / Architecture Explanation */}
+      <section className="text-section">
         <div ref={architectureRef} className="what-we-do-container">
           <p className={`subpart1 ${visible.architecture ? "slide-up" : ""}`}>
             HOW IT WORKS
           </p>
           <h2 className={`subpart2 ${visible.architecture ? "slide-up" : ""}`}>
-            Architecture Built for Scale
+            Simple Workflow, Powerful Results
           </h2>
+          <p
+            className={`subpart3 ${visible.architecture ? "slide-up" : ""}`}
+            style={{ marginBottom: "2rem" }}
+          >
+            See how our automation flows work—from customer inquiry to action,
+            all automated, all integrated with your existing systems.
+          </p>
+
+          {/* Workflow Diagram */}
+          <div
+            style={{
+              maxWidth: "900px",
+              margin: "2rem auto",
+              padding: "2rem",
+              background: "rgba(255, 255, 255, 0.95)",
+              borderRadius: "16px",
+              border: "1px solid #bfdbfe",
+              boxShadow: "0 4px 20px rgba(59, 130, 246, 0.1)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.5rem",
+                alignItems: "center",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                  width: "100%",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "1rem 1.5rem",
+                    background:
+                      "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
+                    color: "white",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    minWidth: "200px",
+                    textAlign: "center",
+                    flex: "1 1 250px",
+                  }}
+                >
+                  Customer Message via WhatsApp
+                </div>
+                <div
+                  style={{ fontSize: "2rem", color: "#3b82f6", flexShrink: 0 }}
+                >
+                  →
+                </div>
+                <div
+                  style={{
+                    padding: "1rem 1.5rem",
+                    background: "#e0f2fe",
+                    color: "#1e40af",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    minWidth: "200px",
+                    textAlign: "center",
+                    flex: "1 1 250px",
+                  }}
+                >
+                  Automated Response & Lead Qualification
+                </div>
+              </div>
+
+              <div style={{ fontSize: "2rem", color: "#3b82f6" }}>↓</div>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                  width: "100%",
+                  flexWrap: "wrap",
+                  justifyContent: "center",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "1rem 1.5rem",
+                    background: "#eff6ff",
+                    color: "#1e40af",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    textAlign: "center",
+                    flex: "1 1 150px",
+                  }}
+                >
+                  Update CRM
+                </div>
+                <div
+                  style={{
+                    padding: "1rem 1.5rem",
+                    background: "#eff6ff",
+                    color: "#1e40af",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    textAlign: "center",
+                    flex: "1 1 150px",
+                  }}
+                >
+                  Sync Order Status
+                </div>
+                <div
+                  style={{
+                    padding: "1rem 1.5rem",
+                    background: "#eff6ff",
+                    color: "#1e40af",
+                    borderRadius: "12px",
+                    fontWeight: "600",
+                    textAlign: "center",
+                    flex: "1 1 150px",
+                  }}
+                >
+                  Trigger Payment Link
+                </div>
+              </div>
+
+              <div style={{ fontSize: "2rem", color: "#3b82f6" }}>↓</div>
+
+              <div
+                style={{
+                  padding: "1rem 1.5rem",
+                  background:
+                    "linear-gradient(135deg, #10b981 0%, #059669 100%)",
+                  color: "white",
+                  borderRadius: "12px",
+                  fontWeight: "600",
+                  textAlign: "center",
+                  width: "100%",
+                  maxWidth: "600px",
+                }}
+              >
+                ✅ Automated Follow-up & Human Handoff (if needed)
+              </div>
+            </div>
+          </div>
+
+          <h3
+            className="solution-title"
+            style={{ marginTop: "3rem", marginBottom: "1.5rem" }}
+          >
+            Architecture Built for Scale
+          </h3>
           <p className={`subpart3 ${visible.architecture ? "slide-up" : ""}`}>
             Our WhatsApp automation systems are built on a robust architecture
             that connects WhatsApp Cloud API with your business logic. Here's

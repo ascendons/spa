@@ -79,11 +79,8 @@ const Header = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to="/solutions/whatsapp-business-automation"
-                        className="nav-link"
-                      >
-                        Solutions
+                      <Link to="/services" className="nav-link">
+                        Services
                       </Link>
                     </li>
                     <li>
@@ -114,11 +111,8 @@ const Header = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/solutions/whatsapp-business-automation"
-                    className="desktop-link"
-                  >
-                    Solutions
+                  <Link to="/services" className="desktop-link">
+                    Services
                   </Link>
                 </li>
                 <li>

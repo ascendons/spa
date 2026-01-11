@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import JParticlesEffect from "./JParticlesEffect";
 import ProfitAndLoss from "./balanceSheet/ProfitandLoss";
 import {
   Accordion,
@@ -77,7 +76,6 @@ const BalanceSheet: React.FC = () => {
   return (
     <>
       <section className="home-section">
-        <JParticlesEffect />
         <div className="home-content">
           <div className="home-heading">Balance Sheet Generator</div>
         </div>

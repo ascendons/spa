@@ -1,26 +1,25 @@
 import React from "react";
-import JParticlesEffect from "../components/JParticlesEffect";
 
 const About: React.FC = () => {
   return (
     <>
       <section className="home-section">
-        {/* <ParticlesComponent id="tsparticles" className="absolute inset-0" /> */}
-        <JParticlesEffect />
-
         <div className="home-content">
           <div className="home-heading">About us</div>
         </div>
       </section>
 
       {/* About Content Section */}
-      <section className="relative w-full bg-white py-20">
+      <section className="text-section">
         <div className="max-w-5xl mx-auto px-4">
           {/* About Us Text */}
-          <h2 className="text-gray-800 text-left text-3xl font-semibold mb-8">
-            About Us
+          <h2
+            className="subpart2 text-left mb-8"
+            style={{ fontSize: "2.5rem" }}
+          >
+            We Build Automation & Platforms That Actually Work
           </h2>
-          <p className="text-left mb-6 text-lg text-gray-700">
+          <p className="subpart3 text-left mb-6">
             Welcome to <span className="font-bold">ASCENDONS</span>, your
             trusted partner in transforming ideas into innovative digital
             solutions. We specialize in crafting cutting-edge mobile apps,
@@ -29,124 +28,166 @@ const About: React.FC = () => {
             an established business seeking to streamline operations with a
             custom inventory management system, we’ve got you covered.
           </p>
-          <p className="text-left mb-12 text-lg text-gray-700">
-            At <span className="font-bold">ASCENDONS</span>, we believe
-            technology should work for you, not the other way around. Our team
-            of skilled developers, designers, and tech enthusiasts is passionate
-            about creating seamless, user-friendly, and scalable solutions for
-            Android, iOS, and web platforms. From concept to deployment, we work
-            closely with you to ensure your vision is brought to life with
-            precision and creativity.
+          <p className="subpart3 text-left mb-12">
+            We've delivered fundraising platforms for NGOs managing hundreds of
+            partner organizations, custom CRMs that replaced expensive
+            enterprise software, and automation systems handling thousands of
+            daily interactions. Our focus is building production-ready solutions
+            that scale, integrate seamlessly, and deliver measurable business
+            outcomes.
           </p>
 
           {/* What We Offer */}
-          <h3 className="text-gray-800 text-left text-3xl font-semibold mb-6">
-            What We Offer:
+          <h3
+            className="subpart2 text-left mb-6"
+            style={{ fontSize: "2.5rem" }}
+          >
+            Our Core Expertise:
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Mobile App Development
+          <div className="grid-2-col mb-12">
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Communication Automation
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                Stunning, high-performance apps for Android and iOS.
+              <p className="solution-description text-left">
+                Intelligent automation systems for customer engagement across
+                multiple channels. Handle lead qualification, support workflows,
+                order tracking, and transactional communications at enterprise
+                scale.
               </p>
             </div>
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Web Development
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Custom CRMs & Software
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                Responsive, modern websites that captivate and convert.
+              <p className="solution-description text-left">
+                Build CRMs and custom software solutions tailored to your exact
+                workflow, not forced into existing templates.
               </p>
             </div>
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Custom Software Solutions
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                RAG-Powered Chatbots
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                Tailored systems like inventory management, CRM, ERP, and more.
+              <p className="solution-description text-left">
+                Intelligent chatbots that understand context, learn from your
+                documents, and provide accurate answers without hallucinations.
               </p>
             </div>
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Tech Consulting
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Fundraising & NGO Platforms
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                Expert advice to help you navigate the ever-evolving tech
-                landscape.
+              <p className="solution-description text-left">
+                Complete platforms for NGOs including marketplaces, fundraising
+                systems, organization management, and workflow automation.
+              </p>
+            </div>
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Workflow Optimization
+              </h4>
+              <p className="solution-description text-left">
+                Analyze your processes, identify bottlenecks, and build
+                automation systems that eliminate repetitive tasks and save
+                hours every week.
+              </p>
+            </div>
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Custom Platforms & Marketplaces
+              </h4>
+              <p className="solution-description text-left">
+                Build platforms and marketplaces from scratch with multi-tenant
+                architecture, secure payments, and role-based access controls.
               </p>
             </div>
           </div>
 
           {/* Why Choose Us */}
 
-          <h3 className="text-gray-800 text-left text-3xl font-semibold mb-6">
-            Why Choose Us?
+          <h3
+            className="subpart2 text-left mb-6"
+            style={{ fontSize: "2.5rem" }}
+          >
+            Why Organizations Choose Us
           </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Client-Centric Approach
+          <div className="grid-2-col grid-2-col-fixed mb-12">
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Real-World Experience
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                Your goals are our priority. We listen, collaborate, and deliver
-                solutions that align perfectly with your vision.
+              <p className="solution-description text-left">
+                We've built WhatsApp automation handling 10,000+ daily
+                conversations, fundraising platforms for NGOs managing hundreds
+                of organizations, and custom CRMs that replaced expensive
+                enterprise software.
               </p>
             </div>
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Innovation-Driven
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                NGO & Nonprofit Specialists
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                We stay ahead of the curve by leveraging the latest technologies
-                and trends.
+              <p className="solution-description text-left">
+                We understand the unique challenges nonprofits face—compliance,
+                donor management, fundraising workflows, and scaling operations
+                with limited resources.
               </p>
             </div>
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Transparent Process
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Automation That Actually Works
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                Clear communication, timely updates, and no hidden surprises.
+              <p className="solution-description text-left">
+                We don't build demos—we build production-ready systems that
+                handle real users, real workflows, and real scale. Every
+                solution is battle-tested and maintained.
               </p>
             </div>
-            <div
-              className="bg-white rounded-lg shadow-xl p-8 transition-shadow duration-200 hover:shadow-2xl"
-              style={{ boxShadow: "0 8px 32px 0 rgba(60,60,90,0.15)" }}
-            >
-              <h4 className="text-gray-800 text-left font-semibold text-xl mb-2">
-                Scalable Solutions
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Custom Solutions, Not Templates
               </h4>
-              <p className="text-gray-600 text-left text-lg">
-                We build systems that grow with your business.
+              <p className="solution-description text-left">
+                Your workflow is unique. We build systems that fit your exact
+                needs, integrate with your tools, and grow with your
+                organization—not force you into existing templates.
               </p>
             </div>
           </div>
 
           {/* Closing Statement */}
-          <p className="text-left text-lg text-gray-700 mb-8">
+          <p className="subpart3 text-left mb-8">
             At <span className="font-bold">ASCENDONS</span>, we’re not just
             building apps and websites-we’re building relationships. Let’s work
             together to create something extraordinary. Your success is our
@@ -157,9 +198,7 @@ const About: React.FC = () => {
           <div>
             <a
               href="/contact"
-              className="inline-block bg-pink-200 !text-pink-400 font-semibold px-8 py-3 rounded-full text-lg border-2 border-transparent transition
-
-    hover:bg-transparent !hover:text-pink-400 hover:border-pink-400"
+              className="inline-block bg-blue-100 !text-blue-600 font-semibold px-8 py-3 rounded-full text-lg border-2 border-transparent transition hover:bg-transparent !hover:text-blue-600 hover:border-blue-600"
             >
               Get in touch
             </a>
