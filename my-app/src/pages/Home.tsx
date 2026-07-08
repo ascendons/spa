@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Home.css";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Home: React.FC = () => {
-  // Refs for hero section
   const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
   const heroSubheadingRef = useRef<HTMLParagraphElement>(null);
   const heroCTA1Ref = useRef<HTMLAnchorElement>(null);
   const heroCTA2Ref = useRef<HTMLAnchorElement>(null);
-  const [heroVisible, setHeroVisible] = useState(false);
 
-  // Refs for What We Do section
   const whatWeDoSectionRef = useRef<HTMLDivElement>(null);
   const solutionCard1Ref = useRef<HTMLDivElement>(null);
   const solutionCard2Ref = useRef<HTMLDivElement>(null);
@@ -18,35 +19,13 @@ const Home: React.FC = () => {
   const solutionCard4Ref = useRef<HTMLDivElement>(null);
   const solutionCard5Ref = useRef<HTMLDivElement>(null);
   const solutionCard6Ref = useRef<HTMLDivElement>(null);
-  const [whatWeDoVisible, setWhatWeDoVisible] = useState(false);
-  const [solutionCardsVisible, setSolutionCardsVisible] = useState({
-    card1: false,
-    card2: false,
-    card3: false,
-    card4: false,
-    card5: false,
-    card6: false,
-  });
 
-  // Refs for Trust & Authority section
   const trustSectionRef = useRef<HTMLDivElement>(null);
-  const [trustVisible, setTrustVisible] = useState(false);
-
-  // Refs for How We Work section
   const howWeWorkRef = useRef<HTMLDivElement>(null);
-  const [howWeWorkVisible, setHowWeWorkVisible] = useState(false);
-
-  // Refs for Industry Use Cases section
   const industryUseCasesRef = useRef<HTMLDivElement>(null);
-  const [industryUseCasesVisible, setIndustryUseCasesVisible] = useState(false);
-
-  // Refs for Testimonials section
   const testimonialsRef = useRef<HTMLDivElement>(null);
-  const [testimonialsVisible, setTestimonialsVisible] = useState(false);
-
-  // Refs for CTA section
   const ctaSectionRef = useRef<HTMLDivElement>(null);
-  const [ctaVisible, setCtaVisible] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -62,7 +41,6 @@ const Home: React.FC = () => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Use the same Google Apps Script endpoint as Contact page
     const formDataToSend = new FormData();
     formDataToSend.append("name", formData.name);
     formDataToSend.append("email", formData.email);
@@ -90,61 +68,334 @@ const Home: React.FC = () => {
     }
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === heroHeadlineRef.current) {
-              setHeroVisible(true);
-            } else if (entry.target === whatWeDoSectionRef.current) {
-              setWhatWeDoVisible(true);
-            } else if (entry.target === solutionCard1Ref.current) {
-              setSolutionCardsVisible((prev) => ({ ...prev, card1: true }));
-            } else if (entry.target === solutionCard2Ref.current) {
-              setSolutionCardsVisible((prev) => ({ ...prev, card2: true }));
-            } else if (entry.target === solutionCard3Ref.current) {
-              setSolutionCardsVisible((prev) => ({ ...prev, card3: true }));
-            } else if (entry.target === solutionCard4Ref.current) {
-              setSolutionCardsVisible((prev) => ({ ...prev, card4: true }));
-            } else if (entry.target === solutionCard5Ref.current) {
-              setSolutionCardsVisible((prev) => ({ ...prev, card5: true }));
-            } else if (entry.target === solutionCard6Ref.current) {
-              setSolutionCardsVisible((prev) => ({ ...prev, card6: true }));
-            } else if (entry.target === trustSectionRef.current) {
-              setTrustVisible(true);
-            } else if (entry.target === howWeWorkRef.current) {
-              setHowWeWorkVisible(true);
-            } else if (entry.target === industryUseCasesRef.current) {
-              setIndustryUseCasesVisible(true);
-            } else if (entry.target === testimonialsRef.current) {
-              setTestimonialsVisible(true);
-            } else if (entry.target === ctaSectionRef.current) {
-              setCtaVisible(true);
-            }
-          }
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      // --- Initial states (set before paint to prevent flash) ---
+      gsap.set(
+        [
+          heroHeadlineRef.current,
+          heroSubheadingRef.current,
+          heroCTA1Ref.current,
+          heroCTA2Ref.current,
+        ],
+        { opacity: 0 },
+      );
+
+      const solutionCards = [
+        solutionCard1Ref.current,
+        solutionCard2Ref.current,
+        solutionCard3Ref.current,
+        solutionCard4Ref.current,
+        solutionCard5Ref.current,
+        solutionCard6Ref.current,
+      ].filter(Boolean) as Element[];
+
+      gsap.set(solutionCards, { opacity: 0 });
+      gsap.set(
+        [
+          trustSectionRef.current,
+          testimonialsRef.current,
+          ctaSectionRef.current,
+        ],
+        { opacity: 0 },
+      );
+
+      if (whatWeDoSectionRef.current)
+        gsap.set(Array.from(whatWeDoSectionRef.current.children), {
+          opacity: 0,
         });
-      },
-      { threshold: 0.1 },
-    );
+      if (howWeWorkRef.current)
+        gsap.set(Array.from(howWeWorkRef.current.children), { opacity: 0 });
+      if (industryUseCasesRef.current)
+        gsap.set(Array.from(industryUseCasesRef.current.children), {
+          opacity: 0,
+        });
 
-    if (heroHeadlineRef.current) observer.observe(heroHeadlineRef.current);
-    if (whatWeDoSectionRef.current)
-      observer.observe(whatWeDoSectionRef.current);
-    if (solutionCard1Ref.current) observer.observe(solutionCard1Ref.current);
-    if (solutionCard2Ref.current) observer.observe(solutionCard2Ref.current);
-    if (solutionCard3Ref.current) observer.observe(solutionCard3Ref.current);
-    if (solutionCard4Ref.current) observer.observe(solutionCard4Ref.current);
-    if (solutionCard5Ref.current) observer.observe(solutionCard5Ref.current);
-    if (solutionCard6Ref.current) observer.observe(solutionCard6Ref.current);
-    if (trustSectionRef.current) observer.observe(trustSectionRef.current);
-    if (howWeWorkRef.current) observer.observe(howWeWorkRef.current);
-    if (industryUseCasesRef.current)
-      observer.observe(industryUseCasesRef.current);
-    if (testimonialsRef.current) observer.observe(testimonialsRef.current);
-    if (ctaSectionRef.current) observer.observe(ctaSectionRef.current);
+      const howWeWorkSection =
+        howWeWorkRef.current?.closest("section") ?? null;
+      const howWeWorkCards = howWeWorkSection
+        ? Array.from(howWeWorkSection.querySelectorAll(".solution-card"))
+        : [];
 
-    return () => observer.disconnect();
+      const industrySection =
+        industryUseCasesRef.current?.closest("section") ?? null;
+      const industryCards = industrySection
+        ? Array.from(industrySection.querySelectorAll(".solution-card"))
+        : [];
+
+      gsap.set([...howWeWorkCards, ...industryCards], { opacity: 0 });
+
+      if (trustSectionRef.current)
+        gsap.set(
+          Array.from(trustSectionRef.current.querySelectorAll(".trust-point")),
+          { opacity: 0 },
+        );
+
+      if (testimonialsRef.current)
+        gsap.set(
+          Array.from(
+            testimonialsRef.current.querySelectorAll(".testimonial-card"),
+          ),
+          { opacity: 0 },
+        );
+
+      // --- Hero: plays immediately on mount ---
+      const heroTl = gsap.timeline({ delay: 0.1 });
+      heroTl
+        .fromTo(
+          heroHeadlineRef.current,
+          { opacity: 0, y: 70, rotateX: 30, transformPerspective: 800 },
+          { opacity: 1, y: 0, rotateX: 0, duration: 1.2, ease: "power3.out" },
+        )
+        .fromTo(
+          heroSubheadingRef.current,
+          { opacity: 0, y: 40 },
+          { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" },
+          "-=0.75",
+        )
+        .fromTo(
+          [heroCTA1Ref.current, heroCTA2Ref.current],
+          { opacity: 0, y: 20, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            stagger: 0.15,
+            duration: 0.7,
+            ease: "back.out(1.2)",
+          },
+          "-=0.5",
+        );
+
+      // --- What We Do headings ---
+      gsap.fromTo(
+        whatWeDoSectionRef.current
+          ? Array.from(whatWeDoSectionRef.current.children)
+          : [],
+        { opacity: 0, y: 40, rotateX: 15, transformPerspective: 600 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: 0.15,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: whatWeDoSectionRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+
+      // --- Solution cards (What We Do) ---
+      gsap.fromTo(
+        solutionCards,
+        { opacity: 0, y: 60, rotateX: 20, transformPerspective: 800 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: { amount: 0.8 },
+          duration: 0.9,
+          ease: "back.out(1.2)",
+          clearProps: "transform,transformOrigin,transformPerspective",
+          scrollTrigger: {
+            trigger: solutionCard1Ref.current,
+            start: "top 85%",
+            once: true,
+          },
+        },
+      );
+
+      // --- Trust section ---
+      gsap.fromTo(
+        trustSectionRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: trustSectionRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+
+      // Trust points: alternate left/right with rotateY
+      gsap.fromTo(
+        trustSectionRef.current
+          ? Array.from(
+              trustSectionRef.current.querySelectorAll(".trust-point"),
+            )
+          : [],
+        {
+          opacity: 0,
+          x: (i: number) => (i % 2 === 0 ? -50 : 50),
+          rotateY: (i: number) => (i % 2 === 0 ? 15 : -15),
+          transformPerspective: 600,
+        },
+        {
+          opacity: 1,
+          x: 0,
+          rotateY: 0,
+          stagger: 0.15,
+          duration: 0.9,
+          ease: "power3.out",
+          clearProps: "transform,transformOrigin,transformPerspective",
+          scrollTrigger: {
+            trigger: trustSectionRef.current,
+            start: "top 65%",
+            once: true,
+          },
+        },
+      );
+
+      // --- How We Work headings ---
+      gsap.fromTo(
+        howWeWorkRef.current
+          ? Array.from(howWeWorkRef.current.children)
+          : [],
+        { opacity: 0, y: 40, rotateX: 12, transformPerspective: 600 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: 0.12,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: howWeWorkRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+
+      // How We Work cards
+      gsap.fromTo(
+        howWeWorkCards,
+        { opacity: 0, y: 55, rotateX: 18, transformPerspective: 700 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: { amount: 0.7 },
+          duration: 0.85,
+          ease: "power3.out",
+          clearProps: "transform,transformOrigin,transformPerspective",
+          scrollTrigger: {
+            trigger: howWeWorkRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        },
+      );
+
+      // --- Industry Use Cases headings ---
+      gsap.fromTo(
+        industryUseCasesRef.current
+          ? Array.from(industryUseCasesRef.current.children)
+          : [],
+        { opacity: 0, y: 40, rotateX: 12, transformPerspective: 600 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: 0.12,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: industryUseCasesRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+
+      // Industry cards
+      gsap.fromTo(
+        industryCards,
+        { opacity: 0, y: 55, rotateX: 18, transformPerspective: 700 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: { amount: 0.7 },
+          duration: 0.85,
+          ease: "power3.out",
+          clearProps: "transform,transformOrigin,transformPerspective",
+          scrollTrigger: {
+            trigger: industryUseCasesRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        },
+      );
+
+      // --- Testimonials section ---
+      gsap.fromTo(
+        testimonialsRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: testimonialsRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+
+      gsap.fromTo(
+        testimonialsRef.current
+          ? Array.from(
+              testimonialsRef.current.querySelectorAll(".testimonial-card"),
+            )
+          : [],
+        { opacity: 0, y: 60, rotateX: 20, transformPerspective: 800 },
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: 0.2,
+          duration: 1,
+          ease: "power3.out",
+          clearProps: "transform,transformOrigin,transformPerspective",
+          scrollTrigger: {
+            trigger: testimonialsRef.current,
+            start: "top 75%",
+            once: true,
+          },
+        },
+      );
+
+      // --- CTA section ---
+      gsap.fromTo(
+        ctaSectionRef.current,
+        { opacity: 0, y: 60, scale: 0.97 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ctaSectionRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+    });
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -154,7 +405,7 @@ const Home: React.FC = () => {
         <div className="home-content">
           <h1
             ref={heroHeadlineRef}
-            className={`home-heading ${heroVisible ? "slide-up" : ""}`}
+            className="home-heading"
           >
             Transform Operations With
             <br />
@@ -164,7 +415,7 @@ const Home: React.FC = () => {
           </h1>
           <p
             ref={heroSubheadingRef}
-            className={`hero-subheading ${heroVisible ? "slide-up" : ""}`}
+            className="hero-subheading"
           >
             Eliminate manual work, reduce errors by 95%, and scale operations
             effortlessly. We build intelligent automation systems, custom CRMs,
@@ -179,14 +430,14 @@ const Home: React.FC = () => {
             <Link
               ref={heroCTA1Ref}
               to="/contact"
-              className={`home-butto hero-cta-primary ${heroVisible ? "slide-up" : ""}`}
+              className="home-butto hero-cta-primary"
             >
               Book a Free Consultation
             </Link>
             <Link
               ref={heroCTA2Ref}
               to="/services"
-              className={`home-butto hero-cta-secondary ${heroVisible ? "slide-up" : ""}`}
+              className="home-butto hero-cta-secondary"
             >
               Discuss Your Automation Needs
             </Link>
@@ -197,13 +448,13 @@ const Home: React.FC = () => {
       {/* WHAT WE DO SECTION */}
       <section className="text-section">
         <div ref={whatWeDoSectionRef} className="what-we-do-container">
-          <p className={`subpart1 ${whatWeDoVisible ? "slide-up" : ""}`}>
+          <p className="subpart1">
             WHAT WE DO
           </p>
-          <h2 className={`subpart2 ${whatWeDoVisible ? "slide-up" : ""}`}>
+          <h2 className="subpart2">
             Automation & Platform Solutions That Actually Work
           </h2>
-          <p className={`subpart3 ${whatWeDoVisible ? "slide-up" : ""}`}>
+          <p className="subpart3">
             Stop losing time on repetitive tasks. We eliminate manual work,
             reduce errors by 95%, and automate workflows that save 15+ hours
             every week. Our intelligent automation systems, custom CRMs, and
@@ -218,7 +469,7 @@ const Home: React.FC = () => {
         <div className="solutions-grid">
           <div
             ref={solutionCard1Ref}
-            className={`solution-card ${solutionCardsVisible.card1 ? "slide-up" : ""}`}
+            className="solution-card"
           >
             <div className="solution-icon enterprise-icon">
               <svg
@@ -250,7 +501,7 @@ const Home: React.FC = () => {
 
           <div
             ref={solutionCard2Ref}
-            className={`solution-card ${solutionCardsVisible.card2 ? "slide-up" : ""}`}
+            className="solution-card"
           >
             <div className="solution-icon fundraising-icon">
               <svg
@@ -284,7 +535,7 @@ const Home: React.FC = () => {
 
           <div
             ref={solutionCard3Ref}
-            className={`solution-card ${solutionCardsVisible.card3 ? "slide-up" : ""}`}
+            className="solution-card"
           >
             <div className="solution-icon enterprise-icon">
               <svg
@@ -315,7 +566,7 @@ const Home: React.FC = () => {
 
           <div
             ref={solutionCard4Ref}
-            className={`solution-card ${solutionCardsVisible.card4 ? "slide-up" : ""}`}
+            className="solution-card"
           >
             <div className="solution-icon fundraising-icon">
               <svg
@@ -348,7 +599,7 @@ const Home: React.FC = () => {
 
           <div
             ref={solutionCard5Ref}
-            className={`solution-card ${solutionCardsVisible.card5 ? "slide-up" : ""}`}
+            className="solution-card"
           >
             <div className="solution-icon enterprise-icon">
               <svg
@@ -380,7 +631,7 @@ const Home: React.FC = () => {
 
           <div
             ref={solutionCard6Ref}
-            className={`solution-card ${solutionCardsVisible.card6 ? "slide-up" : ""}`}
+            className="solution-card"
           >
             <div className="solution-icon whatsapp-icon">
               <svg
@@ -432,7 +683,7 @@ const Home: React.FC = () => {
       {/* TRUST & AUTHORITY SECTION */}
       <section
         ref={trustSectionRef}
-        className={`trust-section ${trustVisible ? "visible" : ""}`}
+        className="trust-section"
       >
         <div className="trust-content">
           <h2 className="trust-heading">
@@ -499,13 +750,13 @@ const Home: React.FC = () => {
       {/* HOW WE WORK SECTION */}
       <section className="text-section">
         <div ref={howWeWorkRef} className="what-we-do-container">
-          <p className={`subpart1 ${howWeWorkVisible ? "slide-up" : ""}`}>
+          <p className="subpart1">
             OUR PROCESS
           </p>
-          <h2 className={`subpart2 ${howWeWorkVisible ? "slide-up" : ""}`}>
+          <h2 className="subpart2">
             How We Work: From Discovery to Deployment
           </h2>
-          <p className={`subpart3 ${howWeWorkVisible ? "slide-up" : ""}`}>
+          <p className="subpart3">
             We follow a proven 5-step process that ensures your automation
             platform is built right, deployed smoothly, and delivers measurable
             results from day one.
@@ -517,7 +768,7 @@ const Home: React.FC = () => {
           style={{ marginTop: "2rem", maxWidth: "1200px" }}
         >
           <div
-            className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
+            className="solution-card"
             style={{ textAlign: "center" }}
           >
             <div
@@ -546,7 +797,7 @@ const Home: React.FC = () => {
           </div>
 
           <div
-            className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
+            className="solution-card"
             style={{ textAlign: "center" }}
           >
             <div
@@ -575,7 +826,7 @@ const Home: React.FC = () => {
           </div>
 
           <div
-            className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
+            className="solution-card"
             style={{ textAlign: "center" }}
           >
             <div
@@ -604,7 +855,7 @@ const Home: React.FC = () => {
           </div>
 
           <div
-            className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
+            className="solution-card"
             style={{ textAlign: "center" }}
           >
             <div
@@ -633,7 +884,7 @@ const Home: React.FC = () => {
           </div>
 
           <div
-            className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
+            className="solution-card"
             style={{ textAlign: "center" }}
           >
             <div
@@ -663,9 +914,8 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          {/* Add 6th card to make it even */}
           <div
-            className={`solution-card ${howWeWorkVisible ? "slide-up" : ""}`}
+            className="solution-card"
             style={{ textAlign: "center" }}
           >
             <div
@@ -699,19 +949,13 @@ const Home: React.FC = () => {
       {/* INDUSTRY USE CASES SECTION */}
       <section className="text-section" data-bg-gray="true">
         <div ref={industryUseCasesRef} className="what-we-do-container">
-          <p
-            className={`subpart1 ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <p className="subpart1">
             INDUSTRY SOLUTIONS
           </p>
-          <h2
-            className={`subpart2 ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <h2 className="subpart2">
             Built for Your Industry
           </h2>
-          <p
-            className={`subpart3 ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <p className="subpart3">
             Every industry has unique challenges. We build automation solutions
             tailored to your specific workflows, compliance requirements, and
             growth goals.
@@ -719,9 +963,7 @@ const Home: React.FC = () => {
         </div>
 
         <div className="solutions-grid" style={{ marginTop: "2rem" }}>
-          <div
-            className={`solution-card ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <div className="solution-card">
             <h3 className="solution-title">For Real Estate</h3>
             <p className="solution-description">
               Automate property inquiries, schedule site visits, qualify buyers,
@@ -734,9 +976,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div
-            className={`solution-card ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <div className="solution-card">
             <h3 className="solution-title">For E-commerce</h3>
             <p className="solution-description">
               Automate order confirmations, shipping updates, delivery tracking,
@@ -748,9 +988,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div
-            className={`solution-card ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <div className="solution-card">
             <h3 className="solution-title">For Healthcare</h3>
             <p className="solution-description">
               Automate appointment booking, reminders, lab report delivery,
@@ -763,9 +1001,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div
-            className={`solution-card ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <div className="solution-card">
             <h3 className="solution-title">For Service Businesses</h3>
             <p className="solution-description">
               Automate service booking, confirmations, payment reminders,
@@ -778,9 +1014,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div
-            className={`solution-card ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <div className="solution-card">
             <h3 className="solution-title">For NGOs & Nonprofits</h3>
             <p className="solution-description">
               Build fundraising platforms, donor management systems,
@@ -794,9 +1028,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div
-            className={`solution-card ${industryUseCasesVisible ? "slide-up" : ""}`}
-          >
+          <div className="solution-card">
             <h3 className="solution-title">For Manufacturing & Distribution</h3>
             <p className="solution-description">
               Automate inventory updates, order processing, shipping
@@ -935,7 +1167,7 @@ const Home: React.FC = () => {
       {/* TESTIMONIALS SECTION */}
       <section
         ref={testimonialsRef}
-        className={`testimonials-section ${testimonialsVisible ? "visible" : ""}`}
+        className="testimonials-section"
       >
         <div className="testimonials-content">
           <p className="testimonials-label">CLIENT STORIES</p>
@@ -947,7 +1179,7 @@ const Home: React.FC = () => {
           </p>
 
           <div className="testimonials-grid">
-            <div className="testimonial-card slide-up">
+            <div className="testimonial-card">
               <div className="testimonial-quote">
                 <svg
                   width="40"
@@ -978,7 +1210,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            <div className="testimonial-card slide-up">
+            <div className="testimonial-card">
               <div className="testimonial-quote">
                 <svg
                   width="40"
@@ -1013,7 +1245,7 @@ const Home: React.FC = () => {
               </div>
             </div>
 
-            <div className="testimonial-card slide-up">
+            <div className="testimonial-card">
               <div className="testimonial-quote">
                 <svg
                   width="40"
@@ -1052,7 +1284,7 @@ const Home: React.FC = () => {
       {/* CTA SECTION WITH LEAD FORM */}
       <section
         ref={ctaSectionRef}
-        className={`cta-section ${ctaVisible ? "visible" : ""}`}
+        className="cta-section"
       >
         <div className="cta-content">
           <h2 className="cta-heading">
