@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /qr
+Disallow: /balancesheet
+
+Sitemap: https://www.ascendons.in/sitemap.xml
