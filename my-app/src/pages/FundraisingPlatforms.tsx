@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import SEO from "../components/SEO";
 
 const FundraisingPlatforms: React.FC = () => {
   const [visible, setVisible] = useState({
@@ -60,6 +61,12 @@ const FundraisingPlatforms: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Fundraising & Workflow Platforms for Nonprofits"
+        description="Scalable platforms for nonprofits and institutions: automated onboarding, document verification, multi-level approvals, payment gateways, and audit-ready workflows."
+        canonicalPath="/solutions/fundraising-workflow-platforms"
+        keywords="nonprofit software platforms, NGO fundraising platform, institutional workflow automation, NGO donor management"
+      />
       {/* Hero Section */}
       <section className="home-section">
         <div className="home-content">

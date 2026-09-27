@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import SEO from "../components/SEO";
 
 const OurWork: React.FC = () => {
   const [visible, setVisible] = useState({
@@ -40,6 +41,12 @@ const OurWork: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Our Work & Case Studies | Real Platforms & Measurable Impact"
+        description="See case studies of platforms built by Ascendons: 5,000+ daily WhatsApp messages automated with 60% faster response times, and NGO platforms managing 300+ partner organizations."
+        canonicalPath="/our-work"
+        keywords="Ascendons case studies, WhatsApp automation results, NGO platform development, client success stories"
+      />
       {/* Hero Section */}
       <section className="home-section">
         <div className="home-content">
@@ -66,9 +73,9 @@ const OurWork: React.FC = () => {
         style={{ position: "relative", zIndex: 10 }}
       >
         <div ref={case1Ref} className="what-we-do-container">
-          <p className={`subpart1 ${visible.case1 ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.case1 ? "slide-up" : ""}`}>
             CASE STUDY
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.case1 ? "slide-up" : ""}`}>
             WhatsApp Automation for a Consumer-Facing Platform
           </h2>
@@ -189,9 +196,9 @@ const OurWork: React.FC = () => {
         style={{ position: "relative", zIndex: 10 }}
       >
         <div ref={case2Ref} className="what-we-do-container">
-          <p className={`subpart1 ${visible.case2 ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.case2 ? "slide-up" : ""}`}>
             CASE STUDY
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.case2 ? "slide-up" : ""}`}>
             Fundraising & Admin Platform for a Large Nonprofit
           </h2>

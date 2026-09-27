@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const STORAGE_KEY = "privacy_policy_accepted_v1";
 
@@ -17,6 +18,11 @@ const Privacy: React.FC = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto my-24 px-6">
+      <SEO
+        title="Privacy Policy"
+        description="Learn how Ascendons collects, uses, and safeguards personal data and respects user privacy."
+        canonicalPath="/privacy"
+      />
       <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
 
       <p className="mb-4">Last updated: November 30, 2025</p>

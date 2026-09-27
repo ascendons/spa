@@ -1,8 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const About: React.FC = () => {
   return (
     <>
+      <SEO
+        title="About Us | Product Engineering Studio"
+        description="Learn about Ascendons, a product engineering studio based in Surat, India. We build rapid MVPs, enterprise CRMs, and flagship products like BriefGuard."
+        canonicalPath="/about"
+        keywords="about Ascendons, software company Surat, product engineering team, MVP developers India, BriefGuard creators"
+      />
       <section className="home-section">
         <div className="home-content">
           <div className="home-heading">About us</div>
@@ -17,24 +25,41 @@ const About: React.FC = () => {
             className="subpart2 text-left mb-8"
             style={{ fontSize: "2.5rem" }}
           >
-            We Build Automation & Platforms That Actually Work
+            Who We Are
           </h2>
           <p className="subpart3 text-left mb-6">
-            Welcome to <span className="font-bold">ASCENDONS</span>, your
-            trusted partner in transforming ideas into innovative digital
-            solutions. We specialize in crafting cutting-edge mobile apps,
-            websites, and custom software tailored to meet your unique business
-            needs. Whether you're a startup looking to build your first app or
-            an established business seeking to streamline operations with a
-            custom inventory management system, we’ve got you covered.
+            <span className="font-bold">ASCENDONS</span> is a product
+            engineering studio based in Surat, India. We build MVPs for founders
+            in 4–6 weeks, and CRMs, internal systems and automation for
+            established businesses. We also offer technology consulting.
+          </p>
+          <p className="subpart3 text-left mb-6">
+            We also build and run our own products, including{" "}
+            <a
+              href="https://briefguard.ascendons.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold"
+              style={{ color: "#1e40af" }}
+            >
+              BriefGuard
+            </a>
+            , a legal operating system for India, and{" "}
+            <Link
+              to="/products"
+              className="font-bold"
+              style={{ color: "#1e40af" }}
+            >
+              Ascendons CRM
+            </Link>{" "}
+            for large teams. The same team works on our products and on client
+            projects.
           </p>
           <p className="subpart3 text-left mb-12">
-            We've delivered fundraising platforms for NGOs managing hundreds of
-            partner organizations, custom CRMs that replaced expensive
+            For clients, we've delivered fundraising platforms for NGOs managing
+            300+ partner organizations, custom CRMs that replaced expensive
             enterprise software, and automation systems handling thousands of
-            daily interactions. Our focus is building production-ready solutions
-            that scale, integrate seamlessly, and deliver measurable business
-            outcomes.
+            daily conversations.
           </p>
 
           {/* What We Offer */}
@@ -45,6 +70,30 @@ const About: React.FC = () => {
             Our Core Expertise:
           </h3>
           <div className="grid-2-col mb-12">
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                MVP & Product Development
+              </h4>
+              <p className="solution-description text-left">
+                MVPs in 4–6 weeks, with a fixed scope, weekly demos and a stack
+                that can grow with the product.
+              </p>
+            </div>
+            <div className="about-card">
+              <h4
+                className="solution-title text-left mb-2"
+                style={{ fontSize: "1.5rem" }}
+              >
+                Technology Consulting
+              </h4>
+              <p className="solution-description text-left">
+                Architecture reviews, build-vs-buy decisions, automation
+                roadmaps and advice on stalled projects.
+              </p>
+            </div>
             <div className="about-card">
               <h4
                 className="solution-title text-left mb-2"
@@ -139,7 +188,7 @@ const About: React.FC = () => {
                 Real-World Experience
               </h4>
               <p className="solution-description text-left">
-                We've built WhatsApp automation handling 10,000+ daily
+                We've built WhatsApp automation handling 5,000+ daily
                 conversations, fundraising platforms for NGOs managing hundreds
                 of organizations, and custom CRMs that replaced expensive
                 enterprise software.
@@ -163,12 +212,11 @@ const About: React.FC = () => {
                 className="solution-title text-left mb-2"
                 style={{ fontSize: "1.5rem" }}
               >
-                Automation That Actually Works
+                Short Timelines
               </h4>
               <p className="solution-description text-left">
-                We don't build demos—we build production-ready systems that
-                handle real users, real workflows, and real scale. Every
-                solution is battle-tested and maintained.
+                Weekly releases on a stack we have already used in production,
+                so new products reach users within weeks.
               </p>
             </div>
             <div className="about-card">

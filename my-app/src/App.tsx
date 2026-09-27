@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import WhatsAppAutomation from "./pages/WhatsAppAutomation";
 import FundraisingPlatforms from "./pages/FundraisingPlatforms";
 import OurWork from "./pages/OurWork";
+import Products from "./pages/Products";
 import JParticlesEffect from "./components/JParticlesEffect";
 import CookieConsent from "./components/CookieConsent";
 import { initializeAnalytics } from "./utils/userAnalytics";
@@ -21,7 +22,6 @@ import {
 import React, { useEffect } from "react";
 import QrGenerator from "./components/QRGenerator";
 import BalanceSheet from "./components/BalanceSheet";
-import PrivacyPolicy from "./components/PrivacyPolicy";
 import Privacy from "./pages/Privacy";
 
 const router = createBrowserRouter([
@@ -34,6 +34,7 @@ const router = createBrowserRouter([
       { path: "services", element: <Services /> },
       { path: "contact", element: <Contact /> },
       { path: "our-work", element: <OurWork /> },
+      { path: "products", element: <Products /> },
       {
         path: "solutions/whatsapp-business-automation",
         element: <WhatsAppAutomation />,
@@ -50,10 +51,22 @@ const router = createBrowserRouter([
   },
 ]);
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+// Google Analytics loads with consent denied (see index.html); grant it only after the visitor accepts.
+const grantAnalyticsConsent = () => {
+  window.gtag?.("consent", "update", { analytics_storage: "granted" });
+  initializeAnalytics();
+};
+
 function RootLayout() {
   const handleCookieConsent = (consent: boolean) => {
     if (consent) {
-      initializeAnalytics();
+      grantAnalyticsConsent();
     }
   };
 
@@ -61,7 +74,7 @@ function RootLayout() {
     // Initialize analytics if consent was already given
     const consent = localStorage.getItem("cookieConsent");
     if (consent === "accepted") {
-      initializeAnalytics();
+      grantAnalyticsConsent();
     }
   }, []);
 
@@ -73,7 +86,6 @@ function RootLayout() {
         <Outlet />
       </React.Suspense>
       {/* site-wide privacy banner */}
-      <PrivacyPolicy />
       <Footer />
       <CookieConsent onAccept={handleCookieConsent} />
     </div>
