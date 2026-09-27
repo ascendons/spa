@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./CookieConsent.css";
 
 interface CookieConsentProps {
@@ -49,7 +50,11 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept }) => {
               onClick={() => setShowDetails(!showDetails)}
             >
               Learn more
-            </button>
+            </button>{" "}
+            ·{" "}
+            <Link to="/privacy" className="cookie-link">
+              Privacy policy
+            </Link>
           </p>
           {showDetails && (
             <div className="cookie-details">

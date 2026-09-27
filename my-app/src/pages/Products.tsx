@@ -1,180 +1,167 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
-import { Link } from "react-router-dom"; // Ensure you're using react-router
+import SEO from "../components/SEO";
+
+const BRIEFGUARD_URL = "https://briefguard.ascendons.in";
+
+const briefguardFeatures = [
+  {
+    title: "Citation Verification",
+    description:
+      "Each citation is checked against the actual judgment, so fabricated or misattributed authorities are caught before filing.",
+  },
+  {
+    title: "Drafting in 11 Indian Languages",
+    description:
+      "AI-assisted drafting grounded in Indian case law, with awareness of BNS, BNSS and IPC.",
+  },
+  {
+    title: "Word and Google Docs",
+    description: "Works inside Microsoft Word and Google Docs.",
+  },
+  {
+    title: "Practice Management",
+    description:
+      "Matters, deadlines and a multi-user workspace with role-based access and track changes.",
+  },
+];
+
+const briefguardAudience = [
+  "Law firms & chambers",
+  "Independent advocates",
+  "In-house counsel",
+  "Legal researchers",
+];
+
+const crmFeatures = [
+  {
+    title: "Configurable Process",
+    description:
+      "Pipelines, stages, fields and approvals configured to match how your sales and operations teams work.",
+  },
+  {
+    title: "Access and Audit",
+    description:
+      "Role-based access, multi-branch and multi-team hierarchies, and audit trails for every change.",
+  },
+  {
+    title: "Automation",
+    description:
+      "Lead assignment, follow-up reminders, approvals, and WhatsApp or email notifications.",
+  },
+  {
+    title: "Integrations",
+    description:
+      "Integrations with WhatsApp Cloud API, email, ERPs, payment gateways and your existing databases.",
+  },
+];
 
 const Products: React.FC = () => {
   return (
     <>
+      <SEO
+        title="Products | BriefGuard & Ascendons CRM"
+        description="Discover software products built and maintained by Ascendons: BriefGuard legal operating system and customizable Ascendons Enterprise CRM."
+        canonicalPath="/products"
+        keywords="BriefGuard, legal operating system, Indian law AI, Ascendons CRM, custom CRM software, legal tech India"
+      />
       <section className="home-section">
         <div className="home-content">
-          <div className="home-heading">Products</div>
+          {/* <p className="hero-eyebrow slide-up">Ascendons products</p> */}
+          <h1 className="home-heading slide-up">Our Products</h1>
+          <p className="hero-subheading slide-up">
+            Alongside client work, we build and run our own software. The same
+            team works on both.
+          </p>
         </div>
       </section>
 
-      {/* Our Products Section */}
+      {/* BRIEFGUARD */}
       <section className="text-section">
-        <div className="max-w-5xl mx-auto px-4">
-          <h2
-            className="subpart2 text-center mb-4"
-            style={{ fontSize: "2.5rem" }}
-          >
-            Our Products
-          </h2>
-          <p
-            className="subpart3 text-center mb-12"
-            style={{ maxWidth: "1200px", margin: "0 auto 3rem" }}
-          >
-            Explore our innovative solutions designed to streamline your
-            workflow and boost productivity.
+        <div className="what-we-do-container">
+          <p className="subpart1 slide-up">FOR LEGAL TEAMS</p>
+          <br></br>
+          <h2 className="subpart2 slide-up">BriefGuard</h2>
+          <p className="subpart3 slide-up">
+            A legal operating system for India covering research, drafting,
+            review and practice management, with citation verification built in.
           </p>
-          {/* Card Grid */}
-          <div className="grid-3-col">
-            {/* Card 1 - QR Generator */}
-            <Link to="/" className="product-card">
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    margin: "0 auto 1.5rem",
-                    borderRadius: "20px",
-                    background:
-                      "linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 4px 15px rgba(59, 130, 246, 0.2)",
-                  }}
-                >
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3b82f6"
-                    strokeWidth="2"
-                  >
-                    <rect x="3" y="3" width="5" height="5"></rect>
-                    <rect x="16" y="3" width="5" height="5"></rect>
-                    <rect x="3" y="16" width="5" height="5"></rect>
-                    <path d="M21 16h-3"></path>
-                    <path d="M9 21v-3"></path>
-                    <path d="M21 12v-1"></path>
-                    <path d="M12 21h-1"></path>
-                    <path d="M21 8V7"></path>
-                    <path d="M16 21h-1"></path>
-                    <path d="M21 3h-3"></path>
-                    <path d="M9 3v3"></path>
-                  </svg>
-                </div>
-              </div>
-              <h3
-                className="solution-title mb-2"
-                style={{ fontSize: "1.5rem" }}
-              >
-                QR Session for Vault
-              </h3>
-              <p
-                className="solution-description"
-                style={{ fontSize: "1.125rem", marginBottom: 0 }}
-              >
-                Coming Soon
-              </p>
-            </Link>
+        </div>
 
-            {/* Card 2 - Balance Sheet Generator */}
-            <Link to="/" className="product-card">
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    margin: "0 auto 1.5rem",
-                    borderRadius: "20px",
-                    background:
-                      "linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 4px 15px rgba(59, 130, 246, 0.2)",
-                  }}
-                >
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#2563eb"
-                    strokeWidth="2"
-                  >
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                    <polyline points="14 2 14 8 20 8"></polyline>
-                    <line x1="16" y1="13" x2="8" y2="13"></line>
-                    <line x1="16" y1="17" x2="8" y2="17"></line>
-                    <polyline points="10 9 9 9 8 9"></polyline>
-                  </svg>
-                </div>
-              </div>
-              <h3
-                className="solution-title mb-2"
-                style={{ fontSize: "1.5rem" }}
-              >
-                Balance Sheet Generator
-              </h3>
-              <p
-                className="solution-description"
-                style={{ fontSize: "1.125rem", marginBottom: 0 }}
-              >
-                Coming soon
-              </p>
-            </Link>
+        <div className="solutions-grid solutions-grid-2col">
+          {briefguardFeatures.map((feature) => (
+            <div key={feature.title} className="solution-card slide-up">
+              <h3 className="solution-title">{feature.title}</h3>
+              <p className="solution-description">{feature.description}</p>
+            </div>
+          ))}
+        </div>
 
-            {/* Card 3 - ClassMate */}
-            <Link to="/" className="product-card">
-              <div style={{ marginBottom: "1.5rem" }}>
-                <div
-                  style={{
-                    width: "80px",
-                    height: "80px",
-                    margin: "0 auto 1.5rem",
-                    borderRadius: "20px",
-                    background:
-                      "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    boxShadow: "0 4px 15px rgba(59, 130, 246, 0.2)",
-                  }}
-                >
-                  <svg
-                    width="40"
-                    height="40"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#1e40af"
-                    strokeWidth="2"
-                  >
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="9" cy="7" r="4"></circle>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                  </svg>
-                </div>
-              </div>
-              <h3
-                className="solution-title mb-2"
-                style={{ fontSize: "1.5rem" }}
-              >
-                ClassMate
-              </h3>
-              <p
-                className="solution-description"
-                style={{ fontSize: "1.125rem", marginBottom: 0 }}
-              >
-                Coming Soon
-              </p>
-            </Link>
-          </div>
+        <p className="tech-stack">
+          <strong>Who it's for:</strong> {briefguardAudience.join(" · ")}
+        </p>
+
+        <div style={{ marginTop: "2.5rem" }}>
+          <a
+            href={BRIEFGUARD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="home-button"
+            style={{ display: "inline-block", textDecoration: "none" }}
+          >
+            Visit BriefGuard
+          </a>
+        </div>
+      </section>
+
+      {/* CRM */}
+      <section className="text-section" data-bg-gray="true">
+        <div className="what-we-do-container">
+          <p className="subpart1 slide-up">FOR LARGE TEAMS</p>
+          <h2 className="subpart2 slide-up">Ascendons CRM</h2>
+          <p className="subpart3 slide-up">
+            A CRM for larger organisations that need their sales and operations
+            process reflected in the software, rather than adapting to a fixed
+            template.
+          </p>
+        </div>
+
+        <div className="solutions-grid solutions-grid-2col">
+          {crmFeatures.map((feature) => (
+            <div key={feature.title} className="solution-card slide-up">
+              <h3 className="solution-title">{feature.title}</h3>
+              <p className="solution-description">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: "2.5rem" }}>
+          <Link
+            to="/contact"
+            className="home-button"
+            style={{ display: "inline-block", textDecoration: "none" }}
+          >
+            Request a demo
+          </Link>
+        </div>
+      </section>
+
+      {/* WHY IT MATTERS */}
+      <section className="cta-section visible">
+        <div className="cta-content">
+          <h2 className="cta-heading">Need something built?</h2>
+          <p className="cta-description">
+            The team behind these products also builds MVPs and business systems
+            for clients.
+          </p>
+          <Link
+            to="/contact"
+            className="home-button"
+            style={{ display: "inline-block", textDecoration: "none" }}
+          >
+            Start a project
+          </Link>
         </div>
       </section>
     </>

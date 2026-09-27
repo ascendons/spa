@@ -37,7 +37,7 @@ const Header = () => {
       <div className="header-container">
         <div className="logo-wrapper">
           <Link to="/" className="logo-link">
-            <img src={logo} alt="Company Logo" className="logo-image" />
+            <img src={logo} alt="Ascendons logo" className="logo-image" />
             <span className="logo-text">ASCENDONS</span>
           </Link>
         </div>
@@ -66,11 +66,19 @@ const Header = () => {
                 </svg>
               </button>
               {isMenuOpen && (
-                <nav className="mobile-nav">
+                <nav
+                  className="mobile-nav"
+                  onClick={() => setIsMenuOpen(false)}
+                >
                   <ul className="nav-list">
                     <li>
                       <Link to="/" className="nav-link">
                         Home
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/products" className="nav-link">
+                        Products
                       </Link>
                     </li>
                     <li>
@@ -103,6 +111,11 @@ const Header = () => {
                 <li>
                   <Link to="/" className="desktop-link">
                     Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/products" className="desktop-link">
+                    Products
                   </Link>
                 </li>
                 <li>
