@@ -7,9 +7,10 @@ function Footer() {
         <div className="md:w-1/4 text-left">
           <h2 className="text-xl font-bold mb-6">ASCENDONS</h2>
           <p className="text-sm leading-relaxed">
-            At ASCENDONS, we’re not just building apps and websites—we’re
-            building relationships. Let’s work together to create something
-            extraordinary. Your success is our mission.
+            ASCENDONS builds intelligent automation systems, custom CRMs, and
+            AI-powered platforms that eliminate manual work and scale with
+            your business. We partner with NGOs, enterprises, and growing
+            businesses to turn workflows into measurable results.
           </p>
         </div>
 

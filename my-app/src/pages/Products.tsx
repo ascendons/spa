@@ -7,7 +7,7 @@ const Products: React.FC = () => {
     <>
       <section className="home-section">
         <div className="home-content">
-          <div className="home-heading">Products</div>
+          <h1 className="home-heading">Products</h1>
         </div>
       </section>
 

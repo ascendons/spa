@@ -69,7 +69,18 @@ const Home: React.FC = () => {
   };
 
   useLayoutEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
     const ctx = gsap.context(() => {
+      if (prefersReducedMotion) {
+        // Respect the user's OS-level motion preference: everything is
+        // visible by default (we never set opacity to 0 below), so simply
+        // skip building any animation or ScrollTrigger.
+        return;
+      }
+
       // --- Initial states (set before paint to prevent flash) ---
       gsap.set(
         [
@@ -123,7 +134,9 @@ const Home: React.FC = () => {
         ? Array.from(industrySection.querySelectorAll(".solution-card"))
         : [];
 
-      gsap.set([...howWeWorkCards, ...industryCards], { opacity: 0 });
+      gsap.set([...howWeWorkCards, ...industryCards], {
+        opacity: 0,
+      });
 
       if (trustSectionRef.current)
         gsap.set(
@@ -139,13 +152,20 @@ const Home: React.FC = () => {
           { opacity: 0 },
         );
 
-      // --- Hero: plays immediately on mount ---
+      // --- Hero: plays immediately on mount (the one 3D "flip" moment) ---
       const heroTl = gsap.timeline({ delay: 0.1 });
       heroTl
         .fromTo(
           heroHeadlineRef.current,
           { opacity: 0, y: 70, rotateX: 30, transformPerspective: 800 },
-          { opacity: 1, y: 0, rotateX: 0, duration: 1.2, ease: "power3.out" },
+          {
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            clearProps: "transform",
+          },
         )
         .fromTo(
           heroSubheadingRef.current,
@@ -172,14 +192,14 @@ const Home: React.FC = () => {
         whatWeDoSectionRef.current
           ? Array.from(whatWeDoSectionRef.current.children)
           : [],
-        { opacity: 0, y: 40, rotateX: 15, transformPerspective: 600 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: 0.15,
-          duration: 0.9,
+          duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: whatWeDoSectionRef.current,
             start: "top 80%",
@@ -191,15 +211,14 @@ const Home: React.FC = () => {
       // --- Solution cards (What We Do) ---
       gsap.fromTo(
         solutionCards,
-        { opacity: 0, y: 60, rotateX: 20, transformPerspective: 800 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: { amount: 0.8 },
-          duration: 0.9,
-          ease: "back.out(1.2)",
-          clearProps: "transform,transformOrigin,transformPerspective",
+          duration: 0.7,
+          ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: solutionCard1Ref.current,
             start: "top 85%",
@@ -225,7 +244,7 @@ const Home: React.FC = () => {
         },
       );
 
-      // Trust points: alternate left/right with rotateY
+      // Trust points: simple alternating left/right fade-in
       gsap.fromTo(
         trustSectionRef.current
           ? Array.from(
@@ -234,18 +253,15 @@ const Home: React.FC = () => {
           : [],
         {
           opacity: 0,
-          x: (i: number) => (i % 2 === 0 ? -50 : 50),
-          rotateY: (i: number) => (i % 2 === 0 ? 15 : -15),
-          transformPerspective: 600,
+          x: (i: number) => (i % 2 === 0 ? -30 : 30),
         },
         {
           opacity: 1,
           x: 0,
-          rotateY: 0,
           stagger: 0.15,
-          duration: 0.9,
+          duration: 0.8,
           ease: "power3.out",
-          clearProps: "transform,transformOrigin,transformPerspective",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: trustSectionRef.current,
             start: "top 65%",
@@ -259,14 +275,14 @@ const Home: React.FC = () => {
         howWeWorkRef.current
           ? Array.from(howWeWorkRef.current.children)
           : [],
-        { opacity: 0, y: 40, rotateX: 12, transformPerspective: 600 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: 0.12,
           duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: howWeWorkRef.current,
             start: "top 80%",
@@ -278,15 +294,14 @@ const Home: React.FC = () => {
       // How We Work cards
       gsap.fromTo(
         howWeWorkCards,
-        { opacity: 0, y: 55, rotateX: 18, transformPerspective: 700 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: { amount: 0.7 },
-          duration: 0.85,
+          duration: 0.7,
           ease: "power3.out",
-          clearProps: "transform,transformOrigin,transformPerspective",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: howWeWorkRef.current,
             start: "top 75%",
@@ -300,14 +315,14 @@ const Home: React.FC = () => {
         industryUseCasesRef.current
           ? Array.from(industryUseCasesRef.current.children)
           : [],
-        { opacity: 0, y: 40, rotateX: 12, transformPerspective: 600 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: 0.12,
           duration: 0.8,
           ease: "power3.out",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: industryUseCasesRef.current,
             start: "top 80%",
@@ -319,15 +334,14 @@ const Home: React.FC = () => {
       // Industry cards
       gsap.fromTo(
         industryCards,
-        { opacity: 0, y: 55, rotateX: 18, transformPerspective: 700 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: { amount: 0.7 },
-          duration: 0.85,
+          duration: 0.7,
           ease: "power3.out",
-          clearProps: "transform,transformOrigin,transformPerspective",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: industryUseCasesRef.current,
             start: "top 75%",
@@ -359,15 +373,14 @@ const Home: React.FC = () => {
               testimonialsRef.current.querySelectorAll(".testimonial-card"),
             )
           : [],
-        { opacity: 0, y: 60, rotateX: 20, transformPerspective: 800 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
           stagger: 0.2,
-          duration: 1,
+          duration: 0.8,
           ease: "power3.out",
-          clearProps: "transform,transformOrigin,transformPerspective",
+          clearProps: "transform",
           scrollTrigger: {
             trigger: testimonialsRef.current,
             start: "top 75%",
@@ -379,12 +392,11 @@ const Home: React.FC = () => {
       // --- CTA section ---
       gsap.fromTo(
         ctaSectionRef.current,
-        { opacity: 0, y: 60, scale: 0.97 },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          duration: 1,
+          duration: 0.9,
           ease: "power3.out",
           scrollTrigger: {
             trigger: ctaSectionRef.current,
@@ -407,24 +419,23 @@ const Home: React.FC = () => {
             ref={heroHeadlineRef}
             className="home-heading"
           >
-            Transform Operations With
+            Tailor-Built Software For
             <br />
             <span style={{ color: "#60a5fa" }}>
-              Intelligent Automation & Platforms
+              How Your Business Actually Works
             </span>
           </h1>
           <p
             ref={heroSubheadingRef}
             className="hero-subheading"
           >
-            Eliminate manual work, reduce errors by 95%, and scale operations
-            effortlessly. We build intelligent automation systems, custom CRMs,
-            and AI-powered platforms that{" "}
+            No templates, no forcing your process into someone else's
+            software. We design and build custom automation systems, CRMs,
+            AI-powered chatbots, and platforms that{" "}
             <strong style={{ color: "#60a5fa" }}>
-              cut costs, accelerate growth, and deliver measurable business
-              impact
-            </strong>{" "}
-            for NGOs, enterprises, and growing businesses.
+              fit your exact workflow—for any domain
+            </strong>
+            , from NGOs to enterprises to fast-growing businesses.
           </p>
           <div className="hero-cta-container">
             <Link
@@ -452,16 +463,16 @@ const Home: React.FC = () => {
             WHAT WE DO
           </p>
           <h2 className="subpart2">
-            Automation & Platform Solutions That Actually Work
+            Custom Software Built Around Your Workflow
           </h2>
           <p className="subpart3">
-            Stop losing time on repetitive tasks. We eliminate manual work,
-            reduce errors by 95%, and automate workflows that save 15+ hours
-            every week. Our intelligent automation systems, custom CRMs, and
-            AI-powered platforms{" "}
+            Stop losing time on repetitive tasks and software that almost
+            fits. We design and build automation systems, custom CRMs, and
+            AI-powered platforms tailored to your exact process—whatever your
+            domain.{" "}
             <strong style={{ color: "#1e40af" }}>
-              cut operational costs, accelerate growth, and deliver ROI from day
-              one.
+              The examples below are what we've built so far, not a limit on
+              what we can build for you.
             </strong>
           </p>
         </div>
@@ -518,12 +529,11 @@ const Home: React.FC = () => {
             <h3 className="solution-title">Fundraising & NGO Platforms</h3>
             <p className="solution-description">
               <strong style={{ color: "#1e40af" }}>
-                Reduce onboarding from weeks to days (85% faster)
+                Turn weeks of manual onboarding into a self-service workflow
               </strong>{" "}
-              with automated workflows. Scale from 50 to 300+ partner
-              organizations seamlessly. Complete compliance-ready platforms with
-              document verification, secure payments, and audit trails that
-              eliminate governance risks.
+              that scales smoothly as you add partner organizations. Complete
+              compliance-ready platforms with document verification, secure
+              payments, and audit trails that eliminate governance risks.
             </p>
             <Link
               to="/solutions/fundraising-workflow-platforms"
@@ -553,7 +563,8 @@ const Home: React.FC = () => {
             <h3 className="solution-title">AI-Powered Chatbots & Automation</h3>
             <p className="solution-description">
               <strong style={{ color: "#1e40af" }}>
-                Handle 5,000+ conversations daily with 92% accuracy
+                Handle high daily conversation volume with accurate,
+                context-aware answers
               </strong>{" "}
               using RAG-powered chatbots that understand context from your
               documents. Eliminate repetitive support tickets, provide instant
@@ -585,10 +596,9 @@ const Home: React.FC = () => {
             <h3 className="solution-title">Workflow Optimization</h3>
             <p className="solution-description">
               <strong style={{ color: "#1e40af" }}>
-                Cut processing costs by ₹2-5 lakhs annually and reduce errors by
-                95%
-              </strong>
-              by eliminating manual data entry and automating repetitive
+                Cut processing costs and eliminate costly manual errors
+              </strong>{" "}
+              by removing manual data entry and automating repetitive
               workflows. Transform slow, error-prone processes into efficient,
               scalable operations that grow with your business.
             </p>
@@ -617,12 +627,11 @@ const Home: React.FC = () => {
             <h3 className="solution-title">Custom Platforms & Marketplaces</h3>
             <p className="solution-description">
               <strong style={{ color: "#1e40af" }}>
-                Process 1,000+ daily transactions with zero downtime
+                Handle high transaction volume with zero downtime
               </strong>{" "}
-              and 99.9% uptime. Approval workflows that took 2-3 days now
-              complete in under 4 hours. Multi-tenant architecture, secure
-              payments, and scalable infrastructure built to handle growth from
-              day one.
+              . Approval workflows that took days now complete in hours.
+              Multi-tenant architecture, secure payments, and scalable
+              infrastructure built to handle growth from day one.
             </p>
             <Link to="/contact" className="solution-link">
               Build Your Platform →
@@ -649,11 +658,11 @@ const Home: React.FC = () => {
             <h3 className="solution-title">Communication Automation</h3>
             <p className="solution-description">
               <strong style={{ color: "#1e40af" }}>
-                Reduce response time by 60% (from 5 min to 2 min average)
+                Respond in seconds instead of hours
               </strong>{" "}
-              and increase conversion by 35% with automated lead qualification
-              and instant responses. Handle thousands of daily interactions
-              across WhatsApp and other channels—24/7, without additional staff.
+              with automated lead qualification and instant replies. Handle
+              thousands of daily interactions across WhatsApp and other
+              channels—24/7, without additional staff.
             </p>
             <Link
               to="/solutions/whatsapp-business-automation"
@@ -698,18 +707,19 @@ const Home: React.FC = () => {
           </p>
           <div className="trust-points">
             <div className="trust-point">
-              <strong>Cut Operational Costs by 40-60%</strong>
+              <strong>Built Around Your Workflow, Not a Template</strong>
               <span>
-                Our automation systems eliminate manual work, reduce errors by
-                95%, and scale operations without additional staff.{" "}
+                We don't force your business into someone else's software.{" "}
                 <strong style={{ color: "white" }}>
-                  Clients save ₹2-5 lakhs annually
+                  Every system is designed around how your team actually
+                  works,
                 </strong>{" "}
-                through reduced processing costs and improved efficiency.
+                so it fits from day one instead of requiring you to adapt to
+                it.
               </span>
             </div>
             <div className="trust-point">
-              <strong>Scale from 50 to 300+ Organizations</strong>
+              <strong>Built to Handle Real Growth</strong>
               <span>
                 We've built systems that handle real production
                 workloads—thousands of daily transactions, hundreds of
@@ -721,12 +731,12 @@ const Home: React.FC = () => {
               </span>
             </div>
             <div className="trust-point">
-              <strong>Reduce Response Time by 60%</strong>
+              <strong>Faster, More Reliable Response</strong>
               <span>
                 Our automation systems eliminate manual delays, automate lead
-                qualification, and provide instant responses.{" "}
+                qualification, and provide instant responses—{" "}
                 <strong style={{ color: "white" }}>
-                  Average response time drops from 5 minutes to 2 minutes,
+                  cutting response times to a fraction of the manual baseline,
                 </strong>{" "}
                 capturing more leads and improving customer satisfaction.
               </span>
@@ -735,12 +745,11 @@ const Home: React.FC = () => {
               <strong>Production-Ready from Day One</strong>
               <span>
                 Every solution includes monitoring, error handling, security,
-                and compliance by default.{" "}
+                and compliance by default, plus{" "}
                 <strong style={{ color: "white" }}>
-                  99.9% uptime SLA, zero compliance issues, and 3 months of
                   post-launch support
                 </strong>{" "}
-                included with every project.
+                to make sure it keeps working the way it should.
               </span>
             </div>
           </div>
@@ -982,7 +991,7 @@ const Home: React.FC = () => {
               Automate order confirmations, shipping updates, delivery tracking,
               customer support, and abandoned cart recovery.{" "}
               <strong style={{ color: "#1e40af" }}>
-                Increase conversion by 35% and reduce support tickets by 50%
+                Boost conversion and cut support ticket volume
               </strong>{" "}
               with proactive order updates and instant customer support.
             </p>
@@ -1021,7 +1030,7 @@ const Home: React.FC = () => {
               organization onboarding workflows, and grant application
               processes.{" "}
               <strong style={{ color: "#1e40af" }}>
-                Scale from 50 to 300+ partner organizations
+                Scale to hundreds of partner organizations
               </strong>{" "}
               with automated onboarding, document verification, and
               compliance-ready approval workflows.
@@ -1075,7 +1084,23 @@ const Home: React.FC = () => {
               opacity: "1",
             }}
           >
-            <h3 className="solution-title">🔒 Data Security</h3>
+            <div
+              className="solution-icon enterprise-icon"
+              style={{ margin: "0 auto 1rem" }}
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </div>
+            <h3 className="solution-title">Data Security</h3>
             <p className="solution-description">
               End-to-end encryption, secure API integrations, regular security
               audits, and GDPR-compliant data handling. Your data stays safe and
@@ -1092,8 +1117,23 @@ const Home: React.FC = () => {
               opacity: "1",
             }}
           >
+            <div
+              className="solution-icon whatsapp-icon"
+              style={{ margin: "0 auto 1rem" }}
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+            </div>
             <h3 className="solution-title" style={{ fontSize: "1.1rem" }}>
-              ⚡ 99.9% Uptime SLA
+              99.9% Uptime SLA
             </h3>
             <p className="solution-description" style={{ fontSize: "0.9rem" }}>
               Production-ready infrastructure with monitoring, automated
@@ -1111,8 +1151,23 @@ const Home: React.FC = () => {
               opacity: "1",
             }}
           >
+            <div
+              className="solution-icon fundraising-icon"
+              style={{ margin: "0 auto 1rem" }}
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+            </div>
             <h3 className="solution-title" style={{ fontSize: "1.1rem" }}>
-              🛡️ Compliance Ready
+              Compliance Ready
             </h3>
             <p className="solution-description" style={{ fontSize: "0.9rem" }}>
               Audit trails, role-based access control, document versioning, and
@@ -1130,8 +1185,25 @@ const Home: React.FC = () => {
               opacity: "1",
             }}
           >
+            <div
+              className="solution-icon enterprise-icon"
+              style={{ margin: "0 auto 1rem" }}
+            >
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+                <path d="M9 22v-4h6v4" />
+                <path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01" />
+              </svg>
+            </div>
             <h3 className="solution-title" style={{ fontSize: "1.1rem" }}>
-              🏢 Enterprise Ready
+              Enterprise Ready
             </h3>
             <p className="solution-description" style={{ fontSize: "0.9rem" }}>
               Registered in India | 5+ years experience | Serving NGOs,

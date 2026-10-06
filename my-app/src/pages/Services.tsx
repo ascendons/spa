@@ -42,7 +42,7 @@ const Services: React.FC = () => {
     <>
       <section className="home-section">
         <div className="home-content">
-          <div className="home-heading">Services</div>
+          <h1 className="home-heading">Services</h1>
         </div>
       </section>
 
@@ -55,14 +55,14 @@ const Services: React.FC = () => {
             OUR SERVICES
           </p>
           <h2 className={`subpart2 ${visible.services ? "slide-up" : ""}`}>
-            Automation & Platform Solutions That Transform Operations
+            Tailor-Built Software, For Any Domain
           </h2>
           <p className={`subpart3 ${visible.services ? "slide-up" : ""}`}>
-            At Ascendons, we specialize in transforming your ideas into
-            innovative digital solutions. Whether you need a stunning website, a
-            high-performance mobile app, or a custom software solution, we've
-            got you covered. From startups to established enterprises, we work
-            on everything where tech is needed.
+            At Ascendons, we specialize in building software around your
+            exact workflow instead of forcing it into a template. The
+            categories below are examples of what we've built so
+            far—automation systems, custom CRMs, AI chatbots, and
+            platforms—not a limit on what we can build for your domain.
           </p>
         </div>
 

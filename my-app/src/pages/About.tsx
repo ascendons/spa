@@ -5,7 +5,7 @@ const About: React.FC = () => {
     <>
       <section className="home-section">
         <div className="home-content">
-          <div className="home-heading">About us</div>
+          <h1 className="home-heading">About us</h1>
         </div>
       </section>
 
@@ -17,16 +17,16 @@ const About: React.FC = () => {
             className="subpart2 text-left mb-8"
             style={{ fontSize: "2.5rem" }}
           >
-            We Build Automation & Platforms That Actually Work
+            We Build Tailor-Made Software For How You Actually Work
           </h2>
           <p className="subpart3 text-left mb-6">
-            Welcome to <span className="font-bold">ASCENDONS</span>, your
-            trusted partner in transforming ideas into innovative digital
-            solutions. We specialize in crafting cutting-edge mobile apps,
-            websites, and custom software tailored to meet your unique business
-            needs. Whether you're a startup looking to build your first app or
-            an established business seeking to streamline operations with a
-            custom inventory management system, we’ve got you covered.
+            <span className="font-bold">ASCENDONS</span> is a tailor-built
+            software partner—not a template shop. We design and build
+            intelligent automation systems, custom CRMs, AI-powered chatbots,
+            and scalable platforms around your exact workflow, whatever your
+            domain. Whether you're an NGO scaling partner onboarding or an
+            enterprise replacing brittle manual processes, we build the
+            software that fits you, not the other way around.
           </p>
           <p className="subpart3 text-left mb-12">
             We've delivered fundraising platforms for NGOs managing hundreds of
