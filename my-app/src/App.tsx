@@ -1,4 +1,5 @@
 import "./App.css";
+import { useLenis } from "./hooks/useLenis";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import About from "./pages/About";
@@ -64,6 +65,8 @@ const grantAnalyticsConsent = () => {
 };
 
 function RootLayout() {
+  useLenis();
+
   const handleCookieConsent = (consent: boolean) => {
     if (consent) {
       grantAnalyticsConsent();
