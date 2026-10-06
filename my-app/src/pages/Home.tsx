@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Home.css";
 import { useReveal } from "../utils/useReveal";
 import { submitLead, type SubmitStatus } from "../utils/submitLead";
@@ -182,6 +184,8 @@ const industries = [
     description: "Booking, reminders and follow-ups without extra admin work.",
   },
 ];
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
   const [heroRef, heroVisible] = useReveal<HTMLDivElement>();
@@ -508,7 +512,7 @@ const Home: React.FC = () => {
       {/* TESTIMONIALS SECTION */}
       {/* <section
         ref={testimonialsRef}
-        className={`testimonials-section ${testimonialsVisible ? "visible" : ""}`}
+        className="testimonials-section"
       >
         <div className="testimonials-content">
           <p className="testimonials-label">CLIENT STORIES</p>

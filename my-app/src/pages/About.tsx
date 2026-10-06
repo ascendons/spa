@@ -13,7 +13,7 @@ const About: React.FC = () => {
       />
       <section className="home-section">
         <div className="home-content">
-          <div className="home-heading">About us</div>
+          <h1 className="home-heading">About us</h1>
         </div>
       </section>
 

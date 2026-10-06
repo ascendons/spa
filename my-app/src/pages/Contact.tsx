@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
       />
       <section className="home-section">
         <div className="home-content">
-          <div className="home-heading">Contact Us</div>
+          <h1 className="home-heading">Contact Us</h1>
         </div>
       </section>
 
@@ -116,7 +116,6 @@ const Contact: React.FC = () => {
                 </div>
                 <div
                   className="subpart3 leading-relaxed"
-                  style={{ color: "#000000" }}
                 >
                   Plot No. J-72, Vastu Villa,
                   <br />
@@ -133,7 +132,7 @@ const Contact: React.FC = () => {
                 >
                   Phone
                 </div>
-                <div className="subpart3" style={{ color: "#000000" }}>
+                <div className="subpart3">
                   +91 9523297323
                 </div>
               </div>
@@ -145,7 +144,7 @@ const Contact: React.FC = () => {
                 >
                   Email
                 </div>
-                <div className="subpart3" style={{ color: "#000000" }}>
+                <div className="subpart3">
                   contact@ascendons.com
                 </div>
               </div>
@@ -157,7 +156,7 @@ const Contact: React.FC = () => {
                 >
                   Website
                 </div>
-                <div className="subpart3" style={{ color: "#000000" }}>
+                <div className="subpart3">
                   www.ascendons.in
                 </div>
               </div>
@@ -183,7 +182,6 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="cta-input"
-                  style={{ color: "#000000" }}
                 />
                 <input
                   type="email"
@@ -193,7 +191,6 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="cta-input"
-                  style={{ color: "#000000" }}
                 />
                 <input
                   type="text"
@@ -202,7 +199,6 @@ const Contact: React.FC = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   className="cta-input"
-                  style={{ color: "#000000" }}
                 />
                 <input
                   type="text"
@@ -211,7 +207,6 @@ const Contact: React.FC = () => {
                   value={formData.subject}
                   onChange={handleChange}
                   className="cta-input"
-                  style={{ color: "#000000" }}
                 />
                 <textarea
                   name="message"
@@ -221,7 +216,6 @@ const Contact: React.FC = () => {
                   onChange={handleChange}
                   required
                   className="cta-textarea"
-                  style={{ color: "#000000" }}
                 />
                 <button
                   type="submit"
