@@ -34,6 +34,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: my-app/dist
+          cname: www.ascendons.in
           clean: true
 
       - name: Deploy to ascendons/web (www.ascendons.com)
