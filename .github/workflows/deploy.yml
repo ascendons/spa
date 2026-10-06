@@ -35,3 +35,16 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: my-app/dist
           clean: true
+
+      - name: Deploy to ascendons/web (www.ascendons.com)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.WEB_DEPLOY_KEY }}
+          external_repository: ascendons/web
+          publish_branch: main
+          publish_dir: my-app/dist
+          cname: www.ascendons.com
+          enable_jekyll: false
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: Deploy from ascendons/spa
