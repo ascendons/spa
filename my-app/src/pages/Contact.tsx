@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./Contact.css";
 import "./Home.css";
+import { submitLead, type SubmitStatus } from "../utils/submitLead";
+import SEO from "../components/SEO";
 
 const Contact: React.FC = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -17,6 +19,7 @@ const Contact: React.FC = () => {
     message: "",
   });
 
+  const [status, setStatus] = useState<SubmitStatus>("idle");
   const [titleSlidUp, setTitleSlidUp] = useState(false);
   const [subtitleSlidUp, setSubtitleSlidUp] = useState(false);
   const [infoGridSlidUp, setInfoGridSlidUp] = useState(false);
@@ -55,32 +58,25 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted"); // ✅ Debug check
+    setStatus("sending");
 
     const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbx_5H7euCkpYZ6Ozimb3aP2kr9vizl2MDTD9YGX3qpIBklOg6x0_wXMP6gKeXg8gXvLkg/exec",
-        {
-          method: "POST",
-          body: formData,
-        },
-      );
-      const result = await response.text();
-      console.log("Result:", result);
-      alert("Message sent successfully!");
+    const ok = await submitLead(new FormData(form));
+    setStatus(ok ? "success" : "error");
+    if (ok) {
       form.reset();
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    } catch (error) {
-      console.error("Error:", error);
-      alert("There was an error sending your message. Please try again.");
     }
   };
 
   return (
     <>
+      <SEO
+        title="Contact Us | Book a Consultation & Scope Your Project"
+        description="Get in touch with Ascendons to scope your MVP, request a CRM demo, or discuss workflow automation. We respond within one business day."
+        canonicalPath="/contact"
+        keywords="contact Ascendons, hire software developers, scope MVP, request CRM demo, software consultants Surat"
+      />
       <section className="home-section">
         <div className="home-content">
           <h1 className="home-heading">Contact Us</h1>
@@ -101,8 +97,9 @@ const Contact: React.FC = () => {
               ref={subtitleRef}
               className={`subpart3 text-center mb-10 ${subtitleSlidUp ? "slide-up" : "slide-up-init"}`}
             >
-              We'd love to hear from you! Whether you have a question, a project
-              idea, or just want to say hello, feel free to reach out.
+              Planning an MVP, need a custom CRM, or want a BriefGuard demo?
+              Tell us what you're building and we'll reply within one business
+              day.
             </p>
 
             <div
@@ -222,10 +219,22 @@ const Contact: React.FC = () => {
                 />
                 <button
                   type="submit"
-                  className="w-60 py-4 rounded-full bg-amber-100 text-amber-800 font-semibold text-xl shadow-md border-2 border-amber-100 transition duration-200 hover:bg-transparent hover:border-amber-800 hover:text-amber-800 focus:outline-none ml-2"
+                  className="w-60 py-4 rounded-full bg-blue-100 text-blue-600 font-semibold text-xl shadow-md border-2 border-blue-100 transition duration-200 hover:bg-transparent hover:border-blue-600 hover:text-blue-600 focus:outline-none ml-2"
+                  disabled={status === "sending"}
                 >
-                  Send Message
+                  {status === "sending" ? "Sending..." : "Send Message"}
                 </button>
+                {status === "success" && (
+                  <p className="form-status form-status-success" role="status">
+                    Message sent. We'll reply within one business day.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="form-status form-status-error" role="alert">
+                    Something went wrong. Please try again or email
+                    contact@ascendons.com.
+                  </p>
+                )}
               </form>
 
               <div

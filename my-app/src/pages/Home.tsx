@@ -1,30 +1,201 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "./Home.css";
+import { useReveal } from "../utils/useReveal";
+import { submitLead, type SubmitStatus } from "../utils/submitLead";
+import SEO from "../components/SEO";
+
+const BRIEFGUARD_URL = "https://briefguard.ascendons.in";
+
+const paths = [
+  {
+    tag: "For founders and new ventures",
+    title: "Launch an MVP",
+    description:
+      "We turn an idea into a working product that real users can sign up for, in 4–6 weeks. The scope and price are agreed up front, and you see a demo every week.",
+    points: [
+      "Web and mobile apps, SaaS products",
+      "Fixed scope and fixed price",
+      "Weekly demos on a live staging link",
+    ],
+    cta: "Scope my MVP",
+  },
+  {
+    tag: "For established businesses",
+    title: "Build and modernise business systems",
+    description:
+      "We build CRMs, internal tools and automation around the way your teams already work, and connect them to the systems you have.",
+    points: [
+      "Custom CRMs and admin systems",
+      "Workflow automation and integrations",
+      "Technology consulting and architecture reviews",
+    ],
+    cta: "Talk to us",
+  },
+];
+
+const mvpTimeline = [
+  {
+    week: "Week 1",
+    title: "Scope",
+    description:
+      "We agree on who the users are, the problem to solve and what the first version must do. You get a written scope, a timeline and a fixed price.",
+  },
+  {
+    week: "Week 1–2",
+    title: "Design",
+    description:
+      "Screens, data model and integrations, planned on a stack that can grow with the product.",
+  },
+  {
+    week: "Week 2–5",
+    title: "Build",
+    description:
+      "Weekly sprints with a working demo at the end of each one, so you can give feedback and adjust priorities as we go.",
+  },
+  {
+    week: "Week 5–6",
+    title: "Launch",
+    description:
+      "Production deployment with monitoring, analytics and documentation, followed by post-launch support.",
+  },
+];
+
+const engagementModels = [
+  {
+    title: "MVP Sprint",
+    description:
+      "A fixed-scope, fixed-price build that takes a new product from idea to launch in 4–6 weeks.",
+  },
+  {
+    title: "Dedicated Team",
+    description:
+      "Product, design, engineering and QA working as an extension of your team on a monthly basis.",
+  },
+  {
+    title: "Consulting",
+    description:
+      "Architecture reviews, build-vs-buy advice and automation roadmaps for leadership teams.",
+  },
+];
+
+const services = [
+  {
+    title: "MVP & Product Development",
+    description:
+      "Web apps, mobile apps and SaaS products, scoped to what your first users need and built so they can scale.",
+    link: "/contact",
+    linkLabel: "Scope your MVP →",
+    iconClass: "enterprise-icon",
+    icon: <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />,
+  },
+  {
+    title: "CRMs & Business Software",
+    description:
+      "CRMs, admin systems and internal tools built around your process, either from scratch or on top of our own CRM.",
+    link: "/products",
+    linkLabel: "See our CRM →",
+    iconClass: "fundraising-icon",
+    icon: (
+      <>
+        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+        <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+      </>
+    ),
+  },
+  {
+    title: "AI & Automation",
+    description:
+      "AI assistants that answer from your own documents, WhatsApp and messaging automation, and workflows that remove manual steps between systems.",
+    link: "/solutions/whatsapp-business-automation",
+    linkLabel: "See WhatsApp automation →",
+    iconClass: "whatsapp-icon",
+    icon: (
+      <>
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <path d="M13 8H7M17 12H7" />
+      </>
+    ),
+  },
+  {
+    title: "Technology Consulting",
+    description:
+      "Architecture reviews, build-vs-buy decisions and technical roadmaps, for teams that want an independent view before they invest.",
+    link: "/contact",
+    linkLabel: "Book a consultation →",
+    iconClass: "enterprise-icon",
+    icon: (
+      <>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M12 16v-4M12 8h.01" />
+      </>
+    ),
+  },
+];
+
+const whyUs = [
+  {
+    title: "Short timelines",
+    body: "MVPs in 4–6 weeks, with a demo every week. We reuse a stack and process we have already run in production.",
+  },
+  {
+    title: "We run our own products",
+    body: "BriefGuard and our CRM are in daily use. That experience with onboarding, reliability and support goes into client work.",
+  },
+  {
+    title: "Work that's already live",
+    body: "A nonprofit platform serving 300+ partner organisations and WhatsApp automation handling 5,000+ conversations a day.",
+  },
+  {
+    title: "Support after launch",
+    body: "Monitoring, error handling and security are part of every build, and post-launch support is included.",
+  },
+];
+
+const industries = [
+  {
+    title: "Startups",
+    description:
+      "First versions of new products, built to test the idea with real users.",
+  },
+  {
+    title: "Enterprises",
+    description:
+      "CRMs, admin systems and automation connected to existing tools and ERPs.",
+  },
+  {
+    title: "Legal",
+    description:
+      "Research, drafting and citation verification through BriefGuard.",
+  },
+  {
+    title: "Nonprofits",
+    description:
+      "Fundraising platforms, partner onboarding and approval workflows.",
+  },
+  {
+    title: "E-commerce & Retail",
+    description: "Order updates, support and customer messaging on WhatsApp.",
+  },
+  {
+    title: "Healthcare & Services",
+    description: "Booking, reminders and follow-ups without extra admin work.",
+  },
+];
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Home: React.FC = () => {
-  const heroHeadlineRef = useRef<HTMLHeadingElement>(null);
-  const heroSubheadingRef = useRef<HTMLParagraphElement>(null);
-  const heroCTA1Ref = useRef<HTMLAnchorElement>(null);
-  const heroCTA2Ref = useRef<HTMLAnchorElement>(null);
-
-  const whatWeDoSectionRef = useRef<HTMLDivElement>(null);
-  const solutionCard1Ref = useRef<HTMLDivElement>(null);
-  const solutionCard2Ref = useRef<HTMLDivElement>(null);
-  const solutionCard3Ref = useRef<HTMLDivElement>(null);
-  const solutionCard4Ref = useRef<HTMLDivElement>(null);
-  const solutionCard5Ref = useRef<HTMLDivElement>(null);
-  const solutionCard6Ref = useRef<HTMLDivElement>(null);
-
-  const trustSectionRef = useRef<HTMLDivElement>(null);
-  const howWeWorkRef = useRef<HTMLDivElement>(null);
-  const industryUseCasesRef = useRef<HTMLDivElement>(null);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
-  const ctaSectionRef = useRef<HTMLDivElement>(null);
+  const [heroRef, heroVisible] = useReveal<HTMLDivElement>();
+  const [pathsRef, pathsVisible] = useReveal<HTMLDivElement>();
+  const [productsRef, productsVisible] = useReveal<HTMLDivElement>();
+  const [mvpRef, mvpVisible] = useReveal<HTMLDivElement>();
+  const [servicesRef, servicesVisible] = useReveal<HTMLDivElement>();
+  const [trustRef, trustVisible] = useReveal<HTMLElement>();
+  const [industriesRef, industriesVisible] = useReveal<HTMLDivElement>();
+  const [ctaRef, ctaVisible] = useReveal<HTMLElement>();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -32,6 +203,7 @@ const Home: React.FC = () => {
     company: "",
     problem: "",
   });
+  const [status, setStatus] = useState<SubmitStatus>("idle");
 
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -41,1335 +213,338 @@ const Home: React.FC = () => {
 
   const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-    formDataToSend.append("name", formData.name);
-    formDataToSend.append("email", formData.email);
-    formDataToSend.append("company", formData.company);
-    formDataToSend.append("problem", formData.problem);
-    formDataToSend.append("subject", "Homepage Strategy Call Request");
+    setStatus("sending");
+    const body = new FormData();
+    body.append("name", formData.name);
+    body.append("email", formData.email);
+    body.append("company", formData.company);
+    body.append("problem", formData.problem);
+    body.append("subject", "Homepage Strategy Call Request");
 
-    try {
-      const response = await fetch(
-        "https://script.google.com/macros/s/AKfycbx_5H7euCkpYZ6Ozimb3aP2kr9vizl2MDTD9YGX3qpIBklOg6x0_wXMP6gKeXg8gXvLkg/exec",
-        {
-          method: "POST",
-          body: formDataToSend,
-        },
-      );
-      const result = await response.text();
-      console.log("Result:", result);
-      alert(
-        "Thank you! We'll be in touch soon to schedule your strategy call.",
-      );
-      setFormData({ name: "", email: "", company: "", problem: "" });
-    } catch (error) {
-      console.error("Error:", error);
-      alert("There was an error submitting your request. Please try again.");
-    }
+    const ok = await submitLead(body);
+    setStatus(ok ? "success" : "error");
+    if (ok) setFormData({ name: "", email: "", company: "", problem: "" });
   };
 
-  useLayoutEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    const ctx = gsap.context(() => {
-      if (prefersReducedMotion) {
-        // Respect the user's OS-level motion preference: everything is
-        // visible by default (we never set opacity to 0 below), so simply
-        // skip building any animation or ScrollTrigger.
-        return;
-      }
-
-      // --- Initial states (set before paint to prevent flash) ---
-      gsap.set(
-        [
-          heroHeadlineRef.current,
-          heroSubheadingRef.current,
-          heroCTA1Ref.current,
-          heroCTA2Ref.current,
-        ],
-        { opacity: 0 },
-      );
-
-      const solutionCards = [
-        solutionCard1Ref.current,
-        solutionCard2Ref.current,
-        solutionCard3Ref.current,
-        solutionCard4Ref.current,
-        solutionCard5Ref.current,
-        solutionCard6Ref.current,
-      ].filter(Boolean) as Element[];
-
-      gsap.set(solutionCards, { opacity: 0 });
-      gsap.set(
-        [
-          trustSectionRef.current,
-          testimonialsRef.current,
-          ctaSectionRef.current,
-        ],
-        { opacity: 0 },
-      );
-
-      if (whatWeDoSectionRef.current)
-        gsap.set(Array.from(whatWeDoSectionRef.current.children), {
-          opacity: 0,
-        });
-      if (howWeWorkRef.current)
-        gsap.set(Array.from(howWeWorkRef.current.children), { opacity: 0 });
-      if (industryUseCasesRef.current)
-        gsap.set(Array.from(industryUseCasesRef.current.children), {
-          opacity: 0,
-        });
-
-      const howWeWorkSection =
-        howWeWorkRef.current?.closest("section") ?? null;
-      const howWeWorkCards = howWeWorkSection
-        ? Array.from(howWeWorkSection.querySelectorAll(".solution-card"))
-        : [];
-
-      const industrySection =
-        industryUseCasesRef.current?.closest("section") ?? null;
-      const industryCards = industrySection
-        ? Array.from(industrySection.querySelectorAll(".solution-card"))
-        : [];
-
-      gsap.set([...howWeWorkCards, ...industryCards], {
-        opacity: 0,
-      });
-
-      if (trustSectionRef.current)
-        gsap.set(
-          Array.from(trustSectionRef.current.querySelectorAll(".trust-point")),
-          { opacity: 0 },
-        );
-
-      if (testimonialsRef.current)
-        gsap.set(
-          Array.from(
-            testimonialsRef.current.querySelectorAll(".testimonial-card"),
-          ),
-          { opacity: 0 },
-        );
-
-      // --- Hero: plays immediately on mount (the one 3D "flip" moment) ---
-      const heroTl = gsap.timeline({ delay: 0.1 });
-      heroTl
-        .fromTo(
-          heroHeadlineRef.current,
-          { opacity: 0, y: 70, rotateX: 30, transformPerspective: 800 },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            duration: 1.2,
-            ease: "power3.out",
-            clearProps: "transform",
-          },
-        )
-        .fromTo(
-          heroSubheadingRef.current,
-          { opacity: 0, y: 40 },
-          { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" },
-          "-=0.75",
-        )
-        .fromTo(
-          [heroCTA1Ref.current, heroCTA2Ref.current],
-          { opacity: 0, y: 20, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            stagger: 0.15,
-            duration: 0.7,
-            ease: "back.out(1.2)",
-          },
-          "-=0.5",
-        );
-
-      // --- What We Do headings ---
-      gsap.fromTo(
-        whatWeDoSectionRef.current
-          ? Array.from(whatWeDoSectionRef.current.children)
-          : [],
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: whatWeDoSectionRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-
-      // --- Solution cards (What We Do) ---
-      gsap.fromTo(
-        solutionCards,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: { amount: 0.8 },
-          duration: 0.7,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: solutionCard1Ref.current,
-            start: "top 85%",
-            once: true,
-          },
-        },
-      );
-
-      // --- Trust section ---
-      gsap.fromTo(
-        trustSectionRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: trustSectionRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-
-      // Trust points: simple alternating left/right fade-in
-      gsap.fromTo(
-        trustSectionRef.current
-          ? Array.from(
-              trustSectionRef.current.querySelectorAll(".trust-point"),
-            )
-          : [],
-        {
-          opacity: 0,
-          x: (i: number) => (i % 2 === 0 ? -30 : 30),
-        },
-        {
-          opacity: 1,
-          x: 0,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: trustSectionRef.current,
-            start: "top 65%",
-            once: true,
-          },
-        },
-      );
-
-      // --- How We Work headings ---
-      gsap.fromTo(
-        howWeWorkRef.current
-          ? Array.from(howWeWorkRef.current.children)
-          : [],
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.12,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: howWeWorkRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-
-      // How We Work cards
-      gsap.fromTo(
-        howWeWorkCards,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: { amount: 0.7 },
-          duration: 0.7,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: howWeWorkRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
-
-      // --- Industry Use Cases headings ---
-      gsap.fromTo(
-        industryUseCasesRef.current
-          ? Array.from(industryUseCasesRef.current.children)
-          : [],
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.12,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: industryUseCasesRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-
-      // Industry cards
-      gsap.fromTo(
-        industryCards,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: { amount: 0.7 },
-          duration: 0.7,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: industryUseCasesRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
-
-      // --- Testimonials section ---
-      gsap.fromTo(
-        testimonialsRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: testimonialsRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-
-      gsap.fromTo(
-        testimonialsRef.current
-          ? Array.from(
-              testimonialsRef.current.querySelectorAll(".testimonial-card"),
-            )
-          : [],
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.2,
-          duration: 0.8,
-          ease: "power3.out",
-          clearProps: "transform",
-          scrollTrigger: {
-            trigger: testimonialsRef.current,
-            start: "top 75%",
-            once: true,
-          },
-        },
-      );
-
-      // --- CTA section ---
-      gsap.fromTo(
-        ctaSectionRef.current,
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ctaSectionRef.current,
-            start: "top 80%",
-            once: true,
-          },
-        },
-      );
-    });
-
-    return () => ctx.revert();
-  }, []);
+  const reveal = (visible: boolean) => (visible ? "slide-up" : "");
 
   return (
     <>
+      <SEO
+        title="Ascendons | Fast MVPs, Custom CRMs & Product Engineering"
+        description="Ascendons builds production-ready MVPs in 4-6 weeks, custom CRMs, AI assistants and automation for founders and enterprises, and makes its own products like BriefGuard."
+        canonicalPath="/"
+        keywords="MVP development, fast time to market, product engineering, software consultancy, custom CRM, BriefGuard, legal tech, WhatsApp automation, Surat software company"
+      />
       {/* HERO SECTION */}
       <section className="home-section">
-        <div className="home-content">
-          <h1
-            ref={heroHeadlineRef}
-            className="home-heading"
-          >
-            Tailor-Built Software For
+        <div ref={heroRef} className="home-content">
+          {/* <p className={`hero-eyebrow ${reveal(heroVisible)}`}>
+            Product engineering studio
+          </p> */}
+          <h1 className={`home-heading ${reveal(heroVisible)}`}>
+            We design, build and launch
             <br />
-            <span style={{ color: "#60a5fa" }}>
-              How Your Business Actually Works
-            </span>
+            <span>software products</span>
           </h1>
-          <p
-            ref={heroSubheadingRef}
-            className="hero-subheading"
-          >
-            No templates, no forcing your process into someone else's
-            software. We design and build custom automation systems, CRMs,
-            AI-powered chatbots, and platforms that{" "}
-            <strong style={{ color: "#60a5fa" }}>
-              fit your exact workflow—for any domain
-            </strong>
-            , from NGOs to enterprises to fast-growing businesses.
+          <p className={`hero-subheading ${reveal(heroVisible)}`}>
+            For founders, we take new products from idea to launch in 4–6 weeks.
+            For established businesses, we build CRMs, internal systems and
+            automation. We also make our own products, including BriefGuard for
+            legal teams.
           </p>
           <div className="hero-cta-container">
             <Link
-              ref={heroCTA1Ref}
               to="/contact"
-              className="home-butto hero-cta-primary"
+              className={`home-butto hero-cta-primary ${reveal(heroVisible)}`}
             >
-              Book a Free Consultation
+              Start a project
             </Link>
             <Link
-              ref={heroCTA2Ref}
-              to="/services"
-              className="home-butto hero-cta-secondary"
+              to="/products"
+              className={`home-butto hero-cta-secondary ${reveal(heroVisible)}`}
             >
-              Discuss Your Automation Needs
+              See our products
             </Link>
           </div>
         </div>
       </section>
 
-      {/* WHAT WE DO SECTION */}
+      {/* CLIENT LOGOS */}
+      {/* <section className="logo-strip">
+        <p className="logo-strip-label">Clients we've worked with</p>
+        <div className="logo-strip-row">
+          {clientLogos.map((logo) => (
+            <img key={logo.alt} src={logo.src} alt={logo.alt} />
+          ))}
+        </div>
+      </section> */}
+
+      {/* TWO PATHS */}
       <section className="text-section">
-        <div ref={whatWeDoSectionRef} className="what-we-do-container">
-          <p className="subpart1">
-            WHAT WE DO
-          </p>
-          <h2 className="subpart2">
-            Custom Software Built Around Your Workflow
+        <div ref={pathsRef} className="what-we-do-container">
+          <h2 className={`subpart2 ${reveal(pathsVisible)}`}>
+            Two kinds of work
           </h2>
-          <p className="subpart3">
-            Stop losing time on repetitive tasks and software that almost
-            fits. We design and build automation systems, custom CRMs, and
-            AI-powered platforms tailored to your exact process—whatever your
-            domain.{" "}
-            <strong style={{ color: "#1e40af" }}>
-              The examples below are what we've built so far, not a limit on
-              what we can build for you.
-            </strong>
+        </div>
+
+        <div className="solutions-grid solutions-grid-2col">
+          {paths.map((path) => (
+            <div
+              key={path.title}
+              className={`solution-card product-feature ${reveal(pathsVisible)}`}
+            >
+              <span className="product-badge">{path.tag}</span>
+              <h3 className="solution-title">{path.title}</h3>
+              <p className="solution-description">{path.description}</p>
+              <ul className="product-points">
+                {path.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <Link to="/contact" className="solution-link">
+                {path.cta} →
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* PRODUCTS SECTION */}
+      <section className="text-section" data-bg-gray="true">
+        <div ref={productsRef} className="what-we-do-container">
+          {/* <p className={`subpart1 ${reveal(productsVisible)}`}>OUR PRODUCTS</p> */}
+          <h2 className={`subpart2 ${reveal(productsVisible)}`}>
+            Products we build and run
+          </h2>
+          <p className={`subpart3 ${reveal(productsVisible)}`}>
+            The same team that works on client projects builds and maintains
+            these.
           </p>
         </div>
 
-        <div className="solutions-grid">
+        <div className="solutions-grid solutions-grid-2col">
           <div
-            ref={solutionCard1Ref}
-            className="solution-card"
+            className={`solution-card product-feature ${reveal(productsVisible)}`}
           >
-            <div className="solution-icon enterprise-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Custom CRMs & Business Software</h3>
+            <span className="product-badge">Legal</span>
+            <h3 className="solution-title">BriefGuard</h3>
             <p className="solution-description">
-              <strong style={{ color: "#1e40af" }}>
-                Save 15+ hours every week
-              </strong>{" "}
-              with automation that fits your exact workflow. We eliminate manual
-              data entry, automate repetitive tasks, and give you real-time
-              insights to make faster decisions. No forcing your process into
-              templates—build exactly what you need.
+              A legal operating system for India that covers research, drafting,
+              review and practice management. Every citation is checked against
+              the actual judgment before filing.
             </p>
-            <Link to="/contact" className="solution-link">
-              Explore Solutions →
-            </Link>
-          </div>
-
-          <div
-            ref={solutionCard2Ref}
-            className="solution-card"
-          >
-            <div className="solution-icon fundraising-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Fundraising & NGO Platforms</h3>
-            <p className="solution-description">
-              <strong style={{ color: "#1e40af" }}>
-                Turn weeks of manual onboarding into a self-service workflow
-              </strong>{" "}
-              that scales smoothly as you add partner organizations. Complete
-              compliance-ready platforms with document verification, secure
-              payments, and audit trails that eliminate governance risks.
-            </p>
-            <Link
-              to="/solutions/fundraising-workflow-platforms"
+            <ul className="product-points">
+              <li>Citation verification</li>
+              <li>Drafting in 11 Indian languages</li>
+              <li>Works with Microsoft Word and Google Docs</li>
+              <li>Matter and deadline management</li>
+            </ul>
+            <a
+              href={BRIEFGUARD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="solution-link"
             >
-              Learn More →
-            </Link>
+              Visit BriefGuard →
+            </a>
           </div>
 
           <div
-            ref={solutionCard3Ref}
-            className="solution-card"
+            className={`solution-card product-feature ${reveal(productsVisible)}`}
           >
-            <div className="solution-icon enterprise-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-                <path d="M13 8H7M17 12H7" />
-              </svg>
-            </div>
-            <h3 className="solution-title">AI-Powered Chatbots & Automation</h3>
+            <span className="product-badge">Enterprise</span>
+            <h3 className="solution-title">Ascendons CRM</h3>
             <p className="solution-description">
-              <strong style={{ color: "#1e40af" }}>
-                Handle high daily conversation volume with accurate,
-                context-aware answers
-              </strong>{" "}
-              using RAG-powered chatbots that understand context from your
-              documents. Eliminate repetitive support tickets, provide instant
-              accurate answers, and free your team to focus on complex issues.
+              A CRM for large teams that can be configured to match their sales
+              and operations process.
             </p>
-            <Link to="/contact" className="solution-link">
-              Explore AI Solutions →
-            </Link>
-          </div>
-
-          <div
-            ref={solutionCard4Ref}
-            className="solution-card"
-          >
-            <div className="solution-icon fundraising-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                <line x1="12" y1="22.08" x2="12" y2="12" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Workflow Optimization</h3>
-            <p className="solution-description">
-              <strong style={{ color: "#1e40af" }}>
-                Cut processing costs and eliminate costly manual errors
-              </strong>{" "}
-              by removing manual data entry and automating repetitive
-              workflows. Transform slow, error-prone processes into efficient,
-              scalable operations that grow with your business.
-            </p>
-            <Link to="/contact" className="solution-link">
-              Optimize Workflows →
-            </Link>
-          </div>
-
-          <div
-            ref={solutionCard5Ref}
-            className="solution-card"
-          >
-            <div className="solution-icon enterprise-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M9 9h6v6H9z" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Custom Platforms & Marketplaces</h3>
-            <p className="solution-description">
-              <strong style={{ color: "#1e40af" }}>
-                Handle high transaction volume with zero downtime
-              </strong>{" "}
-              . Approval workflows that took days now complete in hours.
-              Multi-tenant architecture, secure payments, and scalable
-              infrastructure built to handle growth from day one.
-            </p>
-            <Link to="/contact" className="solution-link">
-              Build Your Platform →
-            </Link>
-          </div>
-
-          <div
-            ref={solutionCard6Ref}
-            className="solution-card"
-          >
-            <div className="solution-icon whatsapp-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
-                <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Communication Automation</h3>
-            <p className="solution-description">
-              <strong style={{ color: "#1e40af" }}>
-                Respond in seconds instead of hours
-              </strong>{" "}
-              with automated lead qualification and instant replies. Handle
-              thousands of daily interactions across WhatsApp and other
-              channels—24/7, without additional staff.
-            </p>
-            <Link
-              to="/solutions/whatsapp-business-automation"
-              className="solution-link"
-            >
-              Learn More →
+            <ul className="product-points">
+              <li>Configurable pipelines, leads and accounts</li>
+              <li>Workflow automation and approvals</li>
+              <li>Role-based access for multi-branch teams</li>
+              <li>WhatsApp, email, ERP and payment integrations</li>
+            </ul>
+            <Link to="/products" className="solution-link">
+              Learn more →
             </Link>
           </div>
         </div>
+      </section>
 
-        {/* Mid-Page CTA */}
-        <div style={{ marginTop: "3rem", textAlign: "center" }}>
-          <Link
-            to="/contact"
-            className="home-button"
-            style={{
-              display: "inline-block",
-              textDecoration: "none",
-              marginTop: "2rem",
-            }}
-          >
-            Get a Custom Quote
+      {/* MVP SECTION */}
+      <section className="text-section">
+        <div ref={mvpRef} className="what-we-do-container">
+          {/* <p className={`subpart1 ${reveal(mvpVisible)}`}>BUILDING AN MVP</p> */}
+          <h2 className={`subpart2 ${reveal(mvpVisible)}`}>
+            Idea to launch in 4–6 weeks
+          </h2>
+          <p className={`subpart3 ${reveal(mvpVisible)}`}>
+            A typical MVP engagement, week by week.
+          </p>
+        </div>
+
+        <div className="mvp-timeline">
+          {mvpTimeline.map((step) => (
+            <div
+              key={step.title}
+              className={`solution-card mvp-step ${reveal(mvpVisible)}`}
+            >
+              <span className="mvp-week">{step.week}</span>
+              <h3 className="solution-title">{step.title}</h3>
+              <p className="solution-description">{step.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="engagement-heading">Ways to work with us</h3>
+        <div className="solutions-grid solutions-grid-3col">
+          {engagementModels.map((model) => (
+            <div
+              key={model.title}
+              className={`solution-card ${reveal(mvpVisible)}`}
+            >
+              <h3 className="solution-title">{model.title}</h3>
+              <p className="solution-description">{model.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* SERVICES SECTION */}
+      <section className="text-section" data-bg-gray="true">
+        <div ref={servicesRef} className="what-we-do-container">
+          {/* <p className={`subpart1 ${reveal(servicesVisible)}`}>SERVICES</p> */}
+          <h2 className={`subpart2 ${reveal(servicesVisible)}`}>
+            What we build
+          </h2>
+        </div>
+
+        <div className="solutions-grid solutions-grid-2col">
+          {services.map((service) => (
+            <div
+              key={service.title}
+              className={`solution-card ${reveal(servicesVisible)}`}
+            >
+              <div className={`solution-icon ${service.iconClass}`}>
+                <svg
+                  width="48"
+                  height="48"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  {service.icon}
+                </svg>
+              </div>
+              <h3 className="solution-title">{service.title}</h3>
+              <p className="solution-description">{service.description}</p>
+              <Link to={service.link} className="solution-link">
+                {service.linkLabel}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginTop: "2.5rem" }}>
+          <Link to="/services" className="solution-link">
+            All services →
           </Link>
         </div>
       </section>
 
-      {/* TRUST & AUTHORITY SECTION */}
+      {/* WHY US SECTION */}
       <section
-        ref={trustSectionRef}
-        className="trust-section"
+        ref={trustRef}
+        className={`trust-section ${trustVisible ? "visible" : ""}`}
       >
         <div className="trust-content">
-          <h2 className="trust-heading">
-            Why Organizations Choose Us: Real Results, Real Impact
-          </h2>
-          <p className="trust-description">
-            We don't build prototypes—we deliver production-ready systems that
-            handle real workloads. Our automation systems process thousands of
-            daily interactions, our fundraising platforms manage 300+
-            organizations seamlessly, and our custom CRMs replace expensive
-            enterprise software while delivering better results.
-          </p>
+          <h2 className="trust-heading">Why clients work with us</h2>
           <div className="trust-points">
-            <div className="trust-point">
-              <strong>Built Around Your Workflow, Not a Template</strong>
-              <span>
-                We don't force your business into someone else's software.{" "}
-                <strong style={{ color: "white" }}>
-                  Every system is designed around how your team actually
-                  works,
-                </strong>{" "}
-                so it fits from day one instead of requiring you to adapt to
-                it.
-              </span>
-            </div>
-            <div className="trust-point">
-              <strong>Built to Handle Real Growth</strong>
-              <span>
-                We've built systems that handle real production
-                workloads—thousands of daily transactions, hundreds of
-                concurrent users, and mission-critical operations.
-                <strong style={{ color: "white" }}>
-                  {" "}
-                  Built to grow with you, not hold you back.
-                </strong>
-              </span>
-            </div>
-            <div className="trust-point">
-              <strong>Faster, More Reliable Response</strong>
-              <span>
-                Our automation systems eliminate manual delays, automate lead
-                qualification, and provide instant responses—{" "}
-                <strong style={{ color: "white" }}>
-                  cutting response times to a fraction of the manual baseline,
-                </strong>{" "}
-                capturing more leads and improving customer satisfaction.
-              </span>
-            </div>
-            <div className="trust-point">
-              <strong>Production-Ready from Day One</strong>
-              <span>
-                Every solution includes monitoring, error handling, security,
-                and compliance by default, plus{" "}
-                <strong style={{ color: "white" }}>
-                  post-launch support
-                </strong>{" "}
-                to make sure it keeps working the way it should.
-              </span>
-            </div>
+            {whyUs.map((point) => (
+              <div key={point.title} className="trust-point">
+                <strong>{point.title}</strong>
+                <span>{point.body}</span>
+              </div>
+            ))}
           </div>
+          {/* <Link
+            to="/our-work"
+            className="home-butto hero-cta-secondary"
+            style={{ marginTop: "3rem" }}
+          >
+            Read the case studies
+          </Link> */}
         </div>
       </section>
 
-      {/* HOW WE WORK SECTION */}
+      {/* INDUSTRIES SECTION */}
       <section className="text-section">
-        <div ref={howWeWorkRef} className="what-we-do-container">
-          <p className="subpart1">
-            OUR PROCESS
-          </p>
-          <h2 className="subpart2">
-            How We Work: From Discovery to Deployment
+        <div ref={industriesRef} className="what-we-do-container">
+          {/* <p className={`subpart1 ${reveal(industriesVisible)}`}>
+            WHO WE WORK WITH
+          </p> */}
+          <h2 className={`subpart2 ${reveal(industriesVisible)}`}>
+            Industries
           </h2>
-          <p className="subpart3">
-            We follow a proven 5-step process that ensures your automation
-            platform is built right, deployed smoothly, and delivers measurable
-            results from day one.
-          </p>
         </div>
 
-        <div
-          className="solutions-grid"
-          style={{ marginTop: "2rem", maxWidth: "1200px" }}
-        >
-          <div
-            className="solution-card"
-            style={{ textAlign: "center" }}
-          >
+        <div className="solutions-grid solutions-grid-3col">
+          {industries.map((industry) => (
             <div
-              className="solution-icon enterprise-icon"
-              style={{ margin: "0 auto 1rem" }}
+              key={industry.title}
+              className={`solution-card industry-card ${reveal(industriesVisible)}`}
             >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+              <h3 className="solution-title">{industry.title}</h3>
+              <p className="solution-description">{industry.description}</p>
             </div>
-            <h3 className="solution-title" style={{ marginBottom: "0.75rem" }}>
-              1. Requirement Discovery
-            </h3>
-            <p className="solution-description">
-              We deep-dive into your workflows, pain points, and goals.
-              Understand current processes, identify automation opportunities,
-              and define success metrics. No assumptions—just facts.
-            </p>
-          </div>
-
-          <div
-            className="solution-card"
-            style={{ textAlign: "center" }}
-          >
-            <div
-              className="solution-icon fundraising-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ marginBottom: "0.75rem" }}>
-              2. Solution Design
-            </h3>
-            <p className="solution-description">
-              We design the architecture, integrations, and workflows. Create
-              technical specifications, define API contracts, plan database
-              schemas, and outline the implementation roadmap.
-            </p>
-          </div>
-
-          <div
-            className="solution-card"
-            style={{ textAlign: "center" }}
-          >
-            <div
-              className="solution-icon whatsapp-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ marginBottom: "0.75rem" }}>
-              3. Development & Integration
-            </h3>
-            <p className="solution-description">
-              We build your solution with clean, scalable code. Integrate with
-              your existing systems, implement automation workflows, and ensure
-              security and compliance standards are met.
-            </p>
-          </div>
-
-          <div
-            className="solution-card"
-            style={{ textAlign: "center" }}
-          >
-            <div
-              className="solution-icon enterprise-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ marginBottom: "0.75rem" }}>
-              4. Testing & Deployment
-            </h3>
-            <p className="solution-description">
-              Rigorous testing in staging environments, performance
-              optimization, security audits, and user acceptance testing. Deploy
-              to production with zero downtime and comprehensive monitoring.
-            </p>
-          </div>
-
-          <div
-            className="solution-card"
-            style={{ textAlign: "center" }}
-          >
-            <div
-              className="solution-icon fundraising-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
-                <line x1="12" y1="22.08" x2="12" y2="12" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ marginBottom: "0.75rem" }}>
-              5. Support & Optimization
-            </h3>
-            <p className="solution-description">
-              Ongoing support, performance monitoring, and continuous
-              optimization. We track metrics, gather feedback, and iterate to
-              ensure your platform keeps delivering value as you scale.
-            </p>
-          </div>
-
-          <div
-            className="solution-card"
-            style={{ textAlign: "center" }}
-          >
-            <div
-              className="solution-icon enterprise-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ marginBottom: "0.75rem" }}>
-              6. Continuous Improvement
-            </h3>
-            <p className="solution-description">
-              Regular updates, feature enhancements, and performance tuning. We
-              evolve your platform based on usage patterns, new requirements,
-              and emerging technologies to maintain competitive advantage.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* INDUSTRY USE CASES SECTION */}
-      <section className="text-section" data-bg-gray="true">
-        <div ref={industryUseCasesRef} className="what-we-do-container">
-          <p className="subpart1">
-            INDUSTRY SOLUTIONS
-          </p>
-          <h2 className="subpart2">
-            Built for Your Industry
-          </h2>
-          <p className="subpart3">
-            Every industry has unique challenges. We build automation solutions
-            tailored to your specific workflows, compliance requirements, and
-            growth goals.
-          </p>
+          ))}
         </div>
 
-        <div className="solutions-grid" style={{ marginTop: "2rem" }}>
-          <div className="solution-card">
-            <h3 className="solution-title">For Real Estate</h3>
-            <p className="solution-description">
-              Automate property inquiries, schedule site visits, qualify buyers,
-              send property details, and manage follow-ups.{" "}
-              <strong style={{ color: "#1e40af" }}>
-                Reduce response time by 70% and capture 40% more qualified leads
-              </strong>{" "}
-              with automated lead scoring and instant property information
-              delivery.
-            </p>
-          </div>
-
-          <div className="solution-card">
-            <h3 className="solution-title">For E-commerce</h3>
-            <p className="solution-description">
-              Automate order confirmations, shipping updates, delivery tracking,
-              customer support, and abandoned cart recovery.{" "}
-              <strong style={{ color: "#1e40af" }}>
-                Boost conversion and cut support ticket volume
-              </strong>{" "}
-              with proactive order updates and instant customer support.
-            </p>
-          </div>
-
-          <div className="solution-card">
-            <h3 className="solution-title">For Healthcare</h3>
-            <p className="solution-description">
-              Automate appointment booking, reminders, lab report delivery,
-              prescription notifications, and follow-up care.{" "}
-              <strong style={{ color: "#1e40af" }}>
-                Reduce no-shows by 50% and improve patient satisfaction scores
-              </strong>{" "}
-              with automated appointment management and personalized care
-              reminders.
-            </p>
-          </div>
-
-          <div className="solution-card">
-            <h3 className="solution-title">For Service Businesses</h3>
-            <p className="solution-description">
-              Automate service booking, confirmations, payment reminders,
-              feedback collection, and customer follow-ups.{" "}
-              <strong style={{ color: "#1e40af" }}>
-                Eliminate manual scheduling and reduce admin overhead by 60%
-              </strong>{" "}
-              with end-to-end workflow automation from inquiry to service
-              completion.
-            </p>
-          </div>
-
-          <div className="solution-card">
-            <h3 className="solution-title">For NGOs & Nonprofits</h3>
-            <p className="solution-description">
-              Build fundraising platforms, donor management systems,
-              organization onboarding workflows, and grant application
-              processes.{" "}
-              <strong style={{ color: "#1e40af" }}>
-                Scale to hundreds of partner organizations
-              </strong>{" "}
-              with automated onboarding, document verification, and
-              compliance-ready approval workflows.
-            </p>
-          </div>
-
-          <div className="solution-card">
-            <h3 className="solution-title">For Manufacturing & Distribution</h3>
-            <p className="solution-description">
-              Automate inventory updates, order processing, shipping
-              notifications, and customer communication.{" "}
-              <strong style={{ color: "#1e40af" }}>
-                Reduce order processing time by 65% and eliminate manual data
-                entry errors
-              </strong>{" "}
-              with real-time ERP integrations and automated workflows.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* TRUST SIGNALS SECTION */}
-      <section className="text-section" data-bg-gray="true">
-        <div
-          className="what-we-do-container"
-          style={{ marginBottom: "3rem", position: "relative", zIndex: 1 }}
-        >
-          <p className="subpart1" style={{ position: "relative", zIndex: 1 }}>
-            TRUST & SECURITY
-          </p>
-          <h2 className="subpart2" style={{ position: "relative", zIndex: 1 }}>
-            Built with Trust, Deployed with Confidence
-          </h2>
-          <p className="subpart3" style={{ position: "relative", zIndex: 1 }}>
-            Your data security and business continuity matter. We follow
-            industry best practices and maintain the highest standards for
-            security, compliance, and reliability.
-          </p>
-        </div>
-
-        <div
-          className="solutions-grid solutions-grid-2col"
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          <div
-            className="solution-card slide-up"
-            style={{
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
-              opacity: "1",
-            }}
-          >
-            <div
-              className="solution-icon enterprise-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Data Security</h3>
-            <p className="solution-description">
-              End-to-end encryption, secure API integrations, regular security
-              audits, and GDPR-compliant data handling. Your data stays safe and
-              private.
-            </p>
-          </div>
-
-          <div
-            className="solution-card slide-up"
-            style={{
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
-              opacity: "1",
-            }}
-          >
-            <div
-              className="solution-icon whatsapp-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ fontSize: "1.1rem" }}>
-              99.9% Uptime SLA
-            </h3>
-            <p className="solution-description" style={{ fontSize: "0.9rem" }}>
-              Production-ready infrastructure with monitoring, automated
-              backups, and disaster recovery. Built for reliability and business
-              continuity.
-            </p>
-          </div>
-
-          <div
-            className="solution-card slide-up"
-            style={{
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
-              opacity: "1",
-            }}
-          >
-            <div
-              className="solution-icon fundraising-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ fontSize: "1.1rem" }}>
-              Compliance Ready
-            </h3>
-            <p className="solution-description" style={{ fontSize: "0.9rem" }}>
-              Audit trails, role-based access control, document versioning, and
-              compliance-ready workflows. Perfect for regulated industries and
-              NGOs.
-            </p>
-          </div>
-
-          <div
-            className="solution-card slide-up"
-            style={{
-              textAlign: "center",
-              position: "relative",
-              zIndex: 1,
-              opacity: "1",
-            }}
-          >
-            <div
-              className="solution-icon enterprise-icon"
-              style={{ margin: "0 auto 1rem" }}
-            >
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
-                <path d="M9 22v-4h6v4" />
-                <path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01" />
-              </svg>
-            </div>
-            <h3 className="solution-title" style={{ fontSize: "1.1rem" }}>
-              Enterprise Ready
-            </h3>
-            <p className="solution-description" style={{ fontSize: "0.9rem" }}>
-              Registered in India | 5+ years experience | Serving NGOs,
-              Enterprises, and Growing Businesses. Production-proven solutions
-              with real-world results.
-            </p>
-          </div>
-        </div>
-
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "2rem auto 0",
-            position: "relative",
-            zIndex: 1,
-            textAlign: "center",
-            padding: "1.5rem",
-            background: "rgba(239, 246, 255, 0.5)",
-            borderRadius: "12px",
-          }}
-        >
-          <p
-            className="solution-description"
-            style={{ marginBottom: "0.5rem" }}
-          >
-            <strong>Tech Stack:</strong> AWS, Google Cloud, PostgreSQL, MongoDB,
-            Redis, WhatsApp Cloud API, Stripe/Razorpay, React.js, Node.js,
-            Docker, Kubernetes
-          </p>
-        </div>
+        <p className="tech-stack">
+          <strong>Tech stack:</strong> React, Node.js, PostgreSQL, MongoDB,
+          Redis, AWS, Google Cloud, Docker, Kubernetes, WhatsApp Cloud API,
+          Razorpay, Stripe
+        </p>
       </section>
 
       {/* TESTIMONIALS SECTION */}
-      <section
+      {/* <section
         ref={testimonialsRef}
         className="testimonials-section"
       >
         <div className="testimonials-content">
           <p className="testimonials-label">CLIENT STORIES</p>
-          <h2 className="testimonials-heading">What Our Clients Say</h2>
-          <p className="testimonials-subheading">
-            Real results from real clients. Here's how our automation systems,
-            custom platforms, and scalable solutions delivered measurable
-            business impact.
-          </p>
+          <h2 className="testimonials-heading">What our clients say</h2>
 
           <div className="testimonials-grid">
-            <div className="testimonial-card">
-              <div className="testimonial-quote">
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="quote-icon"
-                >
-                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
-                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
-                </svg>
+            {testimonials.map((t) => (
+              <div key={t.name} className="testimonial-card slide-up">
+                <div className="testimonial-quote">
+                  <QuoteIcon />
+                </div>
+                <p className="testimonial-text">{t.quote}</p>
+                <div className="testimonial-author">
+                  <strong className="testimonial-name">{t.name}</strong>
+                  <span className="testimonial-role">{t.role}</span>
+                </div>
               </div>
-              <p className="testimonial-text">
-                Working with Ascendons was the push our engineering roadmap
-                needed. They dove into our legacy systems, proposed a focused
-                plan, and incrementally replaced brittle processes with robust
-                automation. Beyond shipping features, they helped us clarify
-                priorities and improved developer velocity across the board.
-                Short version: less firefighting, more product work.
-              </p>
-              <div className="testimonial-author">
-                <strong className="testimonial-name">Viaksh Roy</strong>
-                <span className="testimonial-role">
-                  Founder and CEO, WattGlow Power
-                </span>
-              </div>
-            </div>
-
-            <div className="testimonial-card">
-              <div className="testimonial-quote">
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="quote-icon"
-                >
-                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
-                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
-                </svg>
-              </div>
-              <p className="testimonial-text">
-                I've worked with Ascendons for a while now, and they've
-                consistently exceeded my expectations. The team is not only
-                technically strong but also genuinely curious about
-                understanding the business problem before jumping into code.
-                They bring structure, creativity, and accountability to every
-                project—traits that are rare to find together. From the very
-                first engagement, they've shown a level of dedication and
-                professionalism that made them feel more like an in-house team
-                than an external partner. Every milestone with Ascendons has
-                added measurable value to our operations and product roadmap.
-              </p>
-              <div className="testimonial-author">
-                <strong className="testimonial-name">Pranav Kumar</strong>
-                <span className="testimonial-role">
-                  Founder, People Kind Pharma
-                </span>
-              </div>
-            </div>
-
-            <div className="testimonial-card">
-              <div className="testimonial-quote">
-                <svg
-                  width="40"
-                  height="40"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="quote-icon"
-                >
-                  <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
-                  <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
-                </svg>
-              </div>
-              <p className="testimonial-text">
-                Partnering with Ascendons has been a turning point for RK
-                Enterprises. Their team streamlined our internal workflows,
-                built reliable digital tools for our operations, and helped us
-                move away from manual processes that slowed us down for years.
-                What stood out most was their proactive approach — they
-                anticipate challenges before they become issues. It's refreshing
-                to work with a team that treats your business goals like their
-                own.
-              </p>
-              <div className="testimonial-author">
-                <strong className="testimonial-name">Vijay Goyal</strong>
-                <span className="testimonial-role">
-                  Managing Director, RK Enterprises
-                </span>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA SECTION WITH LEAD FORM */}
       <section
-        ref={ctaSectionRef}
-        className="cta-section"
+        ref={ctaRef}
+        className={`cta-section ${ctaVisible ? "visible" : ""}`}
       >
         <div className="cta-content">
-          <h2 className="cta-heading">
-            Ready to Eliminate Manual Work & Scale Operations?
-          </h2>
+          <h2 className="cta-heading">Tell us about your project</h2>
           <p className="cta-description">
-            Stop losing time on repetitive tasks. Whether you need workflow
-            automation, a custom CRM, a fundraising platform, or AI-powered
-            chatbots—let's discuss how we can help you
-            <strong style={{ color: "#1e40af" }}>
-              {" "}
-              cut costs, reduce errors, and accelerate growth.
-            </strong>
+            Whether it's a new product or a system for your business, send us a
+            few lines and we'll reply within one business day.
           </p>
           <form onSubmit={handleFormSubmit} className="cta-form">
             <div className="cta-form-row">
@@ -1396,25 +571,39 @@ const Home: React.FC = () => {
               <input
                 type="text"
                 name="company"
-                placeholder="Company / Organization"
+                placeholder="Company / Organization (optional)"
                 value={formData.company}
                 onChange={handleFormChange}
-                required
                 className="cta-input"
               />
             </div>
             <textarea
               name="problem"
-              placeholder="Tell us about your automation or platform needs..."
+              placeholder="What would you like to build?"
               value={formData.problem}
               onChange={handleFormChange}
               required
               rows={4}
               className="cta-textarea"
             />
-            <button type="submit" className="cta-submit-button">
-              Request Strategy Call
+            <button
+              type="submit"
+              className="cta-submit-button"
+              disabled={status === "sending"}
+            >
+              {status === "sending" ? "Sending..." : "Send"}
             </button>
+            {status === "success" && (
+              <p className="form-status form-status-success" role="status">
+                Thanks. We'll reply within one business day.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="form-status form-status-error" role="alert">
+                Something went wrong. Please try again or email
+                contact@ascendons.com.
+              </p>
+            )}
           </form>
         </div>
       </section>

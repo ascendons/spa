@@ -994,6 +994,7 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
@@ -1702,9 +1703,7 @@
   padding: 2.5rem;
   margin: 0 auto;
   max-width: 1200px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 8px 32px rgba(59, 130, 246, 0.12);
   position: relative;
   overflow: hidden;
@@ -1792,4 +1791,185 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+}
+
+/* Hero extras */
+.hero-eyebrow {
+  color: #93c5fd;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.industry-card {
+  padding: 1.75rem;
+}
+
+.industry-card .solution-title {
+  font-size: 1.25rem;
+}
+
+.industry-card .solution-description {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+/* Client logo strip */
+.logo-strip {
+  position: relative;
+  z-index: 15;
+  background: #ffffff;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo-strip-label {
+  color: #6b7280;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.logo-strip-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+.logo-strip-row img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.75;
+  transition:
+    filter 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.logo-strip-row img:hover {
+  filter: none;
+  opacity: 1;
+}
+
+/* Product cards */
+.product-feature {
+  text-align: left;
+}
+
+.product-badge {
+  display: inline-block;
+  background: #dbeafe;
+  color: #1e40af;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+
+.product-points {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  color: #374151;
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.product-points li::before {
+  content: "✓ ";
+  color: #2563eb;
+  font-weight: 700;
+}
+
+/* MVP timeline */
+.mvp-timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 2rem;
+  margin: 1rem auto 0;
+}
+
+.mvp-step {
+  text-align: left;
+  padding: 2rem 1.5rem;
+}
+
+.mvp-step .solution-title {
+  font-size: 1.25rem;
+}
+
+.mvp-step .solution-description {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.mvp-week {
+  display: block;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 1024px) {
+  .mvp-timeline {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .mvp-timeline {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+}
+
+.engagement-heading {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  margin: 4rem 0 2rem;
+}
+
+.trust-grid {
+  margin-top: 3rem;
+}
+
+.tech-stack {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding: 1.5rem;
+  background: rgba(239, 246, 255, 0.5);
+  border-radius: 12px;
+  color: #000000;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Inline form feedback */
+.form-status {
+  margin-top: 1rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.form-status-success {
+  color: #15803d;
+}
+
+.form-status-error {
+  color: #b91c1c;
 }

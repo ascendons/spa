@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import SEO from "../components/SEO";
 
 const Services: React.FC = () => {
   const [visible, setVisible] = useState({
@@ -40,6 +41,12 @@ const Services: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="Services & Engineering Capabilities"
+        description="Explore Ascendons engineering services: rapid MVP development (4-6 weeks), custom enterprise CRMs, AI assistants with RAG, WhatsApp automation, and platform development."
+        canonicalPath="/services"
+        keywords="MVP development services, custom CRM engineering, AI assistants RAG, WhatsApp automation systems, platform development, SaaS consulting"
+      />
       <section className="home-section">
         <div className="home-content">
           <h1 className="home-heading">Services</h1>
@@ -51,85 +58,103 @@ const Services: React.FC = () => {
         style={{ position: "relative", zIndex: 10 }}
       >
         <div ref={servicesRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.services ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.services ? "slide-up" : ""}`}>
             OUR SERVICES
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.services ? "slide-up" : ""}`}>
-            Tailor-Built Software, For Any Domain
+            From MVP to Enterprise Platform
           </h2>
           <p className={`subpart3 ${visible.services ? "slide-up" : ""}`}>
-            At Ascendons, we specialize in building software around your
-            exact workflow instead of forcing it into a template. The
-            categories below are examples of what we've built so
-            far—automation systems, custom CRMs, AI chatbots, and
-            platforms—not a limit on what we can build for your domain.
+            New products for founders, and CRMs, automation and consulting for
+            established businesses.
           </p>
         </div>
 
         <div className="solutions-grid solutions-grid-2col">
           <div className="solution-card slide-up">
+            <h3 className="solution-title">MVP & Product Development</h3>
+            <p className="solution-description">
+              Web and mobile MVPs in 4–6 weeks, with a fixed scope and price and
+              a demo every week on a live staging link.
+            </p>
+            <Link
+              to="/contact"
+              className="solution-link"
+              style={{ textDecoration: "none", display: "inline-block" }}
+            >
+              Scope Your MVP →
+            </Link>
+          </div>
+          <div className="solution-card slide-up">
+            <h3 className="solution-title">Technology Consulting</h3>
+            <p className="solution-description">
+              Architecture reviews, build-vs-buy decisions, automation roadmaps
+              and advice on projects that have stalled.
+            </p>
+            <Link
+              to="/contact"
+              className="solution-link"
+              style={{ textDecoration: "none", display: "inline-block" }}
+            >
+              Book a Consultation →
+            </Link>
+          </div>
+          <div className="solution-card slide-up">
             <h3 className="solution-title">Custom CRMs & Business Software</h3>
             <p className="solution-description">
-              Build CRMs and custom software solutions tailored to your exact
-              workflow. ensuring your digital solutions drive growth and
-              success. From market research to product roadmaps, we've got you
-              covered.
+              CRMs, admin systems and internal tools built around your process,
+              either from scratch or on top of Ascendons CRM.
+            </p>
+            <Link
+              to="/products"
+              className="solution-link"
+              style={{ textDecoration: "none", display: "inline-block" }}
+            >
+              See Our CRM →
+            </Link>
+          </div>
+          <div className="solution-card slide-up">
+            <h3 className="solution-title">AI Assistants</h3>
+            <p className="solution-description">
+              Assistants for support, sales and internal knowledge that answer
+              from your own documents, using retrieval-augmented generation
+              (RAG).
             </p>
             <Link
               to="/contact"
               className="solution-link"
               style={{ textDecoration: "none", display: "inline-block" }}
             >
-              Explore Solutions →
+              Discuss an AI Project →
             </Link>
           </div>
           <div className="solution-card slide-up">
-            <h3 className="solution-title">Fundraising & NGO Platforms</h3>
+            <h3 className="solution-title">Automation & Integrations</h3>
             <p className="solution-description">
-              Complete platform solutions for nonprofits and NGOs. We build
-              marketplaces, fundraising systems, organization management
-              platforms with onboarding workflows, document verification, secure
-              payments, and compliance-ready approval systems.
-            </p>
-            <Link
-              to="/solutions/fundraising-workflow-platforms"
-              className="solution-link"
-              style={{ textDecoration: "none", display: "inline-block" }}
-            >
-              Learn More →
-            </Link>
-          </div>
-          <div className="solution-card slide-up">
-            <h3 className="solution-title">AI-Powered Chatbots & Automation</h3>
-            <p className="solution-description">
-              Intelligent chatbots powered by RAG (Retrieval Augmented
-              Generation) technology that understand context and learn from your
-              documents. Build customer support systems, knowledge bases, and
-              automation workflows that provide accurate, context-aware
-              responses.
-            </p>
-            <Link
-              to="/contact"
-              className="solution-link"
-              style={{ textDecoration: "none", display: "inline-block" }}
-            >
-              Build Your Chatbot →
-            </Link>
-          </div>
-          <div className="solution-card slide-up">
-            <h3 className="solution-title">Communication Automation</h3>
-            <p className="solution-description">
-              Automate customer engagement across multiple channels. Build
-              intelligent messaging systems that handle lead qualification,
-              customer support, order tracking, and transactional communications
-              at enterprise scale.
+              WhatsApp and messaging automation for leads, orders and support,
+              and integrations that connect your CRM, ERP, payment gateway and
+              databases.
             </p>
             <Link
               to="/solutions/whatsapp-business-automation"
               className="solution-link"
               style={{ textDecoration: "none", display: "inline-block" }}
             >
-              Learn More →
+              See WhatsApp Automation →
+            </Link>
+          </div>
+          <div className="solution-card slide-up">
+            <h3 className="solution-title">Platforms & Marketplaces</h3>
+            <p className="solution-description">
+              Multi-tenant platforms and marketplaces with payments, role-based
+              access and infrastructure that can grow with usage.
+            </p>
+            <Link
+              to="/contact"
+              className="solution-link"
+              style={{ textDecoration: "none", display: "inline-block" }}
+            >
+              Discuss a Platform →
             </Link>
           </div>
         </div>
@@ -140,51 +165,41 @@ const Services: React.FC = () => {
         style={{ position: "relative", zIndex: 10 }}
       >
         <div ref={additionalRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.additional ? "slide-up" : ""}`}>
-            ADDITIONAL EXPERTISE
-          </p>
+          {/* <p className={`subpart1 ${visible.additional ? "slide-up" : ""}`}>
+            ALSO
+          </p> */}
           <h2 className={`subpart2 ${visible.additional ? "slide-up" : ""}`}>
-            More Ways We Can Help
+            Other Systems We Build
           </h2>
-          <p className={`subpart3 ${visible.additional ? "slide-up" : ""}`}>
-            We provide cutting-edge technology consulting services to help your
-            business innovate, optimize, and grow. Here's how we can add value
-            to your organization.
-          </p>
         </div>
 
-        <div className="solutions-grid solutions-grid-2col">
+        <div className="solutions-grid solutions-grid-3col">
           <div className="solution-card slide-up">
-            <h3 className="solution-title">Custom Platforms & Marketplaces</h3>
+            <h3 className="solution-title">Fundraising & NGO Platforms</h3>
             <p className="solution-description">
-              Build platforms and marketplaces from scratch with multi-tenant
-              architecture, secure payments, role-based access, and scalable
-              infrastructure—everything you need to launch and grow your
-              platform.
+              Partner onboarding, document verification, approvals, payments and
+              audit trails for nonprofits.
+            </p>
+            <Link
+              to="/solutions/fundraising-workflow-platforms"
+              className="solution-link"
+              style={{ textDecoration: "none", display: "inline-block" }}
+            >
+              Learn More →
+            </Link>
+          </div>
+          <div className="solution-card slide-up">
+            <h3 className="solution-title">Admin Systems</h3>
+            <p className="solution-description">
+              Admin panels and back-office tools for operations teams, with the
+              business rules and access controls your organisation needs.
             </p>
           </div>
           <div className="solution-card slide-up">
-            <h3 className="solution-title">NGO Marketplace Development</h3>
+            <h3 className="solution-title">Process Automation</h3>
             <p className="solution-description">
-              We've built marketplaces specifically for NGOs—connecting
-              organizations, managing partnerships, handling transactions, and
-              scaling operations with compliance built-in from day one.
-            </p>
-          </div>
-          <div className="solution-card slide-up">
-            <h3 className="solution-title">Enterprise Admin Systems</h3>
-            <p className="solution-description">
-              Custom admin panels and workflow systems tailored to your
-              operations. Handle complex business logic, multi-tenant
-              architectures, and compliance requirements with precision.
-            </p>
-          </div>
-          <div className="solution-card slide-up">
-            <h3 className="solution-title">Workflow Optimization</h3>
-            <p className="solution-description">
-              Analyze your business processes, identify bottlenecks, and
-              implement automation systems that eliminate repetitive tasks and
-              save time.
+              We review how work moves through your teams and automate the
+              repetitive steps.
             </p>
           </div>
         </div>
@@ -195,51 +210,45 @@ const Services: React.FC = () => {
         style={{ position: "relative", zIndex: 10 }}
       >
         <div ref={howWeWorkRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.howWeWork ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.howWeWork ? "slide-up" : ""}`}>
             HOW WE WORK
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.howWeWork ? "slide-up" : ""}`}>
-            Our Approach to Building Solutions
+            How a Project Runs
           </h2>
           <p className={`subpart3 ${visible.howWeWork ? "slide-up" : ""}`}>
-            We don't just write code—we understand your workflow, identify
-            automation opportunities, and build systems that integrate
-            seamlessly with your operations. Every solution is production-ready
-            and built to scale.
+            Every project follows the same basic approach, whether it's a new
+            MVP or a system for an established business.
           </p>
         </div>
 
         <div className="solutions-grid solutions-grid-2col">
           <div className="solution-card slide-up">
-            <h3 className="solution-title">System Integration</h3>
+            <h3 className="solution-title">Scope First</h3>
             <p className="solution-description">
-              Seamlessly integrate new systems with your existing tools—CRMs,
-              payment gateways, databases, APIs. We ensure everything works
-              together smoothly.
+              We start by understanding your users and workflow, then agree on a
+              written scope, timeline and price before building.
             </p>
           </div>
           <div className="solution-card slide-up">
-            <h3 className="solution-title">Production-Ready Deployment</h3>
+            <h3 className="solution-title">Weekly Releases</h3>
             <p className="solution-description">
-              Every system we build is production-ready from day one. We handle
-              deployment, monitoring, maintenance, and scaling—so you can focus
-              on using the system, not managing it.
+              Short sprints with a working demo every week, so you can review
+              progress and change priorities as the project goes.
             </p>
           </div>
           <div className="solution-card slide-up">
-            <h3 className="solution-title">Ongoing Support & Optimization</h3>
+            <h3 className="solution-title">Deployment and Support</h3>
             <p className="solution-description">
-              We don't disappear after launch. We provide ongoing support,
-              monitor performance, optimize workflows, and scale systems as your
-              needs grow.
+              We handle deployment, monitoring and maintenance, and support the
+              system after launch.
             </p>
           </div>
           <div className="solution-card slide-up">
-            <h3 className="solution-title">Compliance & Security</h3>
+            <h3 className="solution-title">Security</h3>
             <p className="solution-description">
-              Built-in compliance for NGOs, secure payment processing,
-              audit-ready workflows, and role-based access controls—security and
-              compliance from the ground up.
+              Role-based access, secure payment handling and audit trails are
+              part of the build, not added later.
             </p>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import SEO from "../components/SEO";
 
 const WhatsAppAutomation: React.FC = () => {
   const [visible, setVisible] = useState({
@@ -60,6 +61,12 @@ const WhatsAppAutomation: React.FC = () => {
 
   return (
     <>
+      <SEO
+        title="WhatsApp Business Automation & Cloud API Integration"
+        description="Scale customer engagement with automated WhatsApp workflows, CRM integrations, and order tracking using WhatsApp Cloud API. 24/7 automated handling."
+        canonicalPath="/solutions/whatsapp-business-automation"
+        keywords="WhatsApp Cloud API, WhatsApp automation, customer engagement chatbot, CRM WhatsApp integration, automated order tracking"
+      />
       {/* Hero Section */}
       <section className="home-section">
         <div className="home-content">
