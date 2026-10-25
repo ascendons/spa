@@ -85,7 +85,7 @@ const Contact: React.FC = () => {
 
       <section className="text-section">
         <div>
-          <div className="max-w-6xl mx-auto px-4">
+          <div className="w-full px-4">
             <h2
               ref={titleRef}
               className={`subpart2 text-center mb-3 ${titleSlidUp ? "slide-up" : "slide-up-init"}`}

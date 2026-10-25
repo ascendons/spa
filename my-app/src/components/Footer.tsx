@@ -26,7 +26,7 @@ const solutionLinks = [
 function Footer() {
   return (
     <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-10 px-6 md:px-20 font-sans relative z-10">
-      <div className="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between gap-12">
+      <div className="w-full flex flex-col md:flex-row justify-between gap-12">
         <div className="md:w-1/4 text-left">
           <h2 className="text-xl font-bold mb-6">ASCENDONS</h2>
           <p className="text-sm leading-relaxed">
@@ -88,6 +88,16 @@ function Footer() {
               <Link to="/products" className="text-white hover:underline">
                 Ascendons CRM
               </Link>
+            </li>
+            <li>
+              <a
+                href="https://dpp.ascendons.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:underline"
+              >
+                Ascendons DPP
+              </a>
             </li>
             {solutionLinks.map((link) => (
               <li key={link.label}>

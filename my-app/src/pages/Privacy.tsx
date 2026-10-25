@@ -17,7 +17,7 @@ const Privacy: React.FC = () => {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto my-24 px-6">
+    <div className="w-full my-24 px-6">
       <SEO
         title="Privacy Policy"
         description="Learn how Ascendons collects, uses, and safeguards personal data and respects user privacy."
