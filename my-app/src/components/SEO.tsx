@@ -29,7 +29,7 @@ export const SEO: React.FC<SEOProps> = ({
       let meta = document.querySelector<HTMLMetaElement>(selector);
       if (!meta) {
         meta = document.createElement("meta");
-        const parts = selector.replace(/[\[\]"']/g, "").split("=");
+        const parts = selector.replace(/[[\]"']/g, "").split("=");
         if (parts.length === 2) {
           meta.setAttribute(parts[0], parts[1]);
         }

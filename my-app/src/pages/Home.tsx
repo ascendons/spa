@@ -8,6 +8,7 @@ import { submitLead, type SubmitStatus } from "../utils/submitLead";
 import SEO from "../components/SEO";
 
 const BRIEFGUARD_URL = "https://briefguard.ascendons.in";
+const DPP_URL = "https://dpp.ascendons.in";
 
 const paths = [
   {
@@ -183,6 +184,11 @@ const industries = [
     title: "Healthcare & Services",
     description: "Booking, reminders and follow-ups without extra admin work.",
   },
+  {
+    title: "Logistics",
+    description:
+      "Shipment tracking, delivery updates and fleet and dispatch dashboards.",
+  },
 ];
 
 gsap.registerPlugin(ScrollTrigger);
@@ -284,7 +290,7 @@ const Home: React.FC = () => {
       <section className="text-section">
         <div ref={pathsRef} className="what-we-do-container">
           <h2 className={`subpart2 ${reveal(pathsVisible)}`}>
-            Two kinds of work
+            Whether you're starting out or scaling up
           </h2>
         </div>
 
@@ -294,7 +300,7 @@ const Home: React.FC = () => {
               key={path.title}
               className={`solution-card product-feature ${reveal(pathsVisible)}`}
             >
-              <span className="product-badge">{path.tag}</span>
+              {/* <span className="product-badge">{path.tag}</span> */}
               <h3 className="solution-title">{path.title}</h3>
               <p className="solution-description">{path.description}</p>
               <ul className="product-points">
@@ -323,11 +329,11 @@ const Home: React.FC = () => {
           </p>
         </div>
 
-        <div className="solutions-grid solutions-grid-2col">
+        <div className="solutions-grid solutions-grid-3col">
           <div
             className={`solution-card product-feature ${reveal(productsVisible)}`}
           >
-            <span className="product-badge">Legal</span>
+            {/* <span className="product-badge">Legal</span> */}
             <h3 className="solution-title">BriefGuard</h3>
             <p className="solution-description">
               A legal operating system for India that covers research, drafting,
@@ -353,7 +359,7 @@ const Home: React.FC = () => {
           <div
             className={`solution-card product-feature ${reveal(productsVisible)}`}
           >
-            <span className="product-badge">Enterprise</span>
+            {/* <span className="product-badge">Enterprise</span> */}
             <h3 className="solution-title">Ascendons CRM</h3>
             <p className="solution-description">
               A CRM for large teams that can be configured to match their sales
@@ -368,6 +374,31 @@ const Home: React.FC = () => {
             <Link to="/products" className="solution-link">
               Learn more →
             </Link>
+          </div>
+
+          <div
+            className={`solution-card product-feature ${reveal(productsVisible)}`}
+          >
+            <h3 className="solution-title">Ascendons DPP</h3>
+            <p className="solution-description">
+              A Digital Product Passport platform for manufacturers. It
+              organises product data and compliance evidence, and publishes
+              versioned passports that open from a QR code.
+            </p>
+            <ul className="product-points">
+              <li>Data extracted from PDFs and spreadsheets, reviewed by people</li>
+              <li>Readiness checks for EU product rules</li>
+              <li>Immutable versions and an audit trail</li>
+              <li>REST API, webhooks and CSV/Excel import</li>
+            </ul>
+            <a
+              href={DPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="solution-link"
+            >
+              Visit Ascendons DPP →
+            </a>
           </div>
         </div>
       </section>

@@ -19,7 +19,7 @@ const About: React.FC = () => {
 
       {/* About Content Section */}
       <section className="text-section">
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="w-full px-4">
           {/* About Us Text */}
           <h2
             className="subpart2 text-left mb-8"
@@ -44,7 +44,7 @@ const About: React.FC = () => {
             >
               BriefGuard
             </a>
-            , a legal operating system for India, and{" "}
+            , a legal operating system for India,{" "}
             <Link
               to="/products"
               className="font-bold"
@@ -52,7 +52,18 @@ const About: React.FC = () => {
             >
               Ascendons CRM
             </Link>{" "}
-            for large teams. The same team works on our products and on client
+            for large teams, and{" "}
+            <a
+              href="https://dpp.ascendons.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold"
+              style={{ color: "#1e40af" }}
+            >
+              Ascendons DPP
+            </a>
+            , a Digital Product Passport platform for manufacturers. The same
+            team works on our products and on client
             projects.
           </p>
           <p className="subpart3 text-left mb-12">

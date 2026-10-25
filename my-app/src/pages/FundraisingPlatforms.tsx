@@ -90,9 +90,9 @@ const FundraisingPlatforms: React.FC = () => {
       {/* Problem Statement */}
       <section className="text-section">
         <div ref={problemRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.problem ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.problem ? "slide-up" : ""}`}>
             THE CHALLENGE
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.problem ? "slide-up" : ""}`}>
             Manual Processes Don't Scale for Nonprofits
           </h2>
@@ -154,9 +154,9 @@ const FundraisingPlatforms: React.FC = () => {
       {/* Core Capabilities */}
       <section className="text-section">
         <div ref={capabilitiesRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.capabilities ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.capabilities ? "slide-up" : ""}`}>
             CORE CAPABILITIES
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.capabilities ? "slide-up" : ""}`}>
             Everything You Need in One Platform
           </h2>

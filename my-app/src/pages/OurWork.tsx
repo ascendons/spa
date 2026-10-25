@@ -207,7 +207,7 @@ const OurWork: React.FC = () => {
         <div
           className="solution-card slide-up"
           style={{
-            maxWidth: "1200px",
+            maxWidth: "none",
             margin: "1.5rem auto 0",
             textAlign: "left",
             background: "white",

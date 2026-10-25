@@ -90,9 +90,9 @@ const WhatsAppAutomation: React.FC = () => {
       {/* Problem Statement */}
       <section className="text-section">
         <div ref={problemRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.problem ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.problem ? "slide-up" : ""}`}>
             THE CHALLENGE
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.problem ? "slide-up" : ""}`}>
             Manual WhatsApp Handling Doesn't Scale
           </h2>
@@ -203,9 +203,9 @@ const WhatsAppAutomation: React.FC = () => {
       {/* Use Cases */}
       <section className="text-section">
         <div ref={useCasesRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.useCases ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.useCases ? "slide-up" : ""}`}>
             USE CASES
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.useCases ? "slide-up" : ""}`}>
             Who Benefits from WhatsApp Automation
           </h2>
@@ -396,9 +396,9 @@ const WhatsAppAutomation: React.FC = () => {
       {/* Workflow Diagram / Architecture Explanation */}
       <section className="text-section">
         <div ref={architectureRef} className="what-we-do-container">
-          <p className={`subpart1 ${visible.architecture ? "slide-up" : ""}`}>
+          {/* <p className={`subpart1 ${visible.architecture ? "slide-up" : ""}`}>
             HOW IT WORKS
-          </p>
+          </p> */}
           <h2 className={`subpart2 ${visible.architecture ? "slide-up" : ""}`}>
             Simple Workflow, Powerful Results
           </h2>
@@ -413,7 +413,7 @@ const WhatsAppAutomation: React.FC = () => {
           {/* Workflow Diagram */}
           <div
             style={{
-              maxWidth: "1200px",
+              maxWidth: "none",
               margin: "2rem auto",
               padding: "2rem",
               background: "rgba(255, 255, 255, 0.95)",
