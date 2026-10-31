@@ -1,9 +1,7 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch: # manual only — push trigger removed to save Actions minutes
 
 permissions:
   contents: write
