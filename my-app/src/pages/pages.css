@@ -419,14 +419,14 @@
 }
 .sol-step {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr);
-  gap: 8px 24px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
   padding: 28px 0;
   border-bottom: 1px solid var(--line-2);
 }
 @media (min-width: 900px) {
   .sol-step {
-    grid-template-columns: 80px minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: baseline;
     gap: 32px;
     padding: 36px 0;
@@ -441,15 +441,9 @@
   letter-spacing: -0.03em;
 }
 .sol-step-body {
-  grid-column: 2;
   margin: 0;
   max-width: 52ch;
   color: var(--muted);
-}
-@media (min-width: 900px) {
-  .sol-step-body {
-    grid-column: auto;
-  }
 }
 
 /* Editorial statement (paper) */
