@@ -130,7 +130,13 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <Link to="/products#crm">Ascendons CRM</Link>
+                <a
+                  href={PRODUCT_URLS.crm}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ascendons CRM
+                </a>
               </li>
               <li>
                 <a

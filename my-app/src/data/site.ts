@@ -20,6 +20,7 @@ export const CONTACT = {
 export const PRODUCT_URLS = {
   briefguard: "https://briefguard.ascendons.in",
   dpp: "https://dpp.ascendons.in",
+  crm: "https://crm.ascendons.com",
   impakt: "https://impakt.ascendons.in",
 };
 

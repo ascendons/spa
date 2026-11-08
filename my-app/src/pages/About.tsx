@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import PageHero from "../components/sections/PageHero";
 import WhyUs from "../components/sections/WhyUs";
@@ -44,7 +43,14 @@ const About = () => {
                 BriefGuard
               </a>
               , a legal operating system for India;{" "}
-              <Link to="/products#crm">Ascendons CRM</Link> for larger teams;{" "}
+              <a
+                href={PRODUCT_URLS.crm}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ascendons CRM
+              </a>{" "}
+              for larger teams;{" "}
               <a
                 href={PRODUCT_URLS.dpp}
                 target="_blank"
