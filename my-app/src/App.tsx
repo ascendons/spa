@@ -1,29 +1,31 @@
 import "./App.css";
-import { useLenis } from "./hooks/useLenis";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import About from "./pages/About";
-import Services from "./pages/Services";
-import Contact from "./pages/Contact";
-import Home from "./pages/Home";
-import WhatsAppAutomation from "./pages/WhatsAppAutomation";
-import FundraisingPlatforms from "./pages/FundraisingPlatforms";
-import OurWork from "./pages/OurWork";
-import Products from "./pages/Products";
-import JParticlesEffect from "./components/JParticlesEffect";
-import CookieConsent from "./components/CookieConsent";
-import { initializeAnalytics } from "./utils/userAnalytics";
-
+import { lazy, Suspense, useEffect, useLayoutEffect } from "react";
 import {
   createBrowserRouter,
   Navigate,
   Outlet,
   RouterProvider,
+  useLocation,
 } from "react-router-dom";
-import React, { useEffect } from "react";
-import QrGenerator from "./components/QRGenerator";
-import BalanceSheet from "./components/BalanceSheet";
-import Privacy from "./pages/Privacy";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis, scrollToTarget } from "./hooks/useLenis";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import CookieConsent from "./components/CookieConsent";
+import { initializeAnalytics } from "./utils/userAnalytics";
+import Home from "./pages/Home";
+
+// Home ships in the main bundle; every other route is split out.
+const About = lazy(() => import("./pages/About"));
+const Services = lazy(() => import("./pages/Services"));
+const Contact = lazy(() => import("./pages/Contact"));
+const OurWork = lazy(() => import("./pages/OurWork"));
+const Products = lazy(() => import("./pages/Products"));
+const WhatsAppAutomation = lazy(() => import("./pages/WhatsAppAutomation"));
+const FundraisingPlatforms = lazy(() => import("./pages/FundraisingPlatforms"));
+const Privacy = lazy(() => import("./pages/Privacy"));
+const QrGenerator = lazy(() => import("./components/QRGenerator"));
+const BalanceSheet = lazy(() => import("./components/BalanceSheet"));
 
 const router = createBrowserRouter([
   {
@@ -64,33 +66,52 @@ const grantAnalyticsConsent = () => {
   initializeAnalytics();
 };
 
+/** Resets scroll on navigation (or jumps to a #hash) and refreshes scroll triggers. */
+function RouteScroll() {
+  const { pathname, hash } = useLocation();
+  useLayoutEffect(() => {
+    if (hash) {
+      const t = window.setTimeout(() => scrollToTarget(hash), 120);
+      return () => window.clearTimeout(t);
+    }
+    scrollToTarget(0, true);
+  }, [pathname, hash]);
+  useEffect(() => {
+    const t = window.setTimeout(() => ScrollTrigger.refresh(), 300);
+    return () => window.clearTimeout(t);
+  }, [pathname]);
+  return null;
+}
+
 function RootLayout() {
   useLenis();
-
-  const handleCookieConsent = (consent: boolean) => {
-    if (consent) {
-      grantAnalyticsConsent();
-    }
-  };
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    // Initialize analytics if consent was already given
-    const consent = localStorage.getItem("cookieConsent");
-    if (consent === "accepted") {
+    if (localStorage.getItem("cookieConsent") === "accepted")
       grantAnalyticsConsent();
-    }
   }, []);
 
   return (
     <div className="App">
-      <JParticlesEffect />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <RouteScroll />
       <Header />
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <Outlet />
-      </React.Suspense>
-      {/* site-wide privacy banner */}
+      <main id="main" key={pathname} className="x-route">
+        <Suspense
+          fallback={
+            <div className="x-loader" role="status" aria-label="Loading">
+              <span />
+            </div>
+          }
+        >
+          <Outlet />
+        </Suspense>
+      </main>
       <Footer />
-      <CookieConsent onAccept={handleCookieConsent} />
+      <CookieConsent onAccept={(ok) => ok && grantAnalyticsConsent()} />
     </div>
   );
 }

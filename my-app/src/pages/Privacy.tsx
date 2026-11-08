@@ -1,10 +1,26 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "../components/SEO";
+import { CONTACT } from "../data/site";
+import "./pages.css";
 
 const STORAGE_KEY = "privacy_policy_accepted_v1";
 
-const Privacy: React.FC = () => {
+const SECTIONS = [
+  {
+    title: "Overview",
+    body: "We respect your privacy. We use cookies and similar technologies to provide, protect and improve our services. This page describes how we collect and use personal data when you use our website.",
+  },
+  {
+    title: "What we collect",
+    body: "We collect information you provide directly (for example, when you contact us) and information automatically collected (for example, cookies and analytics). We do not sell personal information to third-parties.",
+  },
+  {
+    title: "How we use data",
+    body: "We use collected information to provide and improve our services, personalize content, and respond to requests. We may also use aggregated data for analytics and internal research.",
+  },
+];
+
+const Privacy = () => {
   const navigate = useNavigate();
 
   const acceptAndReturn = () => {
@@ -17,66 +33,48 @@ const Privacy: React.FC = () => {
   };
 
   return (
-    <div className="w-full my-24 px-6">
+    <div className="x-page">
       <SEO
         title="Privacy Policy"
         description="Learn how Ascendons collects, uses, and safeguards personal data and respects user privacy."
         canonicalPath="/privacy"
       />
-      <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
+      <article className="x-section pg-legal">
+        <div className="x-wrap pg-legal-wrap">
+          <h1 className="x-h2">Privacy Policy</h1>
+          <p className="x-meta pg-muted">Last updated: November 30, 2025</p>
 
-      <p className="mb-4">Last updated: November 30, 2025</p>
+          {SECTIONS.map((s) => (
+            <section key={s.title}>
+              <h2 className="x-h3">{s.title}</h2>
+              <p className="x-body">{s.body}</p>
+            </section>
+          ))}
+          <section>
+            <h2 className="x-h3">Contact</h2>
+            <p className="x-body">
+              If you have privacy-related questions, reach out to{" "}
+              <a href={`mailto:${CONTACT.email}`} className="x-link">
+                {CONTACT.email}
+              </a>
+              .
+            </p>
+          </section>
 
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Overview</h2>
-        <p>
-          We respect your privacy. We use cookies and similar technologies to
-          provide, protect and improve our services. This page describes how we
-          collect and use personal data when you use our website.
-        </p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">What we collect</h2>
-        <p>
-          We collect information you provide directly (for example, when you
-          contact us) and information automatically collected (for example,
-          cookies and analytics). We do not sell personal information to
-          third-parties.
-        </p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">How we use data</h2>
-        <p>
-          We use collected information to provide and improve our services,
-          personalize content, and respond to requests. We may also use
-          aggregated data for analytics and internal research.
-        </p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-xl font-semibold mb-2">Contact</h2>
-        <p>
-          If you have privacy-related questions, reach out to
-          contact@ascendons.com.
-        </p>
-      </section>
-
-      <div className="flex gap-3">
-        <button
-          onClick={acceptAndReturn}
-          className="bg-[#f1c40f] px-4 py-2 rounded-md font-semibold"
-        >
-          Accept and return
-        </button>
-        <button
-          onClick={() => navigate(-1)}
-          className="px-4 py-2 rounded-md border"
-        >
-          Back
-        </button>
-      </div>
+          <div className="pg-actions">
+            <button type="button" className="x-btn" onClick={acceptAndReturn}>
+              Accept and return
+            </button>
+            <button
+              type="button"
+              className="x-btn x-btn--ghost"
+              onClick={() => navigate(-1)}
+            >
+              Back
+            </button>
+          </div>
+        </div>
+      </article>
     </div>
   );
 };

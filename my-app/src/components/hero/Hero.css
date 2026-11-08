@@ -1,0 +1,164 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 120px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ---------- Stage ---------- */
+
+.hero-stage {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.6s var(--ease-out);
+}
+.hero-canvas.is-ready {
+  opacity: 1;
+}
+
+.hero-static-wrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  transition: opacity 1.2s var(--ease-out);
+}
+.hero-static-wrap.is-hidden {
+  opacity: 0;
+}
+.hero-static {
+  width: min(78vh, 90vw);
+  height: auto;
+  opacity: 0.7;
+}
+@media (min-width: 960px) {
+  .hero-static-wrap {
+    justify-items: end;
+    padding-right: 6vw;
+  }
+}
+
+/* Keeps the headline legible over the scene, and blends into the next section. */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      120% 70% at 0% 100%,
+      rgba(9, 10, 15, 0.92) 0%,
+      rgba(9, 10, 15, 0.55) 45%,
+      transparent 75%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(9, 10, 15, 0.5) 0%,
+      transparent 22%,
+      transparent 70%,
+      var(--bg) 100%
+    );
+}
+@media (max-width: 959px) {
+  .hero-vignette {
+    background: linear-gradient(
+      180deg,
+      rgba(9, 10, 15, 0.35) 0%,
+      rgba(9, 10, 15, 0.2) 30%,
+      rgba(9, 10, 15, 0.85) 62%,
+      var(--bg) 100%
+    );
+  }
+}
+
+/* ---------- Content ---------- */
+
+.hero-content {
+  position: relative;
+  padding-bottom: clamp(40px, 6vh, 72px);
+}
+
+.hero-title {
+  max-width: 15ch;
+  font-size: clamp(2.6rem, 6.1vw, 6.6rem);
+}
+
+.hero-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  /* room for descenders inside the mask */
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.hero-word > span {
+  display: inline-block;
+  transform-origin: 0 100%;
+}
+.hero-sub {
+  margin-top: clamp(24px, 3vw, 36px);
+  max-width: 50ch;
+  color: #c9c7cf;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(28px, 3.5vw, 44px);
+}
+
+/* ---------- Paths ---------- */
+
+.hero-paths {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  border-top: 1px solid var(--line);
+  padding-bottom: 8px;
+}
+@media (min-width: 760px) {
+  .hero-paths {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.hero-path {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.3em;
+  transition:
+    color 0.3s var(--ease-out),
+    text-decoration-color 0.3s var(--ease-out);
+}
+.hero-path:hover {
+  color: var(--text);
+  text-decoration-color: var(--teal);
+}
+@media (min-width: 760px) {
+  .hero-path {
+    padding: 24px 24px 28px 0;
+    border-bottom: 0;
+  }
+  .hero-path + .hero-path {
+    padding-left: 24px;
+    border-left: 1px solid var(--line);
+  }
+}

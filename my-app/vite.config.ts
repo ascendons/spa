@@ -5,7 +5,4 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   base: "/",
   plugins: [react(), tailwindcss()],
-  optimizeDeps: {
-    include: ["@tsparticles/slim"],
-  },
 });
