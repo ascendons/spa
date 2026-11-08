@@ -217,7 +217,9 @@ export default function ProductsShowcase({
               ))}
             </dl>
             <div className="pr-actions">
-              <Button to="/products#crm">Explore Ascendons CRM</Button>
+              <Button href={PRODUCT_URLS.crm} icon="external">
+                Explore Ascendons CRM
+              </Button>
               <p className="pr-audience x-meta">
                 Connects to {listify(CRM.integrations)}.
               </p>
