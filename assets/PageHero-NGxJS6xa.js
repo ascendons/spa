@@ -1,1 +1,0 @@
-import{j as s}from"./index-C9-piIEA.js";function i({title:r,lede:e,children:a}){return s.jsx("section",{className:"ph",children:s.jsxs("div",{className:"x-wrap",children:[s.jsx("h1",{className:"x-display ph-title",children:r}),e&&s.jsx("p",{className:"x-lede ph-lede",children:e}),a&&s.jsx("div",{className:"ph-extra",children:a})]})})}export{i as P};
