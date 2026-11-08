@@ -1,18 +1,20 @@
-import { Link } from "react-router-dom";
-import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { Link, useLocation } from "react-router-dom";
+import { FaLinkedinIn, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import logo from "../ascendons.png";
+import { CONTACT, PRODUCT_URLS, SERVICES } from "../data/site";
+import { Button } from "./ui/ui";
+import "./Footer.css";
 
-const quickLinks = [
+const siteLinks = [
   { to: "/", label: "Home" },
+  { to: "/services", label: "What We Build" },
   { to: "/products", label: "Products" },
-  { to: "/services", label: "Services" },
   { to: "/our-work", label: "Our Work" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
-  { to: "/privacy", label: "Privacy Policy" },
 ];
 
 const solutionLinks = [
-  { to: "/contact", label: "MVP Development" },
   {
     to: "/solutions/whatsapp-business-automation",
     label: "WhatsApp Automation",
@@ -24,117 +26,165 @@ const solutionLinks = [
 ];
 
 function Footer() {
+  // Home, Contact and solution pages already end with their own CTA.
+  const { pathname } = useLocation();
+  const showClose =
+    pathname !== "/" &&
+    pathname !== "/contact" &&
+    !pathname.startsWith("/solutions");
   return (
-    <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white py-10 px-6 md:px-20 font-sans relative z-10">
-      <div className="w-full flex flex-col md:flex-row justify-between gap-12">
-        <div className="md:w-1/4 text-left">
-          <h2 className="text-xl font-bold mb-6">ASCENDONS</h2>
-          <p className="text-sm leading-relaxed">
-            A product engineering studio that ships production-ready MVPs in
-            weeks, builds custom CRMs and automation for growing businesses, and
-            makes its own products, including BriefGuard for legal teams.
-          </p>
-          <div className="flex space-x-4 mt-6">
-            <a
-              href="https://www.linkedin.com/company/ascendons1/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ascendons on LinkedIn"
-              className="bg-blue-900 p-2 rounded-full hover:bg-blue-700 transition-colors"
+    <footer className="site-footer">
+      <div className="x-wrap">
+        {showClose && (
+          <div className="site-footer-close">
+            <h2 className="site-footer-statement">
+              Tell us what you're building.
+            </h2>
+            <div className="site-footer-actions">
+              <Button to="/contact">Start a Conversation</Button>
+              <Button
+                href={`mailto:${CONTACT.email}`}
+                variant="ghost"
+                icon="none"
+              >
+                {CONTACT.email}
+              </Button>
+            </div>
+          </div>
+        )}
+
+        <div className="site-footer-grid">
+          <div className="site-footer-brand">
+            <Link
+              to="/"
+              className="site-footer-logo"
+              aria-label="Ascendons home"
             >
-              <FaLinkedinIn />
-            </a>
-            <a
-              href="https://www.instagram.com/ascendonstech/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Ascendons on Instagram"
-              className="bg-blue-900 p-2 rounded-full hover:bg-blue-700 transition-colors"
-            >
-              <FaInstagram />
-            </a>
+              <img src={logo} alt="" width="32" height="32" />
+              Ascendons
+            </Link>
+            <p>
+              We turn ambitious ideas into production-ready software products
+              and help businesses build smarter digital operations.
+            </p>
+            <div className="site-footer-social">
+              <a
+                href={CONTACT.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Ascendons on LinkedIn"
+              >
+                <FaLinkedinIn aria-hidden="true" />
+              </a>
+              <a
+                href={CONTACT.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Ascendons on Instagram"
+              >
+                <FaInstagram aria-hidden="true" />
+              </a>
+              <a
+                href={CONTACT.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Message Ascendons on WhatsApp"
+              >
+                <FaWhatsapp aria-hidden="true" />
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <h2 className="site-footer-heading">Navigate</h2>
+            <ul>
+              {siteLinks.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to}>{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="site-footer-heading">Services</h2>
+            <ul>
+              {SERVICES.map((s) => (
+                <li key={s.id}>
+                  <Link to={`/services#${s.id}`}>{s.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="site-footer-heading">Products</h2>
+            <ul>
+              <li>
+                <a
+                  href={PRODUCT_URLS.briefguard}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  BriefGuard
+                </a>
+              </li>
+              <li>
+                <Link to="/products#crm">Ascendons CRM</Link>
+              </li>
+              <li>
+                <a
+                  href={PRODUCT_URLS.dpp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ascendons DPP
+                </a>
+              </li>
+              <li>
+                <a
+                  href={PRODUCT_URLS.impakt}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Impakt
+                </a>
+              </li>
+              {solutionLinks.map((l) => (
+                <li key={l.to}>
+                  <Link to={l.to}>{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="site-footer-heading">Contact</h2>
+            <ul>
+              <li>
+                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+              </li>
+              <li>
+                <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  WhatsApp
+                </a>
+              </li>
+            </ul>
+            <address>{CONTACT.address}</address>
           </div>
         </div>
 
-        {/*Quick Links*/}
-        <div className="md:w-1/4 text-left">
-          <h2 className="text-xl font-bold mb-6">Quick Links</h2>
-          <ul className="space-y-2 text-sm">
-            {quickLinks.map((link) => (
-              <li key={link.to}>
-                <Link to={link.to} className="text-white hover:underline">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="site-footer-legal">
+          <p>© {new Date().getFullYear()} Ascendons. All rights reserved.</p>
+          <Link to="/privacy">Privacy Policy</Link>
         </div>
-
-        {/*Products & Solutions*/}
-        <div className="md:w-1/4 text-left">
-          <h2 className="text-xl font-bold mb-6">Products & Solutions</h2>
-          <ul className="space-y-2 text-sm">
-            <li>
-              <a
-                href="https://briefguard.ascendons.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:underline"
-              >
-                BriefGuard
-              </a>
-            </li>
-            <li>
-              <Link to="/products" className="text-white hover:underline">
-                Ascendons CRM
-              </Link>
-            </li>
-            <li>
-              <a
-                href="https://dpp.ascendons.in"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:underline"
-              >
-                Ascendons DPP
-              </a>
-            </li>
-            {solutionLinks.map((link) => (
-              <li key={link.label}>
-                <Link to={link.to} className="text-white hover:underline">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/*Contact Information*/}
-        <div className="md:w-1/4 text-left">
-          <h2 className="text-xl font-bold mb-6">Contact Information</h2>
-          <p className="text-sm">
-            Plot No. J-72, Vastu Villa, Mansarovar, Godadara, Surat, Gujarat -
-            395012
-          </p>
-          <p className="mt-2 text-sm">
-            <a href="tel:+919523297323" className="hover:underline">
-              +91 9523297323
-            </a>
-          </p>
-          <p className="mt-2 text-sm">
-            <a href="mailto:contact@ascendons.com" className="hover:underline">
-              contact@ascendons.com
-            </a>
-          </p>
-        </div>
-      </div>
-
-      {/*Copyright*/}
-      <div className="text-center text-sm mt-10">
-        <p>
-          Copyright ©{new Date().getFullYear()} All rights reserved by{" "}
-          <strong>ASCENDONS</strong>
-        </p>
       </div>
     </footer>
   );

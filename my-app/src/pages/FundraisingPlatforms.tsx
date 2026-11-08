@@ -1,147 +1,130 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import "./Home.css";
 import SEO from "../components/SEO";
+import PageHero from "../components/sections/PageHero";
+import { Button } from "../components/ui/ui";
+import "./pages.css";
 
-const FundraisingPlatforms: React.FC = () => {
-  const [visible, setVisible] = useState({
-    hero: false,
-    problem: false,
-    solution: false,
-    capabilities: false,
-    whyChoose: false,
-    cta: false,
-  });
+const PROBLEMS = [
+  {
+    title: "Manual Onboarding",
+    body: "Paper-based or email-driven onboarding processes are slow, error-prone, and don't scale. Organizations wait weeks to get onboarded.",
+  },
+  {
+    title: "Compliance Risk",
+    body: "Missing documentation, incomplete audit trails, and lack of verification create compliance and governance risks that can impact funding and reputation.",
+  },
+  {
+    title: "Inefficient Workflows",
+    body: "Approval processes rely on email chains and manual checklists. Delays pile up, and there's no visibility into where requests are stuck.",
+  },
+];
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const problemRef = useRef<HTMLDivElement>(null);
-  const solutionRef = useRef<HTMLDivElement>(null);
-  const capabilitiesRef = useRef<HTMLDivElement>(null);
-  const whyChooseRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
+const CAPABILITIES = [
+  {
+    title: "Organization Onboarding",
+    body: "Streamlined registration process with multi-step forms, document upload, and automated verification workflows. Organizations can self-register and track their application status in real-time.",
+  },
+  {
+    title: "Document Upload & Verification",
+    body: "Secure document upload with automatic validation, format checks, and verification workflows. Support for multiple document types with version control and audit trails.",
+  },
+  {
+    title: "Admin Approvals",
+    body: "Configurable approval workflows with multi-level approvals, role-based permissions, and automated notifications. Track approval status and history with full audit trails.",
+  },
+  {
+    title: "Role-Based Access",
+    body: "Granular permission system with roles for admins, reviewers, organizations, and donors. Control who can view, edit, or approve what—with fine-grained access controls.",
+  },
+  {
+    title: "Secure Payment Integrations",
+    body: "Integrated payment gateways for donations, fees, and transactions. Support for multiple payment methods with secure processing, receipts, and financial reporting.",
+  },
+  {
+    title: "Audit-Ready Workflows",
+    body: "Complete audit trails for all actions, document changes, and approvals. Export-ready reports for compliance, governance, and financial audits.",
+  },
+];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === heroRef.current) {
-              setVisible((prev) => ({ ...prev, hero: true }));
-            } else if (entry.target === problemRef.current) {
-              setVisible((prev) => ({ ...prev, problem: true }));
-            } else if (entry.target === solutionRef.current) {
-              setVisible((prev) => ({ ...prev, solution: true }));
-            } else if (entry.target === capabilitiesRef.current) {
-              setVisible((prev) => ({ ...prev, capabilities: true }));
-            } else if (entry.target === whyChooseRef.current) {
-              setVisible((prev) => ({ ...prev, whyChoose: true }));
-            } else if (entry.target === ctaRef.current) {
-              setVisible((prev) => ({ ...prev, cta: true }));
-            }
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
+const REASONS = [
+  {
+    title: "Faster Onboarding",
+    body: "Reduce onboarding time from weeks to days with automated workflows and self-service registration.",
+  },
+  {
+    title: "Better Governance",
+    body: "Complete visibility into all processes, approvals, and transactions with full audit trails and reporting.",
+  },
+  {
+    title: "Scalable Architecture",
+    body: "Built to handle growth—from hundreds to thousands of organizations without performance degradation.",
+  },
+];
 
-    const refs = [
-      heroRef,
-      problemRef,
-      solutionRef,
-      capabilitiesRef,
-      whyChooseRef,
-      ctaRef,
-    ];
-    refs.forEach((ref) => {
-      if (ref.current) observer.observe(ref.current);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
+const FundraisingPlatforms = () => {
   return (
-    <>
+    <div className="x-page">
       <SEO
         title="Fundraising & Workflow Platforms for Nonprofits"
         description="Scalable platforms for nonprofits and institutions: automated onboarding, document verification, multi-level approvals, payment gateways, and audit-ready workflows."
         canonicalPath="/solutions/fundraising-workflow-platforms"
         keywords="nonprofit software platforms, NGO fundraising platform, institutional workflow automation, NGO donor management"
       />
-      {/* Hero Section */}
-      <section className="home-section">
-        <div className="home-content">
-          <h1
-            ref={heroRef}
-            className={`home-heading ${visible.hero ? "slide-up" : ""}`}
-          >
-            Fundraising & Workflow Platforms
-          </h1>
-          <p
-            className={`hero-subheading ${visible.hero ? "slide-up" : ""}`}
-            style={{ marginTop: "1rem" }}
-          >
-            Complete platform solutions for nonprofits and institutions. From
-            organization onboarding to secure payments, we build systems that
-            handle complex workflows, compliance, and scale.
-          </p>
-        </div>
-      </section>
-
-      {/* Problem Statement */}
-      <section className="text-section">
-        <div ref={problemRef} className="what-we-do-container">
-          {/* <p className={`subpart1 ${visible.problem ? "slide-up" : ""}`}>
-            THE CHALLENGE
-          </p> */}
-          <h2 className={`subpart2 ${visible.problem ? "slide-up" : ""}`}>
-            Manual Processes Don't Scale for Nonprofits
-          </h2>
-          <p className={`subpart3 ${visible.problem ? "slide-up" : ""}`}>
-            Nonprofits and institutions struggle with manual onboarding,
-            document verification, and approval workflows. Spreadsheets and
-            email chains create compliance risks, slow down operations, and make
-            it impossible to scale. You need a platform that handles everything
-            from organization registration to payment processing—with full audit
-            trails and role-based access.
-          </p>
-        </div>
-
-        <div className="solutions-grid" style={{ marginTop: "2rem" }}>
-          <div className={`solution-card ${visible.problem ? "slide-up" : ""}`}>
-            <h3 className="solution-title">Manual Onboarding</h3>
-            <p className="solution-description">
-              Paper-based or email-driven onboarding processes are slow,
-              error-prone, and don't scale. Organizations wait weeks to get
-              onboarded.
-            </p>
-          </div>
-          <div className={`solution-card ${visible.problem ? "slide-up" : ""}`}>
-            <h3 className="solution-title">Compliance Risk</h3>
-            <p className="solution-description">
-              Missing documentation, incomplete audit trails, and lack of
-              verification create compliance and governance risks that can
-              impact funding and reputation.
-            </p>
-          </div>
-          <div className={`solution-card ${visible.problem ? "slide-up" : ""}`}>
-            <h3 className="solution-title">Inefficient Workflows</h3>
-            <p className="solution-description">
-              Approval processes rely on email chains and manual checklists.
-              Delays pile up, and there's no visibility into where requests are
-              stuck.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Solution Overview */}
-      <section
-        ref={solutionRef}
-        className={`trust-section ${visible.solution ? "visible" : ""}`}
+      <PageHero
+        title="Fundraising & Workflow Platforms"
+        lede="Complete platform solutions for nonprofits and institutions. From organization onboarding to secure payments, we build systems that handle complex workflows, compliance, and scale."
       >
-        <div className="trust-content">
-          <h2 className="trust-heading">Platform-Driven Approach</h2>
-          <p className="trust-description">
+        <div className="pg-actions">
+          <Button to="/contact">Discuss Your Platform</Button>
+          <Button href="#capabilities" variant="ghost">
+            Core capabilities
+          </Button>
+        </div>
+      </PageHero>
+
+      {/* The challenge */}
+      <section
+        className="x-section x-section--tight"
+        aria-labelledby="fr-problem-title"
+      >
+        <div className="x-wrap">
+          <div className="x-head x-head--split">
+            <div>
+              <h2 id="fr-problem-title" className="x-h2">
+                Manual Processes Don't Scale for Nonprofits
+              </h2>
+            </div>
+            <p className="x-lede">
+              Nonprofits and institutions struggle with manual onboarding,
+              document verification, and approval workflows. Spreadsheets and
+              email chains create compliance risks, slow down operations, and
+              make it impossible to scale. You need a platform that handles
+              everything from organization registration to payment
+              processing—with full audit trails and role-based access.
+            </p>
+          </div>
+          <div className="sol-problems">
+            {PROBLEMS.map((p) => (
+              <article key={p.title} className="sol-problem">
+                <h3 className="x-h3">{p.title}</h3>
+                <p className="x-body">{p.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Approach */}
+      <section
+        className="x-section x-section--tight x-paper"
+        aria-labelledby="fr-approach-title"
+      >
+        <div className="x-wrap sol-statement">
+          <div>
+            <h2 id="fr-approach-title" className="x-h2">
+              Platform-Driven Approach
+            </h2>
+          </div>
+          <p className="sol-statement-body">
             We build complete fundraising and workflow platforms that handle
             organization onboarding, document verification, admin approvals,
             role-based access, secure payments, and audit-ready workflows—all in
@@ -151,234 +134,70 @@ const FundraisingPlatforms: React.FC = () => {
         </div>
       </section>
 
-      {/* Core Capabilities */}
-      <section className="text-section">
-        <div ref={capabilitiesRef} className="what-we-do-container">
-          {/* <p className={`subpart1 ${visible.capabilities ? "slide-up" : ""}`}>
-            CORE CAPABILITIES
-          </p> */}
-          <h2 className={`subpart2 ${visible.capabilities ? "slide-up" : ""}`}>
-            Everything You Need in One Platform
-          </h2>
-        </div>
-
-        <div className="solutions-grid" style={{ marginTop: "2rem" }}>
-          <div
-            className={`solution-card ${visible.capabilities ? "slide-up" : ""}`}
-          >
-            <div className="solution-icon fundraising-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Organization Onboarding</h3>
-            <p className="solution-description">
-              Streamlined registration process with multi-step forms, document
-              upload, and automated verification workflows. Organizations can
-              self-register and track their application status in real-time.
-            </p>
-          </div>
-          <div
-            className={`solution-card ${visible.capabilities ? "slide-up" : ""}`}
-          >
-            <div className="solution-icon whatsapp-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Document Upload & Verification</h3>
-            <p className="solution-description">
-              Secure document upload with automatic validation, format checks,
-              and verification workflows. Support for multiple document types
-              with version control and audit trails.
-            </p>
-          </div>
-          <div
-            className={`solution-card ${visible.capabilities ? "slide-up" : ""}`}
-          >
-            <div className="solution-icon enterprise-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M9 11l3 3L22 4" />
-                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Admin Approvals</h3>
-            <p className="solution-description">
-              Configurable approval workflows with multi-level approvals,
-              role-based permissions, and automated notifications. Track
-              approval status and history with full audit trails.
-            </p>
-          </div>
-          <div
-            className={`solution-card ${visible.capabilities ? "slide-up" : ""}`}
-          >
-            <div className="solution-icon fundraising-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                <circle cx="9" cy="7" r="4" />
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Role-Based Access</h3>
-            <p className="solution-description">
-              Granular permission system with roles for admins, reviewers,
-              organizations, and donors. Control who can view, edit, or approve
-              what—with fine-grained access controls.
-            </p>
-          </div>
-          <div
-            className={`solution-card ${visible.capabilities ? "slide-up" : ""}`}
-          >
-            <div className="solution-icon whatsapp-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
-                <line x1="1" y1="10" x2="23" y2="10" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Secure Payment Integrations</h3>
-            <p className="solution-description">
-              Integrated payment gateways for donations, fees, and transactions.
-              Support for multiple payment methods with secure processing,
-              receipts, and financial reporting.
-            </p>
-          </div>
-          <div
-            className={`solution-card ${visible.capabilities ? "slide-up" : ""}`}
-          >
-            <div className="solution-icon enterprise-icon">
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
-              </svg>
-            </div>
-            <h3 className="solution-title">Audit-Ready Workflows</h3>
-            <p className="solution-description">
-              Complete audit trails for all actions, document changes, and
-              approvals. Export-ready reports for compliance, governance, and
-              financial audits.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Additional Benefits */}
+      {/* Core capabilities */}
       <section
-        ref={whyChooseRef}
-        className="text-section"
-        style={{ background: "#f9fafb", paddingTop: "3rem" }}
+        id="capabilities"
+        className="x-section"
+        aria-labelledby="fr-cap-title"
       >
-        <div className="what-we-do-container">
-          <h2
-            className={`subpart2 ${visible.whyChoose ? "slide-up" : ""}`}
-            style={{ marginBottom: "2rem" }}
-          >
-            Why Choose Our Platform Approach
-          </h2>
-          <div className="solutions-grid solutions-grid-3col">
-            <div
-              className={`solution-card ${visible.whyChoose ? "slide-up" : ""}`}
-            >
-              <h3 className="solution-title">Faster Onboarding</h3>
-              <p className="solution-description">
-                Reduce onboarding time from weeks to days with automated
-                workflows and self-service registration.
-              </p>
-            </div>
-            <div
-              className={`solution-card ${visible.whyChoose ? "slide-up" : ""}`}
-            >
-              <h3 className="solution-title">Better Governance</h3>
-              <p className="solution-description">
-                Complete visibility into all processes, approvals, and
-                transactions with full audit trails and reporting.
-              </p>
-            </div>
-            <div
-              className={`solution-card ${visible.whyChoose ? "slide-up" : ""}`}
-            >
-              <h3 className="solution-title">Scalable Architecture</h3>
-              <p className="solution-description">
-                Built to handle growth—from hundreds to thousands of
-                organizations without performance degradation.
-              </p>
-            </div>
+        <div className="x-wrap">
+          <div className="x-head">
+            <h2 id="fr-cap-title" className="x-h2">
+              Everything You Need in One Platform
+            </h2>
+          </div>
+          <div className="sol-cards sol-cards--3">
+            {CAPABILITIES.map((c) => (
+              <article key={c.title} className="sol-card x-panel">
+                <h3 className="x-h3">{c.title}</h3>
+                <p className="x-body">{c.body}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section
-        ref={ctaRef}
-        className={`cta-section ${visible.cta ? "visible" : ""}`}
-      >
-        <div className="cta-content">
-          <h2 className="cta-heading">Discuss Your Platform</h2>
-          <p className="cta-description">
-            Ready to build a fundraising and workflow platform that scales?
-            Let's discuss your requirements, compliance needs, and how we can
-            deliver a system that transforms your operations.
-          </p>
-          <Link
-            to="/contact"
-            className="cta-submit-button"
-            style={{
-              display: "inline-block",
-              textDecoration: "none",
-              textAlign: "center",
-              width: "auto",
-              padding: "1rem 3rem",
-            }}
-          >
-            Discuss Your Platform
-          </Link>
+      {/* Why choose */}
+      <section className="x-section x-paper" aria-labelledby="fr-why-title">
+        <div className="x-wrap">
+          <div className="x-head">
+            <h2 id="fr-why-title" className="x-h2">
+              Why Choose Our Platform Approach
+            </h2>
+          </div>
+          <ul className="sol-steps">
+            {REASONS.map((r) => (
+              <li key={r.title} className="sol-step">
+                <h3 className="sol-step-title">{r.title}</h3>
+                <p className="sol-step-body">{r.body}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
-    </>
+
+      {/* CTA */}
+      <section
+        className="x-section x-section--tight sol-cta"
+        aria-labelledby="fr-cta-title"
+      >
+        <div className="x-wrap">
+          <div className="sol-cta-inner">
+            <h2 id="fr-cta-title" className="x-h2">
+              Discuss Your Platform
+            </h2>
+            <p className="x-lede">
+              Ready to build a fundraising and workflow platform that scales?
+              Let's discuss your requirements, compliance needs, and how we can
+              deliver a system that transforms your operations.
+            </p>
+            <div className="pg-actions">
+              <Button to="/contact">Discuss Your Platform</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 };
 

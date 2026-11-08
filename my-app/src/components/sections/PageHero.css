@@ -1,0 +1,14 @@
+.ph {
+  padding: clamp(160px, 20vw, 240px) 0 clamp(72px, 9vw, 120px);
+  border-bottom: 1px solid var(--line);
+}
+.ph-title {
+  max-width: 16ch;
+  font-size: clamp(2.75rem, 7vw, 7rem);
+}
+.ph-lede {
+  margin-top: 32px;
+}
+.ph-extra {
+  margin-top: 40px;
+}

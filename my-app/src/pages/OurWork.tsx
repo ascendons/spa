@@ -1,363 +1,54 @@
-import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import "./Home.css";
 import SEO from "../components/SEO";
+import PageHero from "../components/sections/PageHero";
+import CaseStudies from "../components/sections/CaseStudies";
+import { BRIEFGUARD, CRM, DPP, IMPAKT } from "../data/site";
+import "./pages.css";
 
-const OurWork: React.FC = () => {
-  const [visible, setVisible] = useState({
-    hero: false,
-    case1: false,
-    case2: false,
-  });
-
-  const heroRef = useRef<HTMLDivElement>(null);
-  const case1Ref = useRef<HTMLDivElement>(null);
-  const case2Ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            if (entry.target === heroRef.current) {
-              setVisible((prev) => ({ ...prev, hero: true }));
-            } else if (entry.target === case1Ref.current) {
-              setVisible((prev) => ({ ...prev, case1: true }));
-            } else if (entry.target === case2Ref.current) {
-              setVisible((prev) => ({ ...prev, case2: true }));
-            }
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
-
-    if (heroRef.current) observer.observe(heroRef.current);
-    if (case1Ref.current) observer.observe(case1Ref.current);
-    if (case2Ref.current) observer.observe(case2Ref.current);
-
-    return () => observer.disconnect();
-  }, []);
-
+const OurWork = () => {
   return (
-    <>
+    <div className="x-page">
       <SEO
-        title="Our Work & Case Studies | Real Platforms & Measurable Impact"
-        description="See case studies of platforms built by Ascendons: 5,000+ daily WhatsApp messages automated with 60% faster response times, and NGO platforms managing 300+ partner organizations."
+        title="Our Work & Case Studies | Ascendons"
+        description="Case studies from Ascendons: WhatsApp automation handling 5,000+ conversations a day, and a fundraising and admin platform serving 300+ partner organisations."
         canonicalPath="/our-work"
-        keywords="Ascendons case studies, WhatsApp automation results, NGO platform development, client success stories"
+        keywords="Ascendons case studies, WhatsApp automation case study, nonprofit platform development, fundraising platform, workflow automation results"
       />
-      {/* Hero Section */}
-      <section className="home-section">
-        <div className="home-content">
-          <h1
-            ref={heroRef}
-            className={`home-heading ${visible.hero ? "slide-up" : ""}`}
-          >
-            Our Work
-          </h1>
-          <p
-            className={`hero-subheading ${visible.hero ? "slide-up" : ""}`}
-            style={{ marginTop: "1rem" }}
-          >
-            Real platforms. Real outcomes. Real impact. Here's how we've helped
-            organizations automate workflows, scale operations, and deliver
-            results.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Systems that run every day, for real organisations."
+        lede="The problem we were handed, what we built, how it connects, and what it does today."
+      />
 
-      {/* Case Study 1: WhatsApp Automation */}
+      <CaseStudies withHeader={false} headingLevel="h2" />
+
       <section
-        className="text-section"
-        style={{ position: "relative", zIndex: 10 }}
+        className="x-section x-section--tight"
+        aria-labelledby="own-title"
       >
-        <div ref={case1Ref} className="what-we-do-container">
-          {/* <p className={`subpart1 ${visible.case1 ? "slide-up" : ""}`}>
-            CASE STUDY
-          </p> */}
-          <h2 className={`subpart2 ${visible.case1 ? "slide-up" : ""}`}>
-            WhatsApp Automation for a Consumer-Facing Platform
-          </h2>
-        </div>
-
-        <div className="case-study-card slide-up">
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            The Challenge
-          </h3>
-          <p
-            className="solution-description"
-            style={{ marginBottom: "1.5rem" }}
-          >
-            A consumer-facing platform was handling thousands of customer
-            inquiries daily through WhatsApp. Manual responses were slow,
-            inconsistent, and couldn't scale. The team was spending hours on
-            repetitive queries like order status, product information, and basic
-            support—leaving little time for complex issues. Lead qualification
-            was manual, and many potential customers were lost due to delayed
-            responses.
-          </p>
-
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            The Solution
-          </h3>
-          <p
-            className="solution-description"
-            style={{ marginBottom: "1.5rem" }}
-          >
-            We built a comprehensive WhatsApp automation system using WhatsApp
-            Cloud API that integrated with their order management and CRM
-            systems. The solution included:
-          </p>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              marginBottom: "2rem",
-              color: "#6b7280",
-            }}
-          >
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Automated Lead Qualification:
-              </strong>{" "}
-              Intelligent workflows that qualify leads, answer product queries,
-              and route qualified leads to sales teams.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Order Tracking Automation:
-              </strong>{" "}
-              Real-time order status updates, shipping notifications, and
-              delivery confirmations—all automated.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Customer Support Workflows:
-              </strong>{" "}
-              Automated responses to common FAQs, with seamless handoff to human
-              agents for complex issues.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>System Integration:</strong>{" "}
-              Deep integration with their order management, inventory, and CRM
-              systems for real-time data and actions.
-            </li>
-          </ul>
-
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            Results & Impact
-          </h3>
-          <div
-            className="solutions-grid solutions-grid-3col"
-            style={{ marginTop: "1.5rem" }}
-          >
-            <div className="solution-card slide-up">
-              <h4 className="solution-title" style={{ color: "#1e40af" }}>
-                60% Faster Response Time
-              </h4>
-              <p className="solution-description">
-                <strong>
-                  Response time reduced from 5 minutes to 2 minutes average.
-                </strong>{" "}
-                Automated handling of 80% of routine queries, freeing up the
-                team to focus on complex customer issues and strategic work.
-              </p>
-            </div>
-            <div className="solution-card slide-up">
-              <h4 className="solution-title" style={{ color: "#1e40af" }}>
-                24/7 Scalability
-              </h4>
-              <p className="solution-description">
-                <strong>
-                  Handles 5,000+ daily conversations without additional staff.
-                </strong>{" "}
-                System scales automatically, enabling 24/7 customer engagement
-                with zero downtime since deployment.
-              </p>
-            </div>
-            <div className="solution-card slide-up">
-              <h4 className="solution-title" style={{ color: "#1e40af" }}>
-                35% Increase in Conversion
-              </h4>
-              <p className="solution-description">
-                <strong>Lead conversion improved by 35%.</strong> Faster
-                response times and automated lead qualification resulted in
-                higher conversion rates and 92% customer satisfaction score.
-              </p>
-            </div>
+        <div className="x-wrap">
+          <div className="x-head">
+            <h2 id="own-title" className="x-h2">
+              Software we build, ship and operate ourselves.
+            </h2>
           </div>
-        </div>
-      </section>
-
-      {/* Case Study 2: Fundraising Platform */}
-      <section
-        className="text-section"
-        style={{ position: "relative", zIndex: 10 }}
-      >
-        <div ref={case2Ref} className="what-we-do-container">
-          {/* <p className={`subpart1 ${visible.case2 ? "slide-up" : ""}`}>
-            CASE STUDY
-          </p> */}
-          <h2 className={`subpart2 ${visible.case2 ? "slide-up" : ""}`}>
-            Fundraising & Admin Platform for a Large Nonprofit
-          </h2>
-        </div>
-
-        <div
-          className="solution-card slide-up"
-          style={{
-            maxWidth: "none",
-            margin: "1.5rem auto 0",
-            textAlign: "left",
-            background: "white",
-          }}
-        >
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            The Challenge
-          </h3>
-          <p className="solution-description" style={{ marginBottom: "2rem" }}>
-            A leading nonprofit organization was managing hundreds of partner
-            organizations through manual processes. Onboarding took weeks,
-            document verification was done via email, and approval workflows
-            relied on spreadsheets and email chains. There was no centralized
-            system for tracking applications, managing payments, or maintaining
-            audit trails. Compliance was a constant concern, and scaling
-            operations was impossible with existing processes.
-          </p>
-
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            The Solution
-          </h3>
-          <p className="solution-description" style={{ marginBottom: "2rem" }}>
-            We built a complete fundraising and workflow platform that
-            transformed their operations:
-          </p>
-          <ul
-            style={{
-              listStyle: "none",
-              padding: 0,
-              marginBottom: "2rem",
-              color: "#6b7280",
-            }}
-          >
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Organization Onboarding:
-              </strong>{" "}
-              Self-service registration portal with multi-step forms, document
-              upload, and real-time application tracking.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>Document Workflows:</strong>{" "}
-              Automated document verification, format validation, and secure
-              storage with version control and audit trails.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Admin Approval System:
-              </strong>{" "}
-              Configurable multi-level approval workflows with role-based
-              permissions, automated notifications, and complete approval
-              history.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Role-Based Access Control:
-              </strong>{" "}
-              Granular permissions for admins, reviewers, organizations, and
-              donors with fine-grained access controls.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Secure Payment Integration:
-              </strong>{" "}
-              Integrated payment gateways for donations, fees, and transactions
-              with secure processing and financial reporting.
-            </li>
-            <li style={{ marginBottom: "0.75rem", paddingLeft: "1.5rem" }}>
-              <strong style={{ color: "#404044" }}>
-                Audit-Ready Workflows:
-              </strong>{" "}
-              Complete audit trails for all actions, document changes, and
-              approvals with export-ready reports for compliance.
-            </li>
+          <ul className="pg-index">
+            {[
+              { p: BRIEFGUARD, to: "/products" },
+              { p: CRM, to: "/products#crm" },
+              { p: DPP, to: "/products#dpp" },
+              { p: IMPAKT, to: "/products#impakt" },
+            ].map(({ p, to }) => (
+              <li key={p.name}>
+                <Link to={to} className="pg-index-row">
+                  <span className="pg-index-title">{p.name}</span>
+                  <span className="pg-index-desc">{p.kind}</span>
+                </Link>
+              </li>
+            ))}
           </ul>
-
-          <h3 className="solution-title" style={{ marginBottom: "1.5rem" }}>
-            Results & Impact
-          </h3>
-          <div
-            className="solutions-grid solutions-grid-3col"
-            style={{ marginTop: "1.5rem" }}
-          >
-            <div className="solution-card slide-up">
-              <h4 className="solution-title" style={{ color: "#1e40af" }}>
-                85% Faster Onboarding
-              </h4>
-              <p className="solution-description">
-                <strong>
-                  Onboarding reduced from 3 weeks to 2 days (85% time
-                  reduction).
-                </strong>{" "}
-                Automated workflows and self-service registration enable faster
-                organization activation with complete document verification.
-              </p>
-            </div>
-            <div className="solution-card slide-up">
-              <h4 className="solution-title" style={{ color: "#1e40af" }}>
-                100% Audit Compliance
-              </h4>
-              <p className="solution-description">
-                <strong>Zero compliance issues since deployment.</strong>{" "}
-                Complete visibility into all processes, approvals, and
-                transactions with full audit trails, ensuring regulatory
-                compliance and reducing governance risks.
-              </p>
-            </div>
-            <div className="solution-card slide-up">
-              <h4 className="solution-title" style={{ color: "#1e40af" }}>
-                300+ Organizations Managed
-              </h4>
-              <p className="solution-description">
-                <strong>
-                  Scaled from 50 to 300+ organizations seamlessly.
-                </strong>{" "}
-                Platform handles growth without performance degradation,
-                processing 1,000+ transactions daily with 99.9% uptime.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section
-        className="cta-section visible"
-        style={{ position: "relative", zIndex: 10 }}
-      >
-        <div className="cta-content">
-          <h2 className="cta-heading">Ready to Build Your Platform?</h2>
-          <p className="cta-description">
-            Let's discuss how we can help you automate workflows, scale
-            operations, and deliver outcomes that matter.
-          </p>
-          <Link
-            to="/contact"
-            className="cta-submit-button"
-            style={{
-              display: "inline-block",
-              textDecoration: "none",
-              textAlign: "center",
-              width: "auto",
-              padding: "1rem 3rem",
-            }}
-          >
-            Book a Strategy Call
-          </Link>
-        </div>
-      </section>
-    </>
+    </div>
   );
 };
 

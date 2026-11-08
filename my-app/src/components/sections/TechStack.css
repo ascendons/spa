@@ -1,0 +1,44 @@
+.st-stack {
+  display: grid;
+  border-top: 1px solid var(--line-2);
+}
+
+.st-layer {
+  display: grid;
+  gap: 14px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+@media (min-width: 900px) {
+  .st-layer {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 2fr);
+    align-items: baseline;
+    gap: 32px;
+  }
+}
+
+.st-layer-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+.st-layer-head p {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Stack names are technical content, so they are set in the mono face. */
+.st-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: clamp(0.95rem, 1.3vw, 1.125rem);
+  color: var(--text);
+}

@@ -40,7 +40,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept }) => {
     <div className="cookie-consent-banner">
       <div className="cookie-consent-content">
         <div className="cookie-consent-text">
-          <h3>🍪 Cookie Consent</h3>
+          <h3>Cookies</h3>
           <p>
             We use cookies to enhance your browsing experience, analyze site
             traffic, and personalize content. By clicking "Accept", you consent
