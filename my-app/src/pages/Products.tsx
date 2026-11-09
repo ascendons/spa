@@ -2,10 +2,10 @@ import SEO from "../components/SEO";
 import PageHero from "../components/sections/PageHero";
 import ProductsShowcase from "../components/sections/ProductsShowcase";
 import { Button } from "../components/ui/ui";
-import { DPP, IMPAKT, PRODUCT_URLS, listify } from "../data/site";
+import { DPP, IMPAKT, LOGISTICS, PRODUCT_URLS, listify } from "../data/site";
 import "./pages.css";
 
-type Detail = typeof DPP | typeof IMPAKT;
+type Detail = typeof DPP | typeof IMPAKT | typeof LOGISTICS;
 
 /** Full feature list for a product, taken from its live site. */
 function ProductDetail({
@@ -62,10 +62,10 @@ const Products = () => {
   return (
     <div className="x-page">
       <SEO
-        title="Products | BriefGuard, Ascendons CRM, Ascendons DPP & Impakt"
-        description="Software built and run by Ascendons: BriefGuard, a legal operating system for India; Ascendons CRM, a configurable CRM and business operations platform; Ascendons DPP for Digital Product Passports; and Impakt, monitoring & evaluation for NGOs."
+        title="Products | BriefGuard, Ascendons CRM, DPP, Impakt & Logistics"
+        description="Software built and run by Ascendons: BriefGuard, a legal operating system for India; Ascendons CRM, a configurable CRM and business operations platform; Ascendons DPP for Digital Product Passports; Impakt, monitoring & evaluation for NGOs; and Ascendons Logistics, transport management for road carriers."
         canonicalPath="/products"
-        keywords="BriefGuard, legal operating system, citation verification, Indian law AI, Ascendons CRM, configurable CRM, Ascendons DPP, Digital Product Passport, ESPR, Impakt, NGO monitoring and evaluation, M&E software"
+        keywords="BriefGuard, legal operating system, citation verification, Indian law AI, Ascendons CRM, configurable CRM, Ascendons DPP, Digital Product Passport, ESPR, Impakt, NGO monitoring and evaluation, M&E software, Ascendons Logistics, transport management software, LR booking, lorry challan, fleet management"
       />
       <PageHero
         title="We don't just build products for clients. We build our own."
@@ -80,6 +80,13 @@ const Products = () => {
         product={IMPAKT}
         href={PRODUCT_URLS.impakt}
         audienceLabel="Built for programmes across"
+      />
+      <ProductDetail
+        id="logistics"
+        product={LOGISTICS}
+        href={PRODUCT_URLS.logistics}
+        paper
+        audienceLabel="Built for"
       />
     </div>
   );
