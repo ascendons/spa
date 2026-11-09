@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import SEO from "../components/SEO";
 import PageHero from "../components/sections/PageHero";
 import CaseStudies from "../components/sections/CaseStudies";
-import { BRIEFGUARD, CRM, DPP, IMPAKT } from "../data/site";
+import { BRIEFGUARD, CRM, DPP, IMPAKT, LOGISTICS } from "../data/site";
 import "./pages.css";
 
 const OurWork = () => {
@@ -37,6 +37,7 @@ const OurWork = () => {
               { p: CRM, to: "/products#crm" },
               { p: DPP, to: "/products#dpp" },
               { p: IMPAKT, to: "/products#impakt" },
+              { p: LOGISTICS, to: "/products#logistics" },
             ].map(({ p, to }) => (
               <li key={p.name}>
                 <Link to={to} className="pg-index-row">

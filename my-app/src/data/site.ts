@@ -22,6 +22,7 @@ export const PRODUCT_URLS = {
   dpp: "https://dpp.ascendons.in",
   crm: "https://crm.ascendons.com",
   impakt: "https://impakt.ascendons.in",
+  logistics: "https://app.parshuramexpress.com",
 };
 
 /** ["a", "b", "c"] -> "a, b and c" */
@@ -283,6 +284,52 @@ export const IMPAKT = {
     "Skilling & livelihoods",
     "Women's self-help groups",
     "Youth employability",
+  ],
+};
+
+// Source: parshuram-crm repo, master (checked 2026-11-09). Only modules that
+// exist in code are listed; the customer portal is a rate estimator only.
+export const LOGISTICS = {
+  name: "Ascendons Logistics",
+  kind: "Transport & logistics management for road carriers",
+  summary:
+    "Runs a road transport business end to end: LR booking, dispatch, trips, delivery and GST billing, in one web platform built for operators who live on the keyboard.",
+  highlights: [
+    "LR / bilty booking with paid, to-pay and billed series",
+    "Dispatch planning with lorry challans and driver advances",
+    "GPS trip tracking with proof of delivery",
+    "GST invoicing, customer credit and trip profitability",
+  ],
+  features: [
+    {
+      title: "LR / bilty booking",
+      body: "Paid, to-pay and billed LR series with GST rules (including reverse charge) applied automatically and printable LR PDFs.",
+    },
+    {
+      title: "Rate cards & contracts",
+      body: "Rate cards, customer-specific lane and product rates, quotations, and controlled charge overrides.",
+    },
+    {
+      title: "Dispatch & trips",
+      body: "Plan loads onto vehicles, issue lorry challans, record driver advances and see the profit and loss of every trip.",
+    },
+    {
+      title: "Tracking & delivery",
+      body: "GPS tracking with geofence events, gate passes and proof of delivery stored against each consignment.",
+    },
+    {
+      title: "Billing & receivables",
+      body: "GST invoices, payment recording and per-customer credit limits and ledgers, with expenses tracked by trip and station.",
+    },
+    {
+      title: "Fleet, hubs & integrations",
+      body: "Vehicles, drivers, vendors and warehouse inventory in one place, with reports and an API for enterprise customers to book directly.",
+    },
+  ],
+  audience: [
+    "Road transport companies",
+    "Part-load & full-truck carriers",
+    "Logistics operators",
   ],
 };
 

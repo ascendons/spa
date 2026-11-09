@@ -4,6 +4,7 @@ import {
   CRM,
   DPP,
   IMPAKT,
+  LOGISTICS,
   PRODUCT_URLS,
   listify,
 } from "../../data/site";
@@ -74,7 +75,50 @@ export function CrmMockup() {
   );
 }
 
-const MORE_PRODUCTS = [
+/** Illustrative LR register built from the verified feature set (the public URL is the client's marketing site, not the app). */
+function LogisticsMockup() {
+  const rows = [
+    { lr: "LR-24871", route: "Surat → Pune", series: "Paid", status: "In transit", tone: "move" },
+    { lr: "LR-24870", route: "Surat → Indore", series: "To-pay", status: "Delivered · POD", tone: "ok" },
+    { lr: "LR-24869", route: "Vapi → Nagpur", series: "Billed", status: "Loaded · LC-1182", tone: "move" },
+    { lr: "LR-24868", route: "Surat → Jaipur", series: "Billed", status: "Booked", tone: "idle" },
+  ];
+  return (
+    <span className="lgx" aria-hidden="true">
+      <span className="lgx-top">
+        <b>LR register</b>
+        <span className="x-meta">Branch: Surat ▾</span>
+      </span>
+      <span className="lgx-rows">
+        {rows.map((r) => (
+          <span key={r.lr} className="lgx-row">
+            <span className="lgx-lr">{r.lr}</span>
+            <span className="lgx-route">{r.route}</span>
+            <span className="lgx-series x-meta">{r.series}</span>
+            <span className={`lgx-status lgx-status--${r.tone}`}>{r.status}</span>
+          </span>
+        ))}
+      </span>
+      <span className="lgx-note x-meta">Illustrative interface</span>
+    </span>
+  );
+}
+
+type MoreProduct = {
+  name: string;
+  kind: string;
+  summary: string;
+  points: readonly string[];
+  href: string;
+  host: string;
+  alt: string;
+  image?: string;
+  w?: number;
+  h?: number;
+  mockup?: React.ReactNode;
+};
+
+const MORE_PRODUCTS: MoreProduct[] = [
   {
     name: DPP.name,
     kind: DPP.kind,
@@ -98,6 +142,16 @@ const MORE_PRODUCTS = [
     w: 1554,
     h: 676,
     alt: "Impakt homepage: 'Every life you touch, measured with care.' beside a photo of students with a field-report notification and an enrolment counter.",
+  },
+  {
+    name: LOGISTICS.name,
+    kind: LOGISTICS.kind,
+    summary: LOGISTICS.summary,
+    points: LOGISTICS.highlights,
+    href: PRODUCT_URLS.logistics,
+    host: "app.parshuramexpress.com",
+    alt: "",
+    mockup: <LogisticsMockup />,
   },
 ];
 
@@ -227,7 +281,7 @@ export default function ProductsShowcase({
           </div>
         </article>
 
-        {/* More products — DPP and Impakt, real screenshots of the live sites */}
+        {/* More products — DPP and Impakt (live-site screenshots) and Logistics (illustrative) */}
         <div className="pr-more">
           <p className="pr-more-label x-meta">More from the studio</p>
           <div className="pr-more-grid">
@@ -246,14 +300,16 @@ export default function ProductsShowcase({
                     <i />
                     <span className="x-meta">{p.host}</span>
                   </span>
-                  <img
-                    src={p.image}
-                    alt={p.alt}
-                    width={p.w}
-                    height={p.h}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {p.mockup ?? (
+                    <img
+                      src={p.image}
+                      alt={p.alt}
+                      width={p.w}
+                      height={p.h}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </a>
                 <div className="pr-card-body">
                   <p className="pr-kind x-meta">{p.kind}</p>

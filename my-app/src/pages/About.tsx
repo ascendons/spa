@@ -58,7 +58,7 @@ const About = () => {
               >
                 Ascendons DPP
               </a>
-              , a Digital Product Passport platform for manufacturers; and{" "}
+              , a Digital Product Passport platform for manufacturers;{" "}
               <a
                 href={PRODUCT_URLS.impakt}
                 target="_blank"
@@ -66,7 +66,15 @@ const About = () => {
               >
                 Impakt
               </a>
-              , monitoring and evaluation for NGOs. The same team works on our
+              , monitoring and evaluation for NGOs; and{" "}
+              <a
+                href={PRODUCT_URLS.logistics}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ascendons Logistics
+              </a>
+              , transport management for road carriers. The same team works on our
               products and on client projects.
             </p>
             <p>
