@@ -433,6 +433,17 @@
     gap: 20px;
   }
 }
+@media (min-width: 960px) and (max-width: 1279px) {
+  /* odd card out on the last row spans the full width */
+  .pr-more-grid > .pr-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1280px) {
+  .pr-more-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 .pr-card {
   display: flex;
@@ -501,4 +512,107 @@
   height: 6px;
   border-radius: 2px;
   background: var(--muted);
+}
+
+/* Illustrative logistics LR register (card visual) */
+.lgx {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  aspect-ratio: 1554 / 616;
+  padding: 12px 14px;
+  font-size: 11px;
+  color: var(--text);
+  overflow: hidden;
+  transition: transform 0.8s var(--ease-out);
+}
+.pr-card:hover .lgx {
+  transform: scale(1.025);
+}
+.lgx-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+.lgx-top b {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+}
+.lgx-top .x-meta {
+  font-size: 10px;
+  color: var(--muted);
+}
+.lgx-rows {
+  display: grid;
+  gap: 5px;
+}
+.lgx-note {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 28px 14px 8px;
+  text-align: right;
+  font-size: 10px;
+  color: var(--faint);
+  background: linear-gradient(transparent, #0f1119 70%);
+}
+.lgx-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 12px;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #151823;
+}
+.lgx-lr {
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+.lgx-route {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.lgx-series {
+  display: none;
+  font-size: 10px;
+  color: var(--faint);
+}
+.lgx-status {
+  justify-self: end;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  white-space: nowrap;
+  color: var(--muted);
+  background: rgba(244, 242, 238, 0.06);
+}
+.lgx-status--move {
+  color: var(--violet-hi);
+  background: rgba(139, 92, 246, 0.14);
+}
+.lgx-status--ok {
+  color: var(--teal);
+  background: rgba(67, 229, 192, 0.12);
+}
+@media (min-width: 560px) {
+  .lgx-row {
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+  }
+  .lgx-series {
+    display: block;
+  }
+}
+@media (min-width: 1280px) {
+  /* three-up cards are narrow again */
+  .lgx-row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .lgx-series {
+    display: none;
+  }
 }

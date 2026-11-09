@@ -16,7 +16,7 @@ export default function Home() {
         title="Ascendons | Product Engineering Studio: MVPs, CRMs & AI Automation"
         description="We design, engineer and launch production-ready software products, intelligent business systems and AI-powered experiences. MVPs in 4–6 weeks, custom CRMs, integrations and dedicated teams."
         canonicalPath="/"
-        keywords="product engineering studio, MVP development, SaaS development, custom CRM, business systems, AI automation, WhatsApp automation, enterprise integrations, dedicated engineering team, BriefGuard, Ascendons CRM, Surat software company"
+        keywords="product engineering studio, MVP development, SaaS development, custom CRM, business systems, AI automation, WhatsApp automation, enterprise integrations, dedicated engineering team, BriefGuard, Ascendons CRM, Ascendons Logistics, Surat software company"
       />
       <Hero />
       <ServicesSection />

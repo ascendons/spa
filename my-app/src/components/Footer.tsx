@@ -156,6 +156,15 @@ function Footer() {
                   Impakt
                 </a>
               </li>
+              <li>
+                <a
+                  href={PRODUCT_URLS.logistics}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ascendons Logistics
+                </a>
+              </li>
               {solutionLinks.map((l) => (
                 <li key={l.to}>
                   <Link to={l.to}>{l.label}</Link>
